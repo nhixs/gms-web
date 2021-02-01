@@ -1,14 +1,230 @@
 import React from 'react';
+import styled from 'styled-components';
+import { useState } from 'react';
+
 
 import Drawer from "./components/drawer";
+import LogoContainer from "./components/logoContainer";
+import Koperasi from "../assets/logo.png"
+
 
 
 const OfficerAdd = (props) => {
+    const [optionOpen, setOption] = useState(false);
+    const handleOptions = () => {
+        setOption(!optionOpen)
+    }
     return (
         <Drawer title={'Officer'} subtitle={'Tambah Officer'}>
-
+            <Container>
+                <Header>
+                    <LeftSide>
+                        <Logo>
+                            <LogoContainer image={Koperasi} scale={"3em"} space={".5em"} />
+                            <KoperasiTitle>Gapura Kayumanis</KoperasiTitle>
+                        </Logo>
+                    </LeftSide>
+                </Header>
+                <FormGroup>
+                    <Label htmlFor="name">Nama</Label>
+                    <Input id="name" />
+                    <Label htmlFor="alamat">Alamat</Label>
+                    <Input id="name" type="text" style={{ height: '75px' }} />
+                    <Label htmlFor="email">Email</Label>
+                    <Input id="email" />
+                    <FormGroupSub>
+                        <Label htmlFor="role">Role</Label>
+                        <Label htmlFor="foto" style={{ marginRight: '300px' }}>Foto</Label>
+                    </FormGroupSub>
+                    <FormGroupSub>
+                        <DropDownButton
+                            onClick={() => handleOptions()}
+                        >
+                            Pilih Role Anda
+                        </DropDownButton>
+                        {optionOpen &&
+                            <DropDownOption>
+                                <DropDown>Name</DropDown>
+                                <DropDown>Role</DropDown>
+                                <DropDown>Id</DropDown>
+                            </DropDownOption>
+                        }
+                        <BrowseFile id="foto" type="file" />
+                    </FormGroupSub>
+                    <FormGroupFooter>
+                        <CancelButton id="cancel" type="submit" value="Batal" />
+                        <SubmitButton id="submit" type="submit" value="Tambah" />
+                    </FormGroupFooter>
+                </FormGroup>
+            </Container>
         </Drawer>
     )
 }
 
+const Container = styled.div`
+display: flex;
+height: fit-content;
+flex-direction: column;
+width: 69em;
+padding: 2em;
+background-color: #ffffff;
+box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+border-radius: 24px;
+`
+const Header = styled.div`
+display: flex;
+flex-direction: row;
+width: 100 %;
+justify-content: space-between;
+`
+
+const LeftSide = styled.div`
+display: flex;
+flex-direction: row;
+align-items: center;
+`
+const Logo = styled.div`
+display: flex;
+flex-direction: row;
+align-items: center;
+margin-right: 1em;
+`
+const KoperasiTitle = styled.div`
+font-family: Franklin Gothic Medium;
+font-style: normal;
+font-weight: normal;
+font-size: 25px;
+line-height: 22px;
+width: 105px;
+`
+const FormGroup = styled.div`
+    display: block;
+	width: 950px;
+    margin: 50px auto;
+    background: #FFFFFF;
+`
+
+const Label = styled.label`
+margin-bottom: 0.5em;
+color: #003459;
+display: block;
+font-family: Franklin Gothic Medium;
+font-style: normal;
+font-weight: normal;
+font-size: 20px;
+line-height: 34px;
+`
+const Input = styled.input`
+padding: 0.5em;
+border: 1px solid #003459;
+box-sizing: border-box;
+border-radius: 10px;
+width: 100%;
+`
+const FormGroupSub = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+
+height: fit-content;
+width: 100%;
+align-item: center;
+`
+
+const DropDownButton = styled.div`
+background: #003459;
+border: 1px solid #003459;
+box-sizing: border-box;
+color: #ffffff;
+font-family: Franklin Gothic Medium;
+font-style: italic;
+font-weight: normal;
+font-size: 17px;
+line-height: 28px;
+text-align: center;
+
+width: 400px;
+height: 30px;
+
+`
+
+
+const DropDownOption = styled.div`
+display: flex;
+  position: absolute;
+  justify-content: center;
+  flex-direction: column;
+  width: 400px;
+  height: fit-content;
+  flex: 1;
+  z-index:15;
+  background-color: #ffffff;
+  border: 1px solid #003459;
+`
+const DropDown = styled.div`
+  display: flex;
+  justify-content:center;
+  width: 100%;
+  border: 1px solid #003459;
+  font-family: Franklin Gothic Medium;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 23px;
+
+
+  color: #003459;
+  &:hover {
+      background-color: #E1ECF4;
+  }
+
+`
+
+const BrowseFile = styled.input`
+margin-right: 46px;
+`
+
+const FormGroupFooter = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+
+height: fit-content;
+width: 100%;
+align-item: center;
+margin-top: 227px;
+padding: 0px 150px;
+`
+
+const CancelButton = styled.input`
+background: #F85454;
+border: none;
+border-radius: 100px;
+font-family: Franklin Gothic Medium;
+font-style: normal;
+font-weight: normal;
+font-size: 28px;
+line-height: 33px;
+text-align: center;
+color: #FFFFFF;
+
+width: 210.01px;
+height: 40.81px;
+`
+
+const SubmitButton = styled.input`
+background: #FFCB37;
+border: none;
+border-radius: 100px;
+font-family: Franklin Gothic Medium;
+font-style: normal;
+font-weight: normal;
+font-size: 28px;
+line-height: 33px;
+text-align: center;
+color: #003459;
+
+width: 210.01px;
+height: 40.81px;
+`
 export default OfficerAdd
