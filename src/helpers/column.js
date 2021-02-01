@@ -25,7 +25,7 @@ const Columns = [
           },
           {
             label: "tambah anggota",
-            path: "/client/add"
+            path: "/client/new"
           }
         ]
       },

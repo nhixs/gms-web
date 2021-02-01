@@ -11,6 +11,11 @@ import { Checkbox } from '@material-ui/core';
 
 const OfficerList = (props) => {
     const [optionOpen, setOption] = useState(false);
+    const [titleButton, setTitleButton] = useState("Pilih");
+    const handleTitleButton = (title) => {
+        setTitleButton(title);
+        setOption(!optionOpen);
+    }
     const handleOptions = () => {
         setOption(!optionOpen)
     }
@@ -36,13 +41,20 @@ const OfficerList = (props) => {
                                     <SortButton
                                         onClick={() => handleOptions()}
                                     >
-                                        Pilih
-                                </SortButton>
+                                        {titleButton}
+                                    </SortButton>
                                     {optionOpen &&
                                         <DropDownOptions>
-                                            <DropDown>Name</DropDown>
-                                            <DropDown>Role</DropDown>
-                                            <DropDown>Id</DropDown>
+                                            <DropDown
+                                                onClick={() => handleTitleButton("Name")}
+                                            >Name
+                                            </DropDown>
+                                            <DropDown
+                                                onClick={() => handleTitleButton("Role")}
+                                            >Role</DropDown>
+                                            <DropDown
+                                                onClick={() => handleTitleButton("Id")}
+                                            >Id</DropDown>
                                         </DropDownOptions>
                                     }
                                 </VariableOptions>
@@ -61,7 +73,19 @@ const OfficerList = (props) => {
                     </RightSide>
                 </Header>
                 <TableContainer>
-                    tes
+                    <Table>
+                        <TableRow>
+                            <TableHead>
+                                First Name
+                            </TableHead>
+                            <TableHead>
+                                Last Name
+                            </TableHead>
+                            <TableHead>
+                                Age
+                            </TableHead>
+                        </TableRow>
+                    </Table>
                 </TableContainer>
             </Container>
         </Drawer>
@@ -85,6 +109,7 @@ display: flex;
 flex-direction: row;
 width: 100 %;
 justify-content: space-between;
+z-index: 10;
 `
 
 const LeftSide = styled.div`
@@ -120,10 +145,8 @@ line-height: fit-content;
 `
 const SortTitle = styled.div`
 font-family: Franklin Gothic Medium;
-font-style: normal;
-font-weight: normal;
 font-size: 20px;
-line-height: 20px;
+padding: 0 1.2em;
 `
 const Option = styled.div`
 display: flex;
@@ -131,10 +154,12 @@ flex-direction: column;
 line-height: fit-content;
 `
 const VariableOptions = styled.div`
-width: 100px;
+width: 100%;
+display: inline-block;
+position: relative;
 `
 const SortButton = styled.div`
-background: #003459;
+/* background: #003459;
 border: 1px solid #003459;
 box-sizing: border-box;
 border-radius: 10px;
@@ -143,21 +168,25 @@ font-family: Franklin Gothic Medium;
 font-style: italic;
 font-weight: normal;
 font-size: 17px;
-line-height: 20px;
 text-align: center;
-
-width: 128px;
+width: 100%;
 height: 20px;
 margin-left: 5px
+*/
+display: flex;
+  justify-content: center;
+  flex: 1;
+  color: #ffffff;
+  background-color: #003459;
+  border-radius:2px;
+  z-index:10;
 `
 const DropDownOptions = styled.div`
-  display: flex;
+  display: block;
   position: absolute;
-  justify-content: center;
-  flex-direction: column;
-  width: 8.4em;
+  min-width: 100%;
   height: fit-content;
-  flex: 1;
+  overflow: auto;
   z-index:15;
   background-color: #ffffff;
   border: 1px solid #003459;
@@ -169,9 +198,6 @@ const DropDown = styled.div`
   border: 1px solid #003459;
   font-family: Franklin Gothic Medium;
   font-style: italic;
-  font-weight: normal;
-  font-size: 20px;
-  line-height: 23px;
 
 
   color: #003459;
@@ -210,5 +236,16 @@ align-items: center;
 
 const TableContainer = styled.div`
 `
+const Table = styled.table`
+border: 1px solid black;
+border-collapse: collapse;
+`
 
+const TableRow = styled.tr`
+
+`
+
+const TableHead = styled.th`
+
+`
 export default OfficerList;

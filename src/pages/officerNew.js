@@ -37,18 +37,20 @@ const OfficerAdd = (props) => {
                         <Label htmlFor="foto" style={{ marginRight: '300px' }}>Foto</Label>
                     </FormGroupSub>
                     <FormGroupSub>
-                        <DropDownButton
-                            onClick={() => handleOptions()}
-                        >
-                            Pilih Role Anda
+                        <DropDownContainer>
+                            <DropDownButton
+                                onClick={() => handleOptions()}
+                            >
+                                Pilih Role Anda
                         </DropDownButton>
-                        {optionOpen &&
-                            <DropDownOption>
-                                <DropDown>Name</DropDown>
-                                <DropDown>Role</DropDown>
-                                <DropDown>Id</DropDown>
-                            </DropDownOption>
-                        }
+                            {optionOpen &&
+                                <DropDownOption>
+                                    <DropDown>Name</DropDown>
+                                    <DropDown>Role</DropDown>
+                                    <DropDown>Id</DropDown>
+                                </DropDownOption>
+                            }
+                        </DropDownContainer>
                         <BrowseFile id="foto" type="file" />
                     </FormGroupSub>
                     <FormGroupFooter>
@@ -130,9 +132,13 @@ height: fit-content;
 width: 100%;
 align-item: center;
 `
-
+const DropDownContainer = styled.div`
+width: 40%;
+display: inline-block;
+position: relative;
+`
 const DropDownButton = styled.div`
-background: #003459;
+/*background: #003459;
 border: 1px solid #003459;
 box-sizing: border-box;
 color: #ffffff;
@@ -145,18 +151,37 @@ text-align: center;
 
 width: 400px;
 height: 30px;
+*/
+display: flex;
+  justify-content: center;
+  flex: 1;
+  color: #ffffff;
+  background-color: #003459;
+  border-radius:2px;
+  z-index:10;
+
 
 `
 
 
 const DropDownOption = styled.div`
-display: flex;
-  position: absolute;
+  /*display: flex;
+  position: relative;
   justify-content: center;
   flex-direction: column;
   width: 400px;
   height: fit-content;
   flex: 1;
+  z-index:15;
+  background-color: #ffffff;
+  border: 1px solid #003459;
+*/
+
+  display: block;
+  position: absolute;
+  min-width: 100%;
+  height: fit-content;
+  overflow: auto;
   z-index:15;
   background-color: #ffffff;
   border: 1px solid #003459;
@@ -170,7 +195,6 @@ const DropDown = styled.div`
   font-style: italic;
   font-weight: normal;
   font-size: 20px;
-  line-height: 23px;
 
 
   color: #003459;
@@ -227,4 +251,6 @@ color: #003459;
 width: 210.01px;
 height: 40.81px;
 `
+
+
 export default OfficerAdd

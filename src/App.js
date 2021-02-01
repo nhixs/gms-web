@@ -8,7 +8,7 @@ import Home from "./pages/home"
 import OfficerList from './pages/officerList';
 import OfficerNew from './pages/officerNew';
 import ClientList from './pages/clientList';
-import ClientAdd from './pages/clientAdd';
+import ClientNew from './pages/clientNew';
 import DepositList from './pages/DepositList';
 import LoanList from './pages/loanList';
 import DepositProductList from "./pages/depositProductList";
@@ -33,7 +33,7 @@ const App = () => {
         <Route path="/officer/list" exact component={OfficerList} />
         <Route path="/officer/new" exact component={OfficerNew} />
         <Route path="/client/list" exact component={ClientList} />
-        <Route path="/client/add" exact component={ClientAdd} />
+        <Route path="/client/new" exact component={ClientNew} />
         <Route path="/deposit/list" exact component={DepositList} />
         <Route path="/loan/list" exact component={LoanList} />
         <Route path="/product/deposit/list" exact component={DepositProductList} />
