@@ -7,6 +7,8 @@ import LogoContainer from './components/logoContainer';
 import Koperasi from "../assets/logo.png";
 import SearchBar from "../pages/components/searchBar";
 import { Checkbox } from '@material-ui/core';
+import dataClient from "../helpers/dataClient";
+
 
 
 const ClientList = (props) => {
@@ -22,6 +24,61 @@ const ClientList = (props) => {
         setOption(!optionOpen)
     }
 
+    const TableRow = (props) => {
+        const { value, index } = props
+        const { id, name, ktp, gender, address, profesion } = value
+        return (
+            <tr>
+                <th scope="row" style={{ color: "#003459", border: "1px solid #003459", textAlign: "center" }}>
+                    {index + 1}
+                </th>
+                <td style={{ color: "#003459", border: "1px solid #003459", textAlign: "center" }}>
+                    {id}
+                </td>
+                <td style={{ color: "#003459", border: "1px solid #003459", textAlign: "center" }}>
+                    {name}
+                </td>
+                <td style={{ color: "#003459", border: "1px solid #003459", textAlign: "center", width: "30%", }}>
+                    {ktp}
+                </td>
+                <td style={{ color: "#003459", border: "1px solid #003459", textAlign: "center" }}>
+                    {gender}
+                </td>
+                <td style={{ color: "#003459", border: "1px solid #003459", textAlign: "center" }}>
+                    {address}
+                </td>
+                <td style={{ color: "#003459", border: "1px solid #003459", textAlign: "center" }}>
+                    {profesion}
+                </td>
+                <td style={{ color: "#003459", border: "1px solid #003459", textAlign: "center" }}>
+                    <div>
+                        <button style={{
+                            color: "#003459",
+                            fontFamily: "Franklin Gothic",
+                            fontSize: "15px",
+                            background: "#E1ECF4",
+                            borderRadius: "100px",
+                            border: "none",
+                            width: "70px",
+                            height: "25"
+                        }}>EDIT</button>
+                    </div>
+                    <div style={{ marginTop: "5px" }}>
+                        <button style={{
+                            color: "#ffffff",
+                            fontFamily: "Franklin Gothic",
+                            fontSize: "15px",
+                            background: "#F85454",
+                            borderRadius: "100px",
+                            border: "none",
+                            width: "70px",
+                            height: "25"
+                        }}>Hapus</button>
+                    </div>
+                </td>
+            </tr>
+        )
+    }
     return (
         <Drawer title={'Anggota'} subtitle={'Daftar Anggota'}>
             <Container>
@@ -71,6 +128,33 @@ const ClientList = (props) => {
                         </SortOption>
                     </RightSide>
                 </Header>
+                <TableContainer>
+                    <table style={{ width: "100%" }} >
+                        <thead>
+                            <tr style={{ backgroundColor: "#003459" }}>
+                                <th scope="col" style={{ color: "white", border: "1px solid white", textAlign: "center" }}>No</th>
+                                <th scope="col" style={{ color: "white", border: "1px solid white", textAlign: "center" }}>ID</th>
+                                <th scope="col" style={{ color: "white", border: "1px solid white", textAlign: "center" }}>Nama</th>
+                                <th scope="col" style={{ color: "white", border: "1px solid white", textAlign: "center" }}>No. KTP</th>
+                                <th scope="col" style={{ color: "white", border: "1px solid white", textAlign: "center" }}>Gender</th>
+                                <th scope="col" style={{ color: "white", border: "1px solid white", textAlign: "center" }}>Lokasi</th>
+                                <th scope="col" style={{ color: "white", border: "1px solid white", textAlign: "center" }}>Profesi</th>
+                                <th scope="col" style={{ color: "white", border: "1px solid white", textAlign: "center" }}>Action</th>
+                                {/* {role === "supervisor" && <th>Action</th>} */}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {dataClient.length === 0 && (
+                                <div>
+                                    Tidak ada Data
+                                </div>
+                            )}
+                            {dataClient.length > 0 && dataClient.map((value, index) => {
+                                return <TableRow value={value} index={index} />
+                            })}
+                        </tbody>
+                    </table>
+                </TableContainer>
             </Container>
         </Drawer>
     )
@@ -216,5 +300,7 @@ line-height: 23px;
 
 
 color: #003459;
+`
+const TableContainer = styled.div`
 `
 export default ClientList;

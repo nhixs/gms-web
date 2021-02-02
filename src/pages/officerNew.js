@@ -163,9 +163,6 @@ display: flex;
   color: #ffffff;
   background-color: #003459;
   border-radius:2px;
-  z-index:10;
-
-
 `
 const DropDownTitle = styled.label`
     color: #ffffff;
@@ -177,18 +174,6 @@ const DropDownTitle = styled.label`
 `
 
 const DropDownOption = styled.div`
-  /*display: flex;
-  position: relative;
-  justify-content: center;
-  flex-direction: column;
-  width: 400px;
-  height: fit-content;
-  flex: 1;
-  z-index:15;
-  background-color: #ffffff;
-  border: 1px solid #003459;
-*/
-
   display: block;
   position: absolute;
   min-width: 100%;

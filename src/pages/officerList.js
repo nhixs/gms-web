@@ -181,7 +181,6 @@ display: flex;
 flex-direction: row;
 width: 100 %;
 justify-content: space-between;
-z-index: 10;
 `
 
 const LeftSide = styled.div`
