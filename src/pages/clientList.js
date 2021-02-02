@@ -10,6 +10,13 @@ import { Checkbox } from '@material-ui/core';
 
 
 const ClientList = (props) => {
+
+    const [titleButton, setTitleButton] = useState("Pilih");
+    const handleTitleButton = (title) => {
+        setTitleButton(title);
+        setOption(!optionOpen);
+    }
+
     const [optionOpen, setOption] = useState(false);
     const handleOptions = () => {
         setOption(!optionOpen)
@@ -36,13 +43,19 @@ const ClientList = (props) => {
                                     <SortButton
                                         onClick={() => handleOptions()}
                                     >
-                                        Pilih
+                                        {titleButton}
                                     </SortButton>
                                     {optionOpen &&
                                         <DropdownOptions>
-                                            <DropDown>Name</DropDown>
-                                            <DropDown>Role</DropDown>
-                                            <DropDown>Id</DropDown>
+                                            <DropDown
+                                                onClick={() => handleTitleButton("Name")}
+                                            >Name</DropDown>
+                                            <DropDown
+                                                onClick={() => handleTitleButton("Role")}
+                                            >Role</DropDown>
+                                            <DropDown
+                                                onClick={() => handleTitleButton("Id")}
+                                            >Id</DropDown>
                                         </DropdownOptions>
                                     }
                                 </VariableOption>
