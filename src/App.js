@@ -9,7 +9,7 @@ import OfficerList from './pages/officerList';
 import OfficerNew from './pages/officerNew';
 import ClientList from './pages/clientList';
 import ClientNew from './pages/clientNew';
-import DepositList from './pages/DepositList';
+import DepositList from './pages/depositList';
 import LoanList from './pages/loanList';
 import DepositProductList from "./pages/depositProductList";
 import LoanProductList from "./pages/loanProductList.js";
