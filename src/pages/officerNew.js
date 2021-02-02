@@ -7,9 +7,16 @@ import Drawer from "./components/drawer";
 import LogoContainer from "./components/logoContainer";
 import Koperasi from "../assets/logo.png"
 
-
+import Polygon1 from "../pages/img/Polygon1.svg"
 
 const OfficerAdd = (props) => {
+
+    const [dropDownButton, setDropDownButton] = useState("Pilih Role Anda");
+    const handleDropDownButton = (dropdown) => {
+        setDropDownButton(dropdown);
+        setOption(!optionOpen);
+    }
+
     const [optionOpen, setOption] = useState(false);
     const handleOptions = () => {
         setOption(!optionOpen)
@@ -41,20 +48,32 @@ const OfficerAdd = (props) => {
                             <DropDownButton
                                 onClick={() => handleOptions()}
                             >
-                                Pilih Role Anda
-                        </DropDownButton>
+                                <DropDownTitle>{dropDownButton}</DropDownTitle> <img src={Polygon1} style={{ width: "15px", marginRight: "14px" }} />
+                            </DropDownButton>
                             {optionOpen &&
                                 <DropDownOption>
-                                    <DropDown>Name</DropDown>
-                                    <DropDown>Role</DropDown>
-                                    <DropDown>Id</DropDown>
+                                    <DropDown
+                                        onClick={() => handleDropDownButton("Operation")}
+                                    >Operation</DropDown>
+                                    <DropDown
+                                        onClick={() => handleDropDownButton("Supervisor")}
+                                    >Supervisor</DropDown>
+                                    <DropDown
+                                        onClick={() => handleDropDownButton("Accountant")}
+                                    >Accountant</DropDown>
+                                    <DropDown
+                                        onClick={() => handleDropDownButton("HR")}
+                                    >HR</DropDown>
+                                    <DropDown
+                                        onClick={() => handleDropDownButton("Finance")}
+                                    >Finance</DropDown>
                                 </DropDownOption>
                             }
                         </DropDownContainer>
                         <BrowseFile id="foto" type="file" />
                     </FormGroupSub>
                     <FormGroupFooter>
-                        <CancelButton id="cancel" type="submit" value="Batal" />
+                        <CancelButton id="cancel">Batal</CancelButton>
                         <SubmitButton id="submit" type="submit" value="Tambah" />
                     </FormGroupFooter>
                 </FormGroup>
@@ -138,22 +157,8 @@ display: inline-block;
 position: relative;
 `
 const DropDownButton = styled.div`
-/*background: #003459;
-border: 1px solid #003459;
-box-sizing: border-box;
-color: #ffffff;
-font-family: Franklin Gothic Medium;
-font-style: italic;
-font-weight: normal;
-font-size: 17px;
-line-height: 28px;
-text-align: center;
-
-width: 400px;
-height: 30px;
-*/
 display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex: 1;
   color: #ffffff;
   background-color: #003459;
@@ -162,7 +167,14 @@ display: flex;
 
 
 `
+const DropDownTitle = styled.label`
+    color: #ffffff;
+    font-family: Franklin Gothic Medium;
+    font-style: italic;
+    font-size: 18px; 
 
+    margin-left 135px;
+`
 
 const DropDownOption = styled.div`
   /*display: flex;
@@ -220,7 +232,7 @@ margin-top: 227px;
 padding: 0px 150px;
 `
 
-const CancelButton = styled.input`
+const CancelButton = styled.button`
 background: #F85454;
 border: none;
 border-radius: 100px;

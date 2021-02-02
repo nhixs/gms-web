@@ -8,18 +8,79 @@ import LogoContainer from "./components/logoContainer";
 import Koperasi from "../assets/logo.png"
 import SearchBar from "../pages/components/searchBar";
 import { Checkbox } from '@material-ui/core';
+import dataOfficer from "../helpers/dataOfficer";
 
 const OfficerList = (props) => {
-    const [optionOpen, setOption] = useState(false);
+
     const [titleButton, setTitleButton] = useState("Pilih");
     const handleTitleButton = (title) => {
         setTitleButton(title);
         setOption(!optionOpen);
     }
+
+    const [optionOpen, setOption] = useState(false);
     const handleOptions = () => {
         setOption(!optionOpen)
     }
 
+    const TableRow = (props) => {
+        const { value, index } = props
+        const { id, nama, role, photo, alamat } = value
+        return (
+            <tr>
+                <th scope="row" style={{ color: "#003459", border: "1px solid #003459", textAlign: "center" }}>
+                    {index + 1}
+                </th>
+                <td style={{ color: "#003459", border: "1px solid #003459", textAlign: "center" }}>
+                    {nama}
+                </td>
+                <td style={{ color: "#003459", border: "1px solid #003459", textAlign: "center" }}>
+                    {id}
+                </td>
+                <td style={{ color: "#003459", border: "1px solid #003459", textAlign: "center", width: "30%", }}>
+                    {alamat}
+                </td>
+                <td style={{ color: "#003459", border: "1px solid #003459", textAlign: "center", padding: "1em 0" }}>
+                    <img src={photo} alt="fotoOrang" style={{
+                        height: "4em",
+                        width: "4em",
+                        borderRadius: "4em",
+                        boxShadow: "1px 1px 1px 1px #e2e2e2",
+                        objectFit: "cover"
+                    }} />
+                </td>
+                <td style={{ color: "#003459", border: "1px solid #003459", textAlign: "center" }}>
+                    {role}
+                </td>
+                <td style={{ color: "#003459", border: "1px solid #003459", textAlign: "center" }}>
+                    <div>
+                        <button style={{
+                            color: "#003459",
+                            fontFamily: "Franklin Gothic",
+                            fontSize: "15px",
+                            background: "#E1ECF4",
+                            borderRadius: "100px",
+                            border: "none",
+                            width: "70px",
+                            height: "25"
+                        }}>EDIT</button>
+                    </div>
+                    <div style={{ marginTop: "11px" }}>
+                        <button style={{
+                            color: "#ffffff",
+                            fontFamily: "Franklin Gothic",
+                            fontSize: "15px",
+                            background: "#F85454",
+                            borderRadius: "100px",
+                            border: "none",
+                            width: "70px",
+                            height: "25"
+                        }}>Hapus</button>
+                    </div>
+                </td>
+            </tr>
+        )
+    }
     return (
         <Drawer title={'Officer'} subtitle={'Daftar Officer'}>
             <Container>
@@ -73,19 +134,30 @@ const OfficerList = (props) => {
                     </RightSide>
                 </Header>
                 <TableContainer>
-                    <Table>
-                        <TableRow>
-                            <TableHead>
-                                First Name
-                            </TableHead>
-                            <TableHead>
-                                Last Name
-                            </TableHead>
-                            <TableHead>
-                                Age
-                            </TableHead>
-                        </TableRow>
-                    </Table>
+                    <table style={{ width: "100%" }} >
+                        <thead>
+                            <tr style={{ backgroundColor: "#003459" }}>
+                                <th scope="col" style={{ color: "white", border: "1px solid white", textAlign: "center" }}>No</th>
+                                <th scope="col" style={{ color: "white", border: "1px solid white", textAlign: "center" }}>Nama</th>
+                                <th scope="col" style={{ color: "white", border: "1px solid white", textAlign: "center" }}>ID</th>
+                                <th scope="col" style={{ color: "white", border: "1px solid white", textAlign: "center" }}>Alamat</th>
+                                <th scope="col" style={{ color: "white", border: "1px solid white", textAlign: "center" }}>Foto</th>
+                                <th scope="col" style={{ color: "white", border: "1px solid white", textAlign: "center" }}>Role</th>
+                                <th scope="col" style={{ color: "white", border: "1px solid white", textAlign: "center" }}>Action</th>
+                                {/* {role === "supervisor" && <th>Action</th>} */}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {dataOfficer.length === 0 && (
+                                <div>
+                                    Tidak ada Data
+                                </div>
+                            )}
+                            {dataOfficer.length > 0 && dataOfficer.map((value, index) => {
+                                return <TableRow value={value} index={index} />
+                            })}
+                        </tbody>
+                    </table>
                 </TableContainer>
             </Container>
         </Drawer>
@@ -236,16 +308,5 @@ align-items: center;
 
 const TableContainer = styled.div`
 `
-const Table = styled.table`
-border: 1px solid black;
-border-collapse: collapse;
-`
 
-const TableRow = styled.tr`
-
-`
-
-const TableHead = styled.th`
-
-`
 export default OfficerList;
