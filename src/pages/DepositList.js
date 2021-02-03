@@ -25,6 +25,14 @@ const DepositList = (props) => {
     const TableRow = (props) => {
         const { value } = props
         const { id_deposit, name, deposit_product, deposit_amount, amount_of_deposit, period, interest, status } = value
+
+        var color = "";
+        if (status === "Selesai") {
+            color = "#39B54A";
+        } else {
+            color = "#F85454";
+        };
+
         return (
             <tr>
                 <td style={{ color: "#003459", border: "1px solid #003459", textAlign: "center", width: "12%" }}>
@@ -59,22 +67,10 @@ const DepositList = (props) => {
                             border: "none",
                             width: "70px",
                             height: "25"
-                        }}>EDIT</button>
-                    </div>
-                    <div style={{ margin: "4px 0px" }}>
-                        <button style={{
-                            color: "#ffffff",
-                            fontFamily: "Franklin Gothic",
-                            fontSize: "15px",
-                            background: "#F85454",
-                            borderRadius: "100px",
-                            border: "none",
-                            width: "70px",
-                            height: "25"
-                        }}>Hapus</button>
+                        }}>Detail</button>
                     </div>
                 </td>
-                <td style={{ color: "#003459", border: "1px solid #003459", textAlign: "center", width: "7%" }}>
+                <td style={{ color: color, border: "1px solid #003459", textAlign: "center", width: "7%" }}>
                     {status}
                 </td>
             </tr>

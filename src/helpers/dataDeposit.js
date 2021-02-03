@@ -8,7 +8,7 @@ const dataDeposit = [
         amount_of_deposit: "833000",
         period: "12",
         interest: "6",
-        status: "belum selesai"
+        status: "Belum selesai"
     },
     {
         id_deposit: "000001101",
@@ -18,7 +18,7 @@ const dataDeposit = [
         amount_of_deposit: "833000",
         period: "12",
         interest: "6",
-        status: "selesai"
+        status: "Selesai"
     },
     {
         id_deposit: "000001101",
@@ -28,7 +28,7 @@ const dataDeposit = [
         amount_of_deposit: "833000",
         period: "12",
         interest: "6",
-        status: "belum selesai"
+        status: "Belum Selesai"
     }
 ]
 
