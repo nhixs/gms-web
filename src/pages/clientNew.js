@@ -6,6 +6,7 @@ import { useState } from 'react';
 import Drawer from "./components/drawer";
 import LogoContainer from "./components/logoContainer";
 import Koperasi from "../assets/logo.png"
+import Polygon1 from "../pages/img/Polygon1.svg"
 
 
 
@@ -44,6 +45,7 @@ const ClientNew = (props) => {
                             <DropDownTitle>
                                 {dropDownButton}
                             </DropDownTitle>
+                            <img src={Polygon1} style={{ width: "15px", marginRight: "14px" }} />
                         </DropDownButton>
                         {optionOpen &&
                             <DropDownOption>
