@@ -39,7 +39,6 @@ const ApplyLoan = (props) => {
                                 {dropDownButton}
                             </DropDownTitle>
                             <img src={Polygon1} style={{ width: "15px", marginRight: "14px" }} />
-
                         </DropDownButton>
                         {optionOpen &&
                             <DropDownOption>
