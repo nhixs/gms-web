@@ -6,10 +6,9 @@ import colors from "../helpers/colors";
 
 import LogoKoperasi from '../assets/logo.png';
 import LogoContainer from '../pages/components/logoContainer';
-
+import { Link } from "react-router-dom";
 import {
   TextField,
-  Button,
   FormControlLabel,
   Checkbox
 } from '@material-ui/core';
@@ -144,7 +143,7 @@ const Login = (props) => {
             }
             label="Remember Me"
           />
-          <Button>LOGIN</Button>
+          <Button as={Link} to="/home" style={{ textDecoration: 'none' }}>LOGIN</Button>
         </Form>
         <CopyRight>&copy; 2021</CopyRight>
       </BackGround>
@@ -179,5 +178,22 @@ const CopyRight = styled.div`
 
 `
 
+const Button = styled.a`
+width: 250px;
+height: 55px;
+display: inherit;
+align-items: inherit;
+justify-content: inherit;
+color: #003459;
+font-size: 30px;
+text-decoration: underline none;
+
+background: #FFCB37;
+border-radius: 100px;
+
+&:hover {
+  text-decoration: underline none;
+}
+`
 
 export default Login;
