@@ -1,6 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import axios from 'axios';
+import ReactPaginate from 'react-paginate';
 
 
 import Login from "./pages/login"

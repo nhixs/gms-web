@@ -1,0 +1,17 @@
+.pagination {
+    margin: 15px auto;
+    display: flex;
+    list-style: none;
+    outline: none;
+  }
+  .pagination > .active > a{
+    text-decoration: underline;
+  }
+  .pagination > li > a{
+    padding: 5px 10px;
+    outline: none;
+    cursor: pointer;
+  }
+  .pagination > li:first-child > a, .pagination > li:first-child > span, .pagination > li:last-child > a, .pagination > li:last-child > span{
+    border-radius: unset
+  }
