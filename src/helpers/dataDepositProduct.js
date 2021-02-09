@@ -1,27 +1,137 @@
-const dataDepositProduct = [
-    {
-        id_deposit: "SR1-0001",
-        name_deposit: "Simpanan Daun",
-        intress: "Bunga 6%",
-        intress_type: "tipe bunga: Flat",
-        pajak: "pph xx"
-    }, {
-        id_deposit: "SR1-0001",
-        name_deposit: "Simpanan Daun",
-        intress: "Bunga 6%",
-        intress_type: "tipe bunga: Flat",
-        pajak: "pph xx"
-    }, {
-        id_deposit: "SR1-0001",
-        name_deposit: "Simpanan Daun",
-        intress: "Bunga 6%",
-        intress_type: "tipe bunga: Flat",
-        pajak: "pph xx"
-    }, {
-        id_deposit: "SR1-0001",
-        name_deposit: "Simpanan Daun",
-        intress: "Bunga 6%",
-        intress_type: "tipe bunga: Flat",
-        pajak: "pph xx"
+const dataDepositProduct =
+{
+    "success": true,
+    "message": "List of Deposit Products",
+    "data": {
+        "depositProd": [
+            {
+                "id": 1,
+                "name": "Simpanan Daun",
+                "prefix": "BGS",
+                "description": "inisial",
+                "interest_rate": 0.02,
+                "interest_calculation": "flat",
+                "compound": "daily",
+                "posting": "monthly",
+                "digit_after_decimal": 6,
+                "in_multiple_of": "100",
+                "lock_in_value": 2,
+                "lock_in_period": "monthly",
+                "tax": "pph23 1.2",
+                "theme_color": "E3E3E3",
+                "created_by": "GPR-2-0001",
+                "created_at": "2021-02-02T20:13:35.000Z",
+                "updated_at": "2021-02-02T20:13:35.000Z",
+                "id_deposit_prod": "SMPN-01-0001",
+                "deposit_type": "fixed"
+            },
+            {
+                "id": 2,
+                "name": "Simpanan Gajah",
+                "prefix": "ADT",
+                "description": "inisial",
+                "interest_rate": 0.02,
+                "interest_calculation": "flat",
+                "compound": "daily",
+                "posting": "monthly",
+                "digit_after_decimal": 6,
+                "in_multiple_of": "100",
+                "lock_in_value": 2,
+                "lock_in_period": "monthly",
+                "tax": "pph23 1.2",
+                "theme_color": "E3E3E3",
+                "created_by": "GPR-2-0001",
+                "created_at": "2021-02-08T07:03:03.000Z",
+                "updated_at": "2021-02-08T07:03:03.000Z",
+                "id_deposit_prod": "SMPN-01-0002",
+                "deposit_type": "fixed"
+            },
+            {
+                "id": 3,
+                "name": "Simpanan Masa depan",
+                "prefix": "DZA",
+                "description": "inisial",
+                "interest_rate": 0.02,
+                "interest_calculation": "flat",
+                "compound": "daily",
+                "posting": "monthly",
+                "digit_after_decimal": 6,
+                "in_multiple_of": "100",
+                "lock_in_value": 2,
+                "lock_in_period": "monthly",
+                "tax": "pph23 1.2",
+                "theme_color": "E3E3E3",
+                "created_by": "GPR-2-0001",
+                "created_at": "2021-02-08T07:03:14.000Z",
+                "updated_at": "2021-02-08T07:03:14.000Z",
+                "id_deposit_prod": "SMPN-01-0003",
+                "deposit_type": "fixed"
+            },
+            {
+                "id": 4,
+                "name": "Simpanan Masa Tua",
+                "prefix": "NSA",
+                "description": "inisial",
+                "interest_rate": 0.02,
+                "interest_calculation": "flat",
+                "compound": "daily",
+                "posting": "monthly",
+                "digit_after_decimal": 6,
+                "in_multiple_of": "100",
+                "lock_in_value": 2,
+                "lock_in_period": "monthly",
+                "tax": "pph23 1.2",
+                "theme_color": "E3E3E3",
+                "created_by": "GPR-2-0001",
+                "created_at": "2021-02-08T07:03:29.000Z",
+                "updated_at": "2021-02-08T07:03:29.000Z",
+                "id_deposit_prod": "SMPN-01-0004",
+                "deposit_type": "fixed"
+            },
+            {
+                "id": 5,
+                "name": "Simpanan Nikah",
+                "prefix": "ALU",
+                "description": "inisial",
+                "interest_rate": 0.02,
+                "interest_calculation": "flat",
+                "compound": "daily",
+                "posting": "monthly",
+                "digit_after_decimal": 6,
+                "in_multiple_of": "100",
+                "lock_in_value": 2,
+                "lock_in_period": "monthly",
+                "tax": "pph23 1.2",
+                "theme_color": "E3E3E3",
+                "created_by": "GPR-2-0001",
+                "created_at": "2021-02-08T07:03:45.000Z",
+                "updated_at": "2021-02-08T07:03:45.000Z",
+                "id_deposit_prod": "SMPN-01-0005",
+                "deposit_type": "fixed"
+            },
+            {
+                "id": 6,
+                "name": "Simpanan Untuk Anak-Anak",
+                "prefix": "OBD",
+                "description": "inisial",
+                "interest_rate": 0.02,
+                "interest_calculation": "flat",
+                "compound": "daily",
+                "posting": "monthly",
+                "digit_after_decimal": 6,
+                "in_multiple_of": "100",
+                "lock_in_value": 2,
+                "lock_in_period": "monthly",
+                "tax": "pph23 1.2",
+                "theme_color": "E3E3E3",
+                "created_by": "GPR-2-0001",
+                "created_at": "2021-02-08T07:04:05.000Z",
+                "updated_at": "2021-02-08T07:04:05.000Z",
+                "id_deposit_prod": "SMPN-01-0006",
+                "deposit_type": "fixed"
+            }
+        ]
     }
-]
+}
+
+export default dataDepositProduct;

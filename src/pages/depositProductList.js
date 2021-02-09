@@ -1,14 +1,14 @@
 import React from 'react'
 import styled from 'styled-components';
-import Pagination from "./components/pagination";
 
 import Drawer from "./components/drawer";
 import LogoContainer from './components/logoContainer';
 import Koperasi from "../assets/logo.png";
 import SearchBar from './components/searchBar';
+import DepositProductData from './components/depositProductData';
+import Pagination from './components/pagination';
 
 const depositProductList = (props) => {
-
 
     return (
         <Drawer title={'Simpanan'} subtitle={'Daftar Produk Simpanan'}>
@@ -24,9 +24,9 @@ const depositProductList = (props) => {
                     <RightSide>
                     </RightSide>
                 </Header>
-                <Content>
-                    <Pagination>
-                    </Pagination>
+                <Content style={{ alignItems: "center" }}>
+                    <Pagination />
+                    <DepositProductData />
                 </Content>
             </Container>
         </Drawer>
@@ -37,6 +37,7 @@ const Container = styled.div`
 display: flex;
 height: fit-content;
 flex-direction: column;
+justify-content: center;
 width: 90em;
 padding: 2em;
 background-color: #ffffff;
@@ -80,16 +81,9 @@ const RightSide = styled.div`
 
 const Content = styled.div`
 display: flex;
-flex-direction: row;
-justify-content: center;
-`
+flex-direction: column;
 
-// const Pagination = styled.ul`
-// display: flex;
-// justify-content: center;
-// `
-// const PaginationItem = styled.li`
-// display: inline;
+`
 
 export default depositProductList
 
