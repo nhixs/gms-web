@@ -6,18 +6,6 @@ import DataDepositProduct from "../../helpers/dataDepositProduct";
 
 
 export default class depositProductData extends Component {
-    state = {
-        showDetail: false
-    }
-
-    toggleDetailHandler = () => {
-        const isVisible = this.state.showDetail;
-        this.setState({
-            showDetail: !isVisible
-        });
-    }
-
-
     constructor(props) {
         super(props);
         this.state = {
@@ -27,6 +15,7 @@ export default class depositProductData extends Component {
     receivedData() {
         const { status, message, data } = DataDepositProduct;
         const { depositProd } = data
+        console.log(depositProd)
         this.setState(state => {
             const data = state.data.concat(depositProd)
             return {
@@ -43,54 +32,20 @@ export default class depositProductData extends Component {
         }
     }
     render() {
-
         const { data } = this.state
-        let detail = null;
 
-        if (this.state.showDetail) {
-            detail = (
-                data.map(product =>
-                    <CardDetail>
-                        <DetailHeader>
-                            <Label>Deskripsi</Label>
-                            <Paragraph>{product.description}</Paragraph>
-                        </DetailHeader>
-                        <DetailBodyContainer>
-                            <DetailBody>
-                                <DetailLabel>Tipe Simpanan</DetailLabel>
-                                <DetailData>{product.deposit_type}</DetailData>
-                                <DetailLabel>Tipe Bunga</DetailLabel>
-                                <DetailData>{product.interest_calculation}</DetailData>
-                                <DetailLabel>Pajak</DetailLabel>
-                                <DetailData>{product.tax}</DetailData>
-                            </DetailBody>
-                            <DetailBody>
-                                <DetailLabel>Periode Bunga</DetailLabel>
-                                <DetailData>{product.compound}</DetailData>
-                                <DetailLabel>Hari Dalam Setahun</DetailLabel>
-                                <DetailData>360</DetailData>
-                            </DetailBody>
-                            <DetailBody>
-                                <DetailLabel>Periode Posting Bunga</DetailLabel>
-                                <DetailData>{product.posting}</DetailData>
-                                <DetailLabel>Lock In Period</DetailLabel>
-                                <DetailData>{product.lock_in_period}</DetailData>
-                            </DetailBody>
-                        </DetailBodyContainer>
-                    </CardDetail>
-                )
-            );
-        }
+        console.log(this.state.data);
+        console.log("render");
         return (
             <>
                 { data.length <= 0 && <div>data kosong</div>}
                 {
                     data.length > 0 &&
                     data.map(product =>
-                        <div>
-                            <Card key={product.id}>
+                        <div key={product.id}>
+                            <Card>
                                 <CardHeader>
-                                    <ProductName onClick={this.toggleDetailHandler}>
+                                    <ProductName>
                                         {product.name}
                                     </ProductName>
                                     <ProductId>
@@ -98,8 +53,9 @@ export default class depositProductData extends Component {
                                     </ProductId>
                                 </CardHeader>
                                 <CardBody>
+
                                     <CardData>
-                                        <Label>Bunga</Label>
+                                        <Label>Bunga:</Label>
                                         {product.interest_rate}%
                                     </CardData>
 
@@ -112,7 +68,6 @@ export default class depositProductData extends Component {
                                         {product.tax}
                                     </CardData>
                                 </CardBody>
-                                {detail}
                             </Card>
                         </div>
                     )
@@ -123,8 +78,8 @@ export default class depositProductData extends Component {
 }
 
 const Label = styled.label`
-font-family: Franklin Gothic Medium;
-font-size: 15px;
+font-family: Franklin Gothic Book;
+font-size: 12px;
 margin-right: 5px;
 margin-left: 10px;
 
@@ -180,51 +135,4 @@ margin-left: 25px;
 const CardData = styled.div`
 font-size: 12px;
 font-weight: bold;
-`
-
-const CardDetail = styled.div`
-width: 450px;
-height: 219px;
-padding: 5px;
-
-background: linear-gradient(115.49deg, #FFFFFF 0%, #FFFFFF 51.03%);
-box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.25);
-border-radius: 0px 0px 20px 20px;
-`
-
-const Paragraph = styled.p`
-margin-left: 10px;
-font-size: 12px;
-font-family: Franklin Gothic Medium;
-`
-
-const DetailHeader = styled.div`
-margin: 10px 15px 10px 25px;
-`
-
-const DetailBody = styled.div`
-display: flex;
-flex-direction: row;
-
-margin-left: 25px;
-padding: 5px;
-`
-const DetailBodyContainer = styled.div`
-
-`
-const DetailLabel = styled.label`
-font-family: Franklin Gothic Book;
-font-size: 10px;
-
-margin-right: 5px;
-`
-
-const DetailData = styled.div`
-font-family: Franklin Gothic Medium;
-font-weight: normal;
-font-size: 12px;
-
-margin-right: 5px;
-
-color: #003459;
 `

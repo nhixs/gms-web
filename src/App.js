@@ -1,9 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import axios from 'axios';
-import ReactPaginate from 'react-paginate';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Login from "./pages/login"
 import Home from "./pages/home"
