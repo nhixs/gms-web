@@ -102,7 +102,7 @@ const dataDepositProduct =
                 "lock_in_value": 2,
                 "lock_in_period": "monthly",
                 "tax": "pph23 1.2",
-                "theme_color": "E3E3E3",
+                "theme_color": "FFF975",
                 "created_by": "GPR-2-0001",
                 "created_at": "2021-02-08T07:03:45.000Z",
                 "updated_at": "2021-02-08T07:03:45.000Z",
@@ -131,6 +131,16 @@ const dataDepositProduct =
                 "deposit_type": "fixed"
             }
         ]
+    },
+    "options": {
+        "pageInfo": {
+            "page": 1,
+            "totalPage": 2,
+            "perPage": 3,
+            "totalData": 6,
+            "nextLink": "http://192.168.100.7:6464/product?limit=3&page=2&search=&sort=asc&type=depo",
+            "prevLink": null
+        }
     }
 }
 

@@ -22,7 +22,6 @@ const depositProductList = (props) => {
                         <SearchBar></SearchBar>
                     </MidSide>
                     <RightSide>
-
                     </RightSide>
                 </Header>
                 <Content style={{ alignItems: "center" }}>
