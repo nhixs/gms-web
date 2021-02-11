@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 import { Accordion, Card } from "react-bootstrap";
 
-import "./css/pagination.css";
-import DataDepositProduct from "../../helpers/dataDepositProduct";
+import "../css/pagination.css";
+import DataDepositProduct from "../../../helpers/deposit/dataDepositProduct";
 
 
 export default class depositProductData extends Component {
@@ -48,44 +48,6 @@ export default class depositProductData extends Component {
         const { data } = this.state
 
         return (
-            /* <>
-                 { data.length <= 0 && <div>data kosong</div>}
-                 {
-                     data.length > 0 &&
-                     data.map(product =>
-                         <div>
-                             <Accordion defaultActiveKey="0">
-                                 <Card key={product.id}>
-                                     <CardHeader>
-                                         <ProductName >
-                                             {product.name}
-                                         </ProductName>
-                                         <ProductId>
-                                             {product.id_deposit_prod}
-                                         </ProductId>
-                                     </CardHeader>
-                                     <CardBody>
-                                         <CardData>
-                                             <Label>Bunga</Label>
-                                             {product.interest_rate}%
-                                     </CardData>
- 
-                                         <CardData>
-                                             <Label>Tipe Bunga: </Label>
-                                             {product.interest_calculation}
-                                         </CardData>
-                                         <CardData>
-                                             <Label>Pajak:</Label>
-                                             {product.tax}
-                                         </CardData>
-                                     </CardBody>
-                                 </Card>
-                                 {detail}
-                             </Accordion>
-                         </div>
-                     )
-                 }
-             </>*/
             <>
                 { data.length <= 0 && <div>data kosong</div>}
                 {
@@ -121,30 +83,44 @@ export default class depositProductData extends Component {
                                     <Card.Body>
 
                                         <DetailHeader>
-                                            <Label>Deskripsi</Label>
+                                            <Label style={{ fontStyle: "normal" }}>Deskripsi</Label>
                                             <Paragraph>{product.description}</Paragraph>
                                         </DetailHeader>
                                         <DetailBodyContainer>
-                                            <DetailBody>
-                                                <DetailLabel>Tipe Simpanan</DetailLabel>
-                                                <DetailData>{product.deposit_type}</DetailData>
-                                                <DetailLabel>Tipe Bunga</DetailLabel>
-                                                <DetailData>{product.interest_calculation}</DetailData>
-                                                <DetailLabel>Pajak</DetailLabel>
-                                                <DetailData>{product.tax}</DetailData>
-                                            </DetailBody>
-                                            <DetailBody>
-                                                <DetailLabel>Periode Bunga</DetailLabel>
-                                                <DetailData>{product.compound}</DetailData>
-                                                <DetailLabel>Hari Dalam Setahun</DetailLabel>
-                                                <DetailData>360</DetailData>
-                                            </DetailBody>
-                                            <DetailBody>
-                                                <DetailLabel>Periode Posting Bunga</DetailLabel>
-                                                <DetailData>{product.posting}</DetailData>
-                                                <DetailLabel>Lock In Period</DetailLabel>
-                                                <DetailData>{product.lock_in_period}</DetailData>
-                                            </DetailBody>
+                                            <DetailLeftSide>
+                                                <DataContainer>
+                                                    <DetailLabel>Tipe Simpanan</DetailLabel>
+                                                    <DetailData>{product.deposit_type}</DetailData>
+                                                </DataContainer>
+                                                <DataContainer>
+                                                    <DetailLabel>Periode Bunga</DetailLabel>
+                                                    <DetailData>{product.compound}</DetailData>
+                                                </DataContainer>
+                                                <DataContainer>
+                                                    <DetailLabel>Periode Posting Bunga</DetailLabel>
+                                                    <DetailData>{product.posting}</DetailData>
+                                                </DataContainer>
+                                            </DetailLeftSide>
+                                            <DetailMidSide>
+                                                <DataContainer>
+                                                    <DetailLabel>Tipe Bunga</DetailLabel>
+                                                    <DetailData>{product.interest_calculation}</DetailData>
+                                                </DataContainer>
+                                                <DataContainer>
+                                                    <DetailLabel>Hari Dalam Setahun</DetailLabel>
+                                                    <DetailData>360</DetailData>
+                                                </DataContainer>
+                                                <DataContainer>
+                                                    <DetailLabel>Lock In Period</DetailLabel>
+                                                    <DetailData>{product.lock_in_period}</DetailData>
+                                                </DataContainer>
+                                            </DetailMidSide>
+                                            <DetailRightSide>
+                                                <DataContainer>
+                                                    <DetailLabel>Pajak</DetailLabel>
+                                                    <DetailData>{product.tax}</DetailData>
+                                                </DataContainer>
+                                            </DetailRightSide>
                                         </DetailBodyContainer>
 
                                     </Card.Body>
@@ -158,66 +134,6 @@ export default class depositProductData extends Component {
         )
     }
 }
-
-// const Label = styled.label`
-// font-family: Franklin Gothic Medium;
-// font-size: 15px;
-// margin-right: 5px;
-// margin-left: 10px;
-
-// color: #003459;
-// `
-// const Card = styled.div`
-// width: 446px;
-// height: 85px;
-
-// margin: 15px 0px 0px 10px;
-
-// background: linear-gradient(92.02deg, #FFF975 0.26%, #FFFFFF 79.73%);
-// box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.10);
-// border-radius: 20px;
-// `
-
-// const CardHeader = styled.div`
-// display: flex;
-// flex-direction: row;
-// justify-content: space-between;
-// `
-
-// const ProductName = styled.div`
-// font-family: Franklin Gothic Medium;
-// font-style: normal;
-// font-weight: normal;
-// font-size: 25px;
-
-// margin-left: 25px;
-
-// color: #003459;
-// `
-
-// const ProductId = styled.div`
-// font-family: Franklin Gothic Medium;
-// font-style: normal;
-// font-weight: normal;
-// font-size: 10px;
-
-// margin-top: 23px;
-// margin-right: 45px;
-
-// color: #003459;
-// `
-// const CardBody = styled.div`
-// display: flex;
-// flex-direction: row;
-
-// margin-top: 15px;
-// margin-left: 25px;
-// `
-
-// const CardData = styled.div`
-// font-size: 12px;
-// font-weight: bold;
-// `
 
 const CardDetail = styled.div`
 width: 450px;
@@ -246,13 +162,19 @@ margin-left: 25px;
  padding: 5px;
 `
 const DetailBodyContainer = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
 
+padding: 0em 3em 0em 3em;
+width: 100%;
 `
 const DetailLabel = styled.label`
 font-family: Franklin Gothic Book;
 font-size: 10px;
 
-margin-right: 5px;
+width: 4.5em;
+margin-right: 5em;
 `
 
 const DetailData = styled.div`
@@ -266,8 +188,10 @@ color: #003459;
 `
 
 const Label = styled.label`
-    /* font-family: Franklin Gothic Book; */
-    font-size: 12px;
+    font-family: Franklin Gothic Book;
+    font-size: 15px;
+    font-weight: bold;
+
     color: #003459;
     padding-right: .6rem;
 `
@@ -313,16 +237,13 @@ const CardHeader = styled.div`
 `
 
 const ProductName = styled.div`
-    /* font-family: Franklin Gothic Medium; */
     font-style: normal;
     font-weight: normal;
     font-size: 25px;
-    /* margin-left: 25px; */
     color: #003459;
 `
 
 const ProductId = styled.div`
-    /* font-family: Franklin Gothic Medium; */
     font-style: normal;
     font-weight: normal;
     font-size: 10px;
@@ -330,12 +251,30 @@ const ProductId = styled.div`
     margin-right: 45px; */
     color: #003459;
 `
-const CardBody = styled.div``
 
+const DetailLeftSide = styled.div`
+display: flex;
+flex-direction: column;
+`
 
+const DetailMidSide = styled.div`
+display: flex;
+flex-direction: column;
+`
+
+const DetailRightSide = styled.div`
+display: flex;
+flex-direction: column;
+`
 
 const CardData = styled.div`
     font-size: 12px;
     font-weight: bold;
     margin-right: .6em;
     `
+
+const DataContainer = styled.div`
+display: flex;
+felx-direction: row;
+justify-content: space-between;
+`

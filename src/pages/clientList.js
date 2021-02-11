@@ -7,7 +7,7 @@ import LogoContainer from './components/logoContainer';
 import Koperasi from "../assets/logo.png";
 import SearchBar from "../pages/components/searchBar";
 import { Checkbox } from '@material-ui/core';
-import dataClient from "../helpers/dataClient";
+import dataClient from "../helpers/client/dataClient";
 
 
 

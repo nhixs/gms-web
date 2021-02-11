@@ -7,7 +7,7 @@ import Drawer from "./components/drawer";
 import LogoContainer from "./components/logoContainer";
 import Koperasi from "../assets/logo.png"
 import SearchBar from "../pages/components/searchBar";
-import dataLoan from "../helpers/dataLoan";
+import dataLoan from "../helpers/loan/dataLoan";
 
 const LoanList = (props) => {
 

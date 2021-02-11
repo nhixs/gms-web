@@ -1,4 +1,4 @@
-import Foto from "../assets/pasfoto.jpg"
+import Foto from "../../assets/pasfoto.jpg"
 
 const dataOfficer = [
     {

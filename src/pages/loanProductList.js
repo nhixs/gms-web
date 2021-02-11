@@ -6,7 +6,7 @@ import Drawer from "./components/drawer";
 import LogoContainer from './components/logoContainer';
 import Koperasi from "../assets/logo.png";
 import SearchBar from './components/searchBar';
-import DepositProductData from './components/depositProductData';
+import LoanProductData from './components/loan/loanProductData';
 import Pagination from './components/pagination';
 
 
@@ -27,7 +27,7 @@ const LoanProductList = (props) => {
                 </Header>
                 <Content style={{ alignItems: "center" }}>
                     <Pagination />
-                    <DepositProductData />
+                    <LoanProductData />
                 </Content>
             </Container>
         </Drawer>

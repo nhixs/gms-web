@@ -5,7 +5,7 @@ import Drawer from "./components/drawer";
 import LogoContainer from './components/logoContainer';
 import Koperasi from "../assets/logo.png";
 import SearchBar from './components/searchBar';
-import DepositProductData from './components/depositProductData';
+import DepositProductData from './components/deposit/depositProductData';
 import Pagination from './components/pagination';
 
 const depositProductList = (props) => {

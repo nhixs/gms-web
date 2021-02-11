@@ -100,12 +100,12 @@ const Columns = [
         title: 'transaction',
         sub: [
           {
-            label: 'transaksi pinjaman',
-            path: '/transaction/loan'
+            label: 'list transaksi',
+            path: '/transaction/list'
           },
           {
-            label: 'transaksi simpanan',
-            path: '/transaction/deposit'
+            label: 'tambah tansaksi',
+            path: '/transaction/list'
           }
         ]
       }

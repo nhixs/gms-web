@@ -8,7 +8,7 @@ import LogoContainer from "./components/logoContainer";
 import Koperasi from "../assets/logo.png"
 import SearchBar from "../pages/components/searchBar";
 import { Checkbox } from '@material-ui/core';
-import dataOfficer from "../helpers/dataOfficer";
+import dataOfficer from "../helpers/officer/dataOfficer";
 
 const OfficerList = (props) => {
 
