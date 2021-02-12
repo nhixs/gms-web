@@ -10,9 +10,9 @@ import YellowArrow from "../assets/yellow_arrow.svg";
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Polygon1 from "../pages/img/Polygon1.svg"
-
-
+import Polygon1 from "../pages/img/Polygon1.svg";
+import DecrementArrow from "../assets/arrow_down.svg";
+import IncrementArrow from "../assets/arrow_up.svg";
 
 const DepositProductList = (props) => {
 
@@ -47,6 +47,19 @@ const DepositProductList = (props) => {
     const handlePostingOptions = () => {
         setOptionPosting(!optionPostingOpen)
     }
+
+    /* Counter */
+    const [count, setCount] = useState(0);
+
+    // Create handleIncrement event handler
+    const handleIncrement = () => {
+        setCount(prevCount => prevCount + 1);
+    };
+
+    //Create handleDecrement event handler
+    const handleDecrement = () => {
+        setCount(prevCount => prevCount - 1);
+    };
 
     return (
         <Drawer title={'Simpanan'} subtitle={'Tambah Produk Simpanan'}>
@@ -133,8 +146,15 @@ const DepositProductList = (props) => {
                                 }
                             </DropDownContainer>
                         </Form>
-                        <Form>
+                        <Form style={{ paddingRight: "25.5em" }}>
                             <Label>Digit Setelah Desimal</Label>
+                            <CounterContainer>
+                                {count}
+                                <Counter>
+                                    <CounterButton onClick={handleIncrement}><img src={IncrementArrow} style={{ width: ".5em", paddingBottom: "0.62em" }} /></CounterButton>
+                                    <CounterButton onClick={handleDecrement}><img src={DecrementArrow} style={{ width: ".5em", paddingBottom: "2em" }} /></CounterButton>
+                                </Counter>
+                            </CounterContainer>
                         </Form>
                         <Form>
                             <Label>Keliapatan Uang</Label>
@@ -151,7 +171,7 @@ const DepositProductList = (props) => {
 
                 </ContainerSub>
             </Content>
-        </Drawer>
+        </Drawer >
     )
 }
 
@@ -320,6 +340,29 @@ const DropDown = styled.div`
   &:hover {
       background-color: #E1ECF4;
   }
+
+`
+
+const CounterContainer = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+
+padding: 0px 5px 3px 30px;
+width: 5.2em;
+height: 2.3em;
+
+font-size: 20px;
+
+border: 1px solid #003459;
+box-sizing: border-box;
+`
+
+const CounterButton = styled.div`
+
+`
+
+const Counter = styled.div`
 
 `
 export default DepositProductList   
