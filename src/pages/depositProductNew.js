@@ -122,7 +122,7 @@ const DepositProductList = (props) => {
         const productData = {
             interest_rate: interest,
             interest_calculation: interest_value,
-            digit_after_desimal: count
+            digit_after_decimal: count
         }
 
         const applicationData = {
@@ -316,10 +316,10 @@ const DepositProductList = (props) => {
                             </FormSub>
                             <FormSub>
                                 <Label>Tenor</Label>
-                                <select id="periode_list" onChange={(e) => setTenorPeriod(e.target.value)}>
-                                    <option value="monthly" >Bulan</option>
-                                    <option value="annually" >Tahun</option>
-                                </select  >
+                                <SelectTenor id="periode_list" onChange={(e) => setTenorPeriod(e.target.value)}>
+                                    <Tenor value="monthly" >Bulan</Tenor>
+                                    <Tenor value="annually" >Tahun</Tenor>
+                                </SelectTenor>
                                 <Input type="number" min="0" max="12" style={{ width: "100px" }} onChange={(e) => setTenor(parseFloat(e.target.value))} />
                             </FormSub>
                             <ButtonSmall onClick={simulateInterest}>Submit</ButtonSmall>
@@ -583,14 +583,14 @@ border-radius: 100px;
 font-family: Franklin Gothic Medium;
 font-style: normal;
 font-weight: normal;
-font-size: 14x;
+font-size: 18px;
 text-align: center;
 color: #003459;
 
-margin-left: 250px;
+margin: 3em 0em 0em 12.2em;
 
-width: 70px;
-height: 10x;
+width: 6.5em;
+height: 2.2em;
 `
 const FormSub = styled.div`
 display: flex;
@@ -627,6 +627,17 @@ text-align: center;
 const TableData = styled.td`
 text-align: center;
 border: 1px solid black;
+`
+
+const SelectTenor = styled.select`
+border: 1px solid #003459;
+border-radius: 7px;
+
+padding-left: .5em;
+width: 6.25em;
+`
+const Tenor = styled.option`
+
 `
 
 export default DepositProductList   

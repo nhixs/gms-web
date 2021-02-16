@@ -209,6 +209,9 @@ const LoanProductList = (props) => {
                                 }
                             </CheckContainer>
                         </Form>
+                        <Form style={{ justifyContent: "flex-end" }}>
+                            <SubmitButton>Tambah</SubmitButton>
+                        </Form>
                     </FormGroup>
                 </ContainerMain>
             </Content>
