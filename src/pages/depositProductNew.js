@@ -48,7 +48,7 @@ const DepositProductList = (props) => {
         setOptionPosting(!optionPostingOpen)
     }
 
-    /* Counter */
+    /* Counter Digit after decimal */
     const [count, setCount] = useState(0);
 
     // Create handleIncrement event handler
@@ -61,6 +61,45 @@ const DepositProductList = (props) => {
         setCount(prevCount => prevCount - 1);
     };
 
+    /* Counter Digit kelipatan uang */
+    const [countMoney, setCountMoney] = useState(10);
+
+    const handleMoneyInc = () => {
+        setCountMoney(prevCountMoney => prevCountMoney * 10);
+    };
+
+    const handleMoneyDec = () => {
+        setCountMoney(prevCountMoney => prevCountMoney / 10);
+    };
+
+    /* Dropdown Lock in Period */
+    const [lockOption, setLockOptionButton] = useState("Pilih Periode");
+    const handleLockOption = (dropDownLock) => {
+        setLockOptionButton(dropDownLock);
+        setOptionLock(!optionLockOpen);
+    };
+    const [optionLockOpen, setOptionLock] = useState(false);
+    const handleLockOptions = () => {
+        setOptionLock(!optionLockOpen)
+    }
+
+    /* Checkbox Pajak */
+    const [checked, setChecked] = useState(false);
+    const handleChange = () => {
+        setChecked(!checked)
+    }
+
+    /* Dropdown Pajak */
+    const [taxOption, setTaxOptionButton] = useState("Pilih Pajak");
+    const handleTaxOption = (dropDownTax) => {
+        setTaxOptionButton(dropDownTax);
+        setOptionTax(!optionTaxOpen);
+    };
+    const [optionTaxOpen, setOptionTax] = useState(false);
+    const handleTaxOptions = () => {
+        setOptionTax(!optionTaxOpen)
+    }
+    const [interest, setInterest] = useState('0');
     return (
         <Drawer title={'Simpanan'} subtitle={'Tambah Produk Simpanan'}>
             <Content>
@@ -99,7 +138,7 @@ const DepositProductList = (props) => {
                         <Form>
                             <Label htmlFor="interest">Bunga</Label>
                             <Form style={{ justifyContent: "space-evenly", paddingRight: "26.4em" }}>
-                                <Input id="interest" type="text" style={{ width: "4em", paddingLeft: "1.5em" }} /><Label style={{ marginLeft: ".5em" }}>%</Label>
+                                <Input id="interest" type="text" style={{ width: "4em", paddingLeft: "1.5em" }} onChange={event => setInterest(event.target.value)} /><Label style={{ marginLeft: ".5em" }}>%</Label>
                             </Form>
                         </Form>
                         <Form>
@@ -149,27 +188,126 @@ const DepositProductList = (props) => {
                         <Form style={{ paddingRight: "25.5em" }}>
                             <Label>Digit Setelah Desimal</Label>
                             <CounterContainer>
-                                {count}
+                                <Numb>
+                                    {count}
+                                </Numb>
                                 <Counter>
                                     <CounterButton onClick={handleIncrement}><img src={IncrementArrow} style={{ width: ".5em", paddingBottom: "0.62em" }} /></CounterButton>
                                     <CounterButton onClick={handleDecrement}><img src={DecrementArrow} style={{ width: ".5em", paddingBottom: "2em" }} /></CounterButton>
                                 </Counter>
                             </CounterContainer>
                         </Form>
-                        <Form>
+                        <Form style={{ paddingRight: "25.5em" }}>
                             <Label>Keliapatan Uang</Label>
+                            <CounterContainer>
+                                <Numb>
+                                    {countMoney}
+                                </Numb>
+                                <Counter>
+                                    <CounterButton onClick={handleMoneyInc}><img src={IncrementArrow} style={{ width: ".5em", paddingBottom: "0.62em" }} /></CounterButton>
+                                    <CounterButton onClick={handleMoneyDec}><img src={DecrementArrow} style={{ width: ".5em", paddingBottom: "2em" }} /></CounterButton>
+                                </Counter>
+                            </CounterContainer>
                         </Form>
-                        <Form>
+                        <Form style={{ paddingRight: "10.7em" }}>
                             <Label>Lock in period</Label>
+                            <LockGroup>
+                                <Input id="lock_in_period" type="text" style={{ width: "5em", marginRight: "20px" }} />
+                                <DropDownContainer>
+                                    <DropDownButton
+                                        onClick={() => handleLockOptions()}
+                                    >
+                                        <DropDownTitle>{lockOption}</DropDownTitle> <img src={Polygon1} style={{ width: "15px", marginRight: "14px" }} />
+                                    </DropDownButton>
+                                    {optionLockOpen &&
+                                        <DropDownOption>
+                                            <DropDown
+                                                onClick={() => handleLockOption("A")}
+                                            >
+                                                A
+                                        </DropDown>
+                                        </DropDownOption>
+                                    }
+                                </DropDownContainer>
+                            </LockGroup>
                         </Form>
                         <Form>
                             <Label>Pajak</Label>
+                            <CheckContainer>
+                                <Input type="checkbox" checked={checked} onChange={handleChange} style={{ width: "5em" }} />
+                                {checked &&
+                                    <DropDownContainer>
+                                        <DropDownButton
+                                            onClick={() => handleTaxOptions()}
+                                        >
+                                            <DropDownTitle >{taxOption}</DropDownTitle> <img src={Polygon1} style={{ width: "15px", marginRight: "14px" }} />
+                                        </DropDownButton>
+                                        {optionTaxOpen &&
+                                            <DropDownOption>
+                                                <DropDown
+                                                    onClick={() => handleTaxOption("A")}
+                                                >
+                                                    A
+                                            </DropDown>
+                                            </DropDownOption>
+                                        }
+                                    </DropDownContainer>
+                                }
+                            </CheckContainer>
+                        </Form>
+                        <Form style={{ justifyContent: "flex-end" }}>
+                            <SubmitButton>Tambah</SubmitButton>
                         </Form>
                     </FormGroup>
                 </ContainerMain>
-                <ContainerSub>
-
-                </ContainerSub>
+                <ContentSub>
+                    <ContainerSub>
+                        <ContainerSubHeader>
+                            Simulasi Perhitungan Bunga
+                        </ContainerSubHeader>
+                        <FormGroup style={{ padding: "0 20px 0 20px", marginTop: "20px" }}>
+                            <FormSub>
+                                <Label>Bunga</Label>
+                                <h2>{interest}%</h2>
+                            </FormSub>
+                            <FormSub>
+                                <Label>Nominal</Label>
+                                <h4>Rp</h4>
+                                <Input id="nominal" type="text" style={{ width: "200px" }} />
+                            </FormSub>
+                            <FormSub>
+                                <Label>Periode</Label>
+                                <Input type="number" style={{ width: "200px" }} />
+                            </FormSub>
+                            <FormSub>
+                                <Label>Jangka</Label>
+                                <Input type="list" id="periode" list="periode_list" style={{ width: "100px" }} />
+                                <datalist id="periode_list">
+                                    <option value="Bulan"></option>
+                                    <option value="Tahun"></option>
+                                </datalist>
+                                <Input type="number" min="0" max="12" style={{ width: "100px" }} />
+                            </FormSub>
+                            <ButtonSmall>Submit</ButtonSmall>
+                        </FormGroup>
+                    </ContainerSub>
+                    <ContainerSub style={{ marginTop: "2em" }}>
+                        <Table>
+                            <TableRow>
+                                <TableHead>No</TableHead>
+                                <TableHead>Bunga</TableHead>
+                                <TableHead>Setoran</TableHead>
+                                <TableHead>Tanggal</TableHead>
+                            </TableRow>
+                            <TableRow>
+                                <TableData>1</TableData>
+                                <TableData>6</TableData>
+                                <TableData>1.714.000</TableData>
+                                <TableData>01/01/2021</TableData>
+                            </TableRow>
+                        </Table>
+                    </ContainerSub>
+                </ContentSub>
             </Content>
         </Drawer >
     )
@@ -198,7 +336,7 @@ background-color: #ffffff;
 box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
 border-radius: 24px;
 
-width: 34em;
+width: 24em;
 height: 22em;
 `
 const Header = styled.div`
@@ -283,6 +421,8 @@ const Input = styled.input`
 border: 1px solid #003459;
 border-radius: 7px;
 
+padding-left: 20px;
+
 width: 32em;
 height: 2.3em;
 `
@@ -365,4 +505,94 @@ const CounterButton = styled.div`
 const Counter = styled.div`
 
 `
+const Numb = styled.div`
+padding: 7px 0 0 8px;
+`
+const LockGroup = styled.div`
+display: flex;
+flex-direction: row;
+`
+const CheckContainer = styled.div`
+display: flex;
+flex-direction: row;
+
+padding-right: 215px;
+`
+
+const SubmitButton = styled.button`
+background: #FFCB37;
+border: none;
+border-radius: 100px;
+font-family: Franklin Gothic Medium;
+font-style: normal;
+font-weight: normal;
+font-size: 28px;
+line-height: 33px;
+text-align: center;
+color: #003459;
+
+margin-top: 100px;
+
+width: 210.01px;
+height: 40.81px;
+`
+const ContainerSubHeader = styled.div`
+text-align: center;
+font-size: 27px;
+
+margin-top: .5em;
+`
+const ButtonSmall = styled.button`
+background: #FFCB37;
+border: none;
+border-radius: 100px;
+font-family: Franklin Gothic Medium;
+font-style: normal;
+font-weight: normal;
+font-size: 14x;
+text-align: center;
+color: #003459;
+
+margin-left: 250px;
+
+width: 70px;
+height: 10x;
+`
+const FormSub = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+
+margin: 0em 0em .5em 0em;
+`
+
+const ContentSub = styled.div`
+display: flex;
+flex-direction: column;
+`
+
+const Table = styled.table`
+margin: 1em 1em 0em 1em;
+border: 1px solid black;
+`
+
+const TableRow = styled.tr`
+border: 1px solid black;
+width: 100%;
+`
+
+const TableHead = styled.th`
+background: #003459;
+border: 1px solid #ffffff;
+box-sizing: border-box;
+color: #ffffff;
+
+text-align: center;
+`
+
+const TableData = styled.td`
+text-align: center;
+border: 1px solid black;
+`
+
 export default DepositProductList   

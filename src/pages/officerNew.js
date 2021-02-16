@@ -11,9 +11,22 @@ import Polygon1 from "../pages/img/Polygon1.svg"
 
 const OfficerAdd = (props) => {
 
+    const [form, setForm] = useState({
+        nama: '',
+        alamat: "",
+        email: "",
+        role: "",
+    })
+
     const [dropDownButton, setDropDownButton] = useState("Pilih Role Anda");
     const handleDropDownButton = (dropdown) => {
-        setDropDownButton(dropdown);
+        setDropDownButton(dropdown.charAt(0).toUpperCase() + dropdown.substring(1))
+        setForm(state => {
+            return {
+                ...state,
+                role: dropdown
+            }
+        })
         setOption(!optionOpen);
     }
 
@@ -21,6 +34,25 @@ const OfficerAdd = (props) => {
     const handleOptions = () => {
         setOption(!optionOpen)
     }
+
+    const handleInput = (input, label) => {
+        let resultInput
+        if (input && input !== "") {
+            resultInput = input
+        }
+        else resultInput = ""
+
+        setForm(state => {
+            return {
+                ...state,
+                [label]: resultInput
+            }
+        })
+    }
+    const showForm = () => {
+        console.log(form);
+    }
+
     return (
         <Drawer title={'Officer'} subtitle={'Tambah Officer'}>
             <Container>
@@ -34,11 +66,12 @@ const OfficerAdd = (props) => {
                 </Header>
                 <FormGroup>
                     <Label htmlFor="name">Nama</Label>
-                    <Input id="name" />
+                    <Input id="name" onChange={(e) => handleInput(e.target.value, "alamat")}
+                    />
                     <Label htmlFor="alamat">Alamat</Label>
-                    <Input id="name" type="text" style={{ height: '75px' }} />
+                    <Input id="address" type="text" style={{ height: '75px' }} onChange={(e) => handleInput(e.target.value, "nama")} />
                     <Label htmlFor="email">Email</Label>
-                    <Input id="email" />
+                    <Input id="email" onChange={(e) => handleInput(e.target.value, "email")} />
                     <FormGroupSub>
                         <Label htmlFor="role">Role</Label>
                         <Label htmlFor="foto" style={{ marginRight: '300px' }}>Foto</Label>
@@ -53,19 +86,19 @@ const OfficerAdd = (props) => {
                             {optionOpen &&
                                 <DropDownOption>
                                     <DropDown
-                                        onClick={() => handleDropDownButton("Operation")}
+                                        onClick={() => handleDropDownButton("operational")}
                                     >Operation</DropDown>
                                     <DropDown
-                                        onClick={() => handleDropDownButton("Supervisor")}
+                                        onClick={() => handleDropDownButton("supervisor")}
                                     >Supervisor</DropDown>
                                     <DropDown
-                                        onClick={() => handleDropDownButton("Accountant")}
+                                        onClick={() => handleDropDownButton("accountant")}
                                     >Accountant</DropDown>
                                     <DropDown
-                                        onClick={() => handleDropDownButton("HR")}
+                                        onClick={() => handleDropDownButton("hr")}
                                     >HR</DropDown>
                                     <DropDown
-                                        onClick={() => handleDropDownButton("Finance")}
+                                        onClick={() => handleDropDownButton("finance")}
                                     >Finance</DropDown>
                                 </DropDownOption>
                             }
@@ -74,7 +107,7 @@ const OfficerAdd = (props) => {
                     </FormGroupSub>
                     <FormGroupFooter>
                         <CancelButton id="cancel">Batal</CancelButton>
-                        <SubmitButton id="submit" type="submit" value="Tambah" />
+                        <SubmitButton id="submit" type="submit" value="Tambah" onClick={showForm} />
                     </FormGroupFooter>
                 </FormGroup>
             </Container>
