@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import moment from 'moment';
 import { useState } from 'react';
+
+import PerhitunganBunga from '../helpers/perhitunganBunga';
 
 import Drawer from "./components/drawer";
 import LogoContainer from "./components/logoContainer";
@@ -99,7 +101,43 @@ const DepositProductList = (props) => {
     const handleTaxOptions = () => {
         setOptionTax(!optionTaxOpen)
     }
-    const [interest, setInterest] = useState('0');
+    const [interest, setInterest] = useState(0);
+    const handleInterest = (interest) => {
+        const newInterest = parseFloat(interest);
+        if (!Number.isNaN(newInterest)) {
+            setInterest(newInterest);
+        } else {
+            setInterest(' tidak valid ');
+        }
+    }
+
+    const [tenorPeriod, setTenorPeriod] = useState();
+    const [tenor, setTenor] = useState(0);
+    const [amount, setAmount] = useState(0);
+    const handleAmount = (amount) => {
+        const newAmount = parseFloat(amount);
+        setAmount(newAmount);
+    }
+    const simulateInterest = async () => {
+        const productData = {
+            interest_rate: interest,
+            interest_calculation: interest_value,
+            digit_after_desimal: count
+        }
+
+        const applicationData = {
+            period_unit: tenorPeriod,
+            amount,
+            tenor,
+            start_date: "16-02-2021"
+        }
+
+        const interestCalc = await PerhitunganBunga(productData, applicationData)
+
+        console.log(interestCalc)
+
+    }
+
     return (
         <Drawer title={'Simpanan'} subtitle={'Tambah Produk Simpanan'}>
             <Content>
@@ -138,14 +176,14 @@ const DepositProductList = (props) => {
                         <Form>
                             <Label htmlFor="interest">Bunga</Label>
                             <Form style={{ justifyContent: "space-evenly", paddingRight: "26.4em" }}>
-                                <Input id="interest" type="text" style={{ width: "4em", paddingLeft: "1.5em" }} onChange={event => setInterest(event.target.value)} /><Label style={{ marginLeft: ".5em" }}>%</Label>
+                                <Input id="interest" type="text" style={{ width: "4em", paddingLeft: "1.5em" }} onChange={event => handleInterest(event.target.value)} /><Label style={{ marginLeft: ".5em" }}>%</Label>
                             </Form>
                         </Form>
                         <Form>
                             <Label htmlFor="interest_type">Tipe Bunga</Label>
                             <RadioGroup value={interest_value} onChange={handleChangeInterest} style={{ display: "flex", flexDirection: "row", paddingRight: "21.3em" }}>
                                 <FormControlLabel value="flat" control={<Radio />} label="Flat" />
-                                <FormControlLabel value="efective" control={<Radio />} label="Efektif" />
+                                <FormControlLabel value="effective" control={<Radio />} label="Efektif" />
                             </RadioGroup>
                         </Form>
                         <Form style={{ paddingRight: "17em" }}>
@@ -273,22 +311,18 @@ const DepositProductList = (props) => {
                             <FormSub>
                                 <Label>Nominal</Label>
                                 <h4>Rp</h4>
-                                <Input id="nominal" type="text" style={{ width: "200px" }} />
+                                <Input id="nominal" type="number" style={{ width: "200px" }}
+                                    onChange={(e) => handleAmount(e.target.value)} />
                             </FormSub>
                             <FormSub>
-                                <Label>Periode</Label>
-                                <Input type="number" style={{ width: "200px" }} />
+                                <Label>Tenor</Label>
+                                <select id="periode_list" onChange={(e) => setTenorPeriod(e.target.value)}>
+                                    <option value="monthly" >Bulan</option>
+                                    <option value="annually" >Tahun</option>
+                                </select  >
+                                <Input type="number" min="0" max="12" style={{ width: "100px" }} onChange={(e) => setTenor(parseFloat(e.target.value))} />
                             </FormSub>
-                            <FormSub>
-                                <Label>Jangka</Label>
-                                <Input type="list" id="periode" list="periode_list" style={{ width: "100px" }} />
-                                <datalist id="periode_list">
-                                    <option value="Bulan"></option>
-                                    <option value="Tahun"></option>
-                                </datalist>
-                                <Input type="number" min="0" max="12" style={{ width: "100px" }} />
-                            </FormSub>
-                            <ButtonSmall>Submit</ButtonSmall>
+                            <ButtonSmall onClick={simulateInterest}>Submit</ButtonSmall>
                         </FormGroup>
                     </ContainerSub>
                     <ContainerSub style={{ marginTop: "2em" }}>
