@@ -4,7 +4,6 @@ import moment from 'moment';
 import { useState } from 'react';
 
 import PerhitunganBunga from '../helpers/perhitunganBunga';
-
 import Drawer from "./components/drawer";
 import LogoContainer from "./components/logoContainer";
 import Koperasi from "../assets/logo.png";
@@ -101,6 +100,9 @@ const DepositProductList = (props) => {
     const handleTaxOptions = () => {
         setOptionTax(!optionTaxOpen)
     }
+
+    /* Function for simulation */
+
     const [interest, setInterest] = useState(0);
     const handleInterest = (interest) => {
         const newInterest = parseFloat(interest);
@@ -350,6 +352,7 @@ const DepositProductList = (props) => {
 const Content = styled.div`
 display: flex;
 flex-direction: row;
+justify-content: center;
 
 width: 100%;
 `
@@ -357,7 +360,7 @@ const ContainerMain = styled.div`
 display: flex;
 height: fit-content;
 flex-direction: column;
-width: 75em;
+width: 64em;
 
 margin-right: 2em; 
 padding: 4em;

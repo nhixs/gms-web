@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import moment from 'moment';
 import { useState } from 'react';
 
+import PerhitunganBunga from '../helpers/perhitunganBunga';
 import Drawer from "./components/drawer";
 import LogoContainer from "./components/logoContainer";
 import Koperasi from "../assets/logo.png";
@@ -23,9 +24,9 @@ const LoanProductList = (props) => {
     };
 
     /* Radio Button Interest Type */
-    const [interest, setInterest] = React.useState('flat');
-    const handleInterest = (event) => {
-        setInterest(event.target.value);
+    const [interestCalc, setInterestCalc] = React.useState('flat');
+    const handleInterestCalc = (event) => {
+        setInterestCalc(event.target.value);
     };
 
     /* Dropdown Compound Interest */
@@ -82,6 +83,45 @@ const LoanProductList = (props) => {
         setOptionTax(!optionTaxOpen)
     }
 
+    /* Function for simulation */
+
+    const [interest, setInterest] = useState(0);
+    const handleInterest = (interest) => {
+        const newInterest = parseFloat(interest);
+        if (!Number.isNaN(newInterest)) {
+            setInterest(newInterest);
+        } else {
+            setInterest(' tidak valid ');
+        }
+    }
+
+    const [tenorPeriod, setTenorPeriod] = useState();
+    const [tenor, setTenor] = useState(0);
+    const [amount, setAmount] = useState(0);
+    const handleAmount = (amount) => {
+        const newAmount = parseFloat(amount);
+        setAmount(newAmount);
+    }
+    const simulateInterest = async () => {
+        const productData = {
+            interest_rate: interest,
+            interest_calculation: interestCalc,
+            digit_after_decimal: count
+        }
+
+        const applicationData = {
+            period_unit: tenorPeriod,
+            amount,
+            tenor,
+            start_date: "16-02-2021"
+        }
+
+        const interestCalc = await PerhitunganBunga(productData, applicationData)
+
+        console.log(interestCalc)
+
+    }
+
     return (
         <Drawer title={'Pinjaman'} subtitle={'Tambah Produk Pinjaman'}>
             <Content>
@@ -110,7 +150,7 @@ const LoanProductList = (props) => {
                             <Label htmlFor="details">Detail</Label>
                             <TextArea />
                         </Form>
-                        <Form>
+                        <Form style={{ paddingRight: "2em" }}>
                             <Label htmlFor="deposit_type">Tipe Pinjaman</Label>
                             <RadioGroup value={collateral} onChange={handelCollateral} style={{ display: "flex", flexDirection: "row", paddingRight: "8.250em" }}>
                                 <FormControlLabel value="with_collateral" control={<Radio />} label="Degan Anggunan" />
@@ -119,45 +159,47 @@ const LoanProductList = (props) => {
                         </Form>
                         <Form>
                             <Label htmlFor="interest_calculation">Perhitungan Bunga</Label>
-                            <RadioGroup value={interest} onChange={handleInterest} style={{ display: "flex", flexDirection: "row", paddingRight: "21.3em" }}>
+                            <RadioGroup value={interestCalc} onChange={handleInterestCalc} style={{ display: "flex", flexDirection: "row", paddingRight: "21.3em" }}>
                                 <FormControlLabel value="flat" control={<Radio />} label="Flat" />
                                 <FormControlLabel value="efective" control={<Radio />} label="Efektif" />
                             </RadioGroup>
                         </Form>
                         <Form>
                             <Label htmlFor="interest">Bunga</Label>
-                            <Input id="interest" type="text" style={{ width: "4em", paddingLeft: "1.5em" }} onChange={event => setInterest(event.target.value)} /><Label style={{ marginLeft: ".5em" }}>%</Label>
+                            <Form style={{ justifyContent: "space-evenly", paddingRight: "26.4em" }}>
+                                <Input id="interest" type="text" style={{ width: "4em", paddingLeft: "1.5em" }} onChange={event => handleInterest(event.target.value)} /><Label style={{ marginLeft: ".5em" }}>%</Label>
+                            </Form>
                         </Form>
-                        <Form>
+                        <Form style={{ paddingRight: "17em" }}>
                             <Label>Compound Interest</Label>
                             <DropDownContainer>
                                 <DropDownButton
-                                    onClick={() => handleCompoundOpen()}
+                                    onClick={() => handleCompoundOption()}
                                 >
                                     <DropDownTitle>{compound}</DropDownTitle> <img src={Polygon1} style={{ width: "15px", marginRight: "14px" }} />
                                 </DropDownButton>
                                 {compoundOpen &&
                                     <DropDownOption>
                                         <DropDown
-                                            onClick={() => handleCompoundOption("A")}                                                                                >
+                                            onClick={() => handleCompoundOpen("A")}                                                                                >
                                             A
                                         </DropDown>
                                     </DropDownOption>
                                 }
                             </DropDownContainer>
                         </Form>
-                        <Form>
+                        <Form style={{ paddingRight: "17em" }}>
                             <Label>Periode Posting Bunga</Label>
                             <DropDownContainer>
                                 <DropDownButton
-                                    onClick={() => handlePostingOpen()}
+                                    onClick={() => handlePostingOption()}
                                 >
                                     <DropDownTitle>{posting}</DropDownTitle><img src={Polygon1} style={{ width: "15px", marginRight: "14px" }} />
                                 </DropDownButton>
                                 {postingOpen &&
                                     <DropDownOption>
                                         <DropDown
-                                            onClick={() => handlePostingOption("A")}
+                                            onClick={() => handlePostingOpen("A")}
                                         >
                                             A
                                         </DropDown>
@@ -165,7 +207,7 @@ const LoanProductList = (props) => {
                                 }
                             </DropDownContainer>
                         </Form>
-                        <Form>
+                        <Form style={{ paddingRight: "25.5em" }}>
                             <Label>Digit Setalah Desimal</Label>
                             <CounterContainer>
                                 <Numb>
@@ -179,7 +221,7 @@ const LoanProductList = (props) => {
                         </Form>
                         <Form>
                             <Label>Kelipatan Uang</Label>
-                            <RadioGroup value={multiples} onChange={handleMultiples} style={{ display: "flex", flexDirection: "row", paddingRight: "8.250em" }}>
+                            <RadioGroup value={multiples} onChange={handleMultiples} style={{ display: "flex", flexDirection: "row", paddingRight: "15.9em" }}>
                                 <FormControlLabel value="100" control={<Radio />} label="100" />
                                 <FormControlLabel value="1000" control={<Radio />} label="1.000" />
                                 <FormControlLabel value="10000" control={<Radio />} label="10.000" />
@@ -214,14 +256,59 @@ const LoanProductList = (props) => {
                         </Form>
                     </FormGroup>
                 </ContainerMain>
+                <ContentSub>
+                    <ContainerSub>
+                        <ContainerSubHeader>
+                            Simulasi Perhitungan Bunga
+                        </ContainerSubHeader>
+                        <FormGroup style={{ padding: "0 20px 0 20px", marginTop: "20px" }}>
+                            <FormSub>
+                                <Label>Bunga</Label>
+                                <h2>{interest}%</h2>
+                            </FormSub>
+                            <FormSub>
+                                <Label>Nominal</Label>
+                                <h4>Rp</h4>
+                                <Input id="nominal" type="number" style={{ width: "200px" }}
+                                    onChange={(e) => handleAmount(e.target.value)} />
+                            </FormSub>
+                            <FormSub>
+                                <Label>Tenor</Label>
+                                <SelectTenor id="periode_list" onChange={(e) => setTenorPeriod(e.target.value)}>
+                                    <Tenor value="monthly" >Bulan</Tenor>
+                                    <Tenor value="annually" >Tahun</Tenor>
+                                </SelectTenor>
+                                <Input type="number" min="0" max="12" style={{ width: "100px" }} onChange={(e) => setTenor(parseFloat(e.target.value))} />
+                            </FormSub>
+                            <ButtonSmall onClick={simulateInterest}>Submit</ButtonSmall>
+                        </FormGroup>
+                    </ContainerSub>
+                    <ContainerSub style={{ marginTop: "2em" }}>
+                        <Table>
+                            <TableRow>
+                                <TableHead>No</TableHead>
+                                <TableHead>Bunga</TableHead>
+                                <TableHead>Setoran</TableHead>
+                                <TableHead>Tanggal</TableHead>
+                            </TableRow>
+                            <TableRow>
+                                <TableData>1</TableData>
+                                <TableData>6</TableData>
+                                <TableData>1.714.000</TableData>
+                                <TableData>01/01/2021</TableData>
+                            </TableRow>
+                        </Table>
+                    </ContainerSub>
+                </ContentSub>
             </Content>
-        </Drawer>
+        </Drawer >
     )
 }
 
 const Content = styled.div`
 display: flex;
 flex-direction: row;
+justify-content: center;
 
 width: 100%;
 `
@@ -229,7 +316,7 @@ const ContainerMain = styled.div`
 display: flex;
 height: fit-content;
 flex-direction: column;
-width: 75em;
+width: 64em;
 
 margin-right: 2em; 
 padding: 4em;
@@ -499,5 +586,14 @@ const TableData = styled.td`
 text-align: center;
 border: 1px solid black;
 `
+const SelectTenor = styled.select`
+border: 1px solid #003459;
+border-radius: 7px;
 
+padding-left: .5em;
+width: 6.25em;
+`
+const Tenor = styled.option`
+
+`
 export default LoanProductList
