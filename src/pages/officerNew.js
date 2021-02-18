@@ -66,10 +66,10 @@ const OfficerAdd = (props) => {
                 </Header>
                 <FormGroup>
                     <Label htmlFor="name">Nama</Label>
-                    <Input id="name" onChange={(e) => handleInput(e.target.value, "alamat")}
+                    <Input id="name" onChange={(e) => handleInput(e.target.value, "nama")}
                     />
                     <Label htmlFor="alamat">Alamat</Label>
-                    <Input id="address" type="text" style={{ height: '75px' }} onChange={(e) => handleInput(e.target.value, "nama")} />
+                    <Input id="address" type="text" style={{ height: '75px' }} onChange={(e) => handleInput(e.target.value, "alamat")} />
                     <Label htmlFor="email">Email</Label>
                     <Input id="email" onChange={(e) => handleInput(e.target.value, "email")} />
                     <FormGroupSub>

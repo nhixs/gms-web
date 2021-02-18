@@ -12,6 +12,14 @@ import Polygon1 from "../pages/img/Polygon1.svg"
 
 const ClientNew = (props) => {
 
+    const [form, setForm] = useState({
+        nama: '',
+        ktp: "",
+        gender: "",
+        lokasi: "",
+        profesi: ""
+    })
+
     const [dropDownButton, setDropDownButton] = useState("Pilih Gender");
     const handleDropDownButton = (dropdown) => {
         setDropDownButton(dropdown);
