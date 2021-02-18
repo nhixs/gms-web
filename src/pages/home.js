@@ -55,16 +55,16 @@ const Home = (props) => {
       <DetailBox>
         <Detail>
           <img src={ShakeHand} style={{ width: "3.5em", paddingBottom: "10em" }} />
-          <DataContainer>
+          <DataContainer style={{ alignItems: "center" }}>
             <Label>Jumlah Anggota</Label>
             <Data>{anggota}</Data>
-            <Button>Review</Button>
+            <Button style={{ width: "4.5em" }}>Review</Button>
           </DataContainer>
           <Line style={{ marginRight: "4.9em" }}></Line>
-          <DataContainer>
+          <DataContainer style={{ alignItems: "center" }}>
             <Label>Calon Anggota</Label>
             <Data>{calonAnggota}</Data>
-            <Button>Review</Button>
+            <Button style={{ width: "4.5em" }}>Review</Button>
           </DataContainer>
         </Detail>
         <Detail style={{
