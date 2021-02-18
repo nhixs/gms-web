@@ -1,11 +1,11 @@
-const moment = require('moment')
+import moment from 'moment';
 
 // const reducer = (accumulator, currentValue) => accumulator + currentValue;
 // const capitalize = (string) => (string.slice(0, 1).toUpperCase() + string.slice(1, string.length))
 const getInterestPeriod = (unit) => unit === "weekly" ? 52 : unit === "monthly" ? 12 : 1
 const getUnitPeriod = (unit) => unit === "weekly" ? 'w' : unit === "monthly" ? "M" : "Y"
 
-module.exports = async (productData, applicationData) => {
+const interestCalc = async (productData, applicationData) => {
     const { interest_calculation, interest_rate, digit_after_decimal: digit, in_multiple_of: multiple, days_in_year: days, tax = [] } = productData
     const { amount, tenor, period_unit, start_date } = applicationData
 
@@ -89,3 +89,5 @@ module.exports = async (productData, applicationData) => {
         },
     }
 }
+
+export default interestCalc

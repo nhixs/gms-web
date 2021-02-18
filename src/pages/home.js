@@ -60,14 +60,16 @@ const Home = (props) => {
             <Data>{anggota}</Data>
             <Button>Review</Button>
           </DataContainer>
-          <Line></Line>
+          <Line style={{ marginRight: "4.9em" }}></Line>
           <DataContainer>
             <Label>Calon Anggota</Label>
             <Data>{calonAnggota}</Data>
             <Button>Review</Button>
           </DataContainer>
         </Detail>
-        <Detail style={{ margin: "1.5em 0em 1.5em 0em" }}>
+        <Detail style={{
+          margin: "1.5em 0em 1.5em"
+        }}>
           <img src={MoneyPuch} style={{ width: "3.5em", paddingBottom: "10em" }} />
           <ContentContainer>
             <ContentHeader>Aplikasi Simpanan</ContentHeader>
@@ -110,7 +112,7 @@ const Home = (props) => {
           </ContentContainer>
         </Detail>
       </DetailBox>
-    </Drawer>
+    </Drawer >
   )
 }
 

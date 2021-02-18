@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import moment from 'moment';
+// import moment from 'moment';
 import { useState } from 'react';
 
 import PerhitunganBunga from '../helpers/perhitunganBunga';
@@ -113,7 +113,7 @@ const DepositProductList = (props) => {
         }
     }
 
-    const [tenorPeriod, setTenorPeriod] = useState();
+    const [tenorPeriod, setTenorPeriod] = useState("annually");
     const [tenor, setTenor] = useState(0);
     const [amount, setAmount] = useState(0);
     const handleAmount = (amount) => {
@@ -133,6 +133,8 @@ const DepositProductList = (props) => {
             tenor,
             start_date: "16-02-2021"
         }
+        console.log(productData)
+        console.log(applicationData)
 
         const interestCalc = await PerhitunganBunga(productData, applicationData)
 
@@ -318,7 +320,7 @@ const DepositProductList = (props) => {
                             </FormSub>
                             <FormSub>
                                 <Label>Tenor</Label>
-                                <SelectTenor id="periode_list" onChange={(e) => setTenorPeriod(e.target.value)}>
+                                <SelectTenor id="periode_list" value={tenorPeriod} onChange={(e) => setTenorPeriod(e.target.value)}>
                                     <Tenor value="monthly" >Bulan</Tenor>
                                     <Tenor value="annually" >Tahun</Tenor>
                                 </SelectTenor>
