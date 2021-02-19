@@ -16,21 +16,48 @@ import DecrementArrow from "../assets/arrow_down.svg";
 import IncrementArrow from "../assets/arrow_up.svg";
 
 const DepositProductList = (props) => {
+    /*set Form function */
+    const [form, setForm] = useState({
+        name: '',
+        description: '',
+        interest_calculation: 'flat',
+        interest_rate: 0.1,
+        deposit_type: 'fixed',
+        compound: '',
+        posting: '',
+        digit_after_decimal: '',
+        in_multiple_of: '',
+        lock_in_value: '',
+        lock_in_period: '',
+        tax: '',
+        tax_value: '',
+        theme_color: ''
+    })
 
     /* Radio Button */
-    const [deposit_value, setValueDeposit] = React.useState('periodic_deposit');
-    const [interest_value, setValueInterest] = React.useState('flat');
+
+    /* Tipe Simpanan */
+    const [deposit_value, setValueDeposit] = useState(form.deposit_type);
     const handleChangeDeposit = (event) => {
         setValueDeposit(event.target.value);
     };
+
+    /* Tipe Bunga  */
+    const [interest_value, setValueInterest] = useState(form.interest_calculation);
     const handleChangeInterest = (event) => {
         setValueInterest(event.target.value);
     };
 
     /* Dropdown periode Bunga */
     const [periodOption, setPeriodOptionButton] = useState("Pilih Periode Bunga");
-    const handlePeriodOption = (dropdowPeriod) => {
-        setPeriodOptionButton(dropdowPeriod);
+    const handlePeriodOption = (dropDownPeriod) => {
+        setForm(state => {
+            return {
+                ...state,
+                compound: dropDownPeriod
+            }
+        });
+        setPeriodOptionButton(dropDownPeriod.charAt(0).toUpperCase() + dropDownPeriod.substring(1));
         setOptionPeriod(!optionPeriodOpen);
     }
     const [optionPeriodOpen, setOptionPeriod] = useState(false);
@@ -41,7 +68,13 @@ const DepositProductList = (props) => {
     /* Dropdown periode Posing Bunga */
     const [postingOption, setPostingOptionButton] = useState("Pilih Posting Bunga");
     const handlePostingOption = (dropdowPosting) => {
-        setPostingOptionButton(dropdowPosting);
+        setForm(state => {
+            return {
+                ...state,
+                posting: dropdowPosting
+            }
+        });
+        setPostingOptionButton(dropdowPosting.charAt(0).toUpperCase() + dropdowPosting.substring(1));
         setOptionPosting(!optionPostingOpen);
     }
     const [optionPostingOpen, setOptionPosting] = useState(false);
@@ -103,9 +136,15 @@ const DepositProductList = (props) => {
 
     /* Function for simulation */
 
-    const [interest, setInterest] = useState(0);
-    const handleInterest = (interest) => {
-        setInterest(interest);
+    const [interest, setInterest] = useState(form.interest_rate);
+    const handleInterest = (interest_rate) => {
+        setForm(state => {
+            return {
+                ...state,
+                interest_rate
+            }
+        });
+        setInterest(interest_rate);
     }
 
     const [tenorPeriod, setTenorPeriod] = useState("annually");
@@ -138,22 +177,7 @@ const DepositProductList = (props) => {
     }
 
     /* Submit Function */
-    const [form, setForm] = useState({
-        name: '',
-        description: '',
-        interest_calculation: '',
-        interest_rate: '',
-        tipe_bunga: '',
-        compound: '',
-        posting: '',
-        digit_after_decimal: '',
-        in_multiple_of: '',
-        lock_in_value: '',
-        lock_in_period: '',
-        tax: '',
-        tax_value: '',
-        theme_color: ''
-    })
+
 
     const handleInput = (input, label) => {
         let resultInput
@@ -204,26 +228,26 @@ const DepositProductList = (props) => {
                         <Form>
                             <Label htmlFor="deposit_type">Tipe Simpanan</Label>
                             <RadioGroup value={deposit_value} onChange={handleChangeDeposit} style={{ display: "flex", flexDirection: "row", paddingRight: "8.250em" }}>
-                                <FormControlLabel value="time_deposit" control={<Radio />} label="Simpanan Berjangka" />
-                                <FormControlLabel value="periodic_deposit" control={<Radio />} label="Simpanan Berkala" />
+                                <FormControlLabel value="fixed" control={<Radio onClick={(e) => handleInput(e.target.value, "deposit_type")} />} label="Simpanan Berjangka" />
+                                <FormControlLabel value="recurring" control={<Radio onClick={(e) => handleInput(e.target.value, "deposit_type")} />} label="Simpanan Berkala" />
                             </RadioGroup>
                         </Form>
                         <Form>
                             <Label htmlFor="interest">Bunga</Label>
-                            <Form style={{ justifyContent: "space-evenly", paddingRight: "26.4em" }}>
-                                <Input id="interest" type="number" min="0" style={{ width: "4em", paddingLeft: "1.5em" }} onChange={event => handleInterest(event.target.value) /*}, (e) => handleInput(e.target.value, "interest_rate")*/} />
+                            <Form style={{ justifyContent: "space-evenly", paddingRight: "26.4em" }} value={form.interest_rate}>
+                                <Input id="interest" type="number" min="0.1" style={{ width: "4em", paddingLeft: "1em" }} onChange={event => handleInterest(event.target.value)} />
                                 <Label style={{ marginLeft: ".5em" }}>%</Label>
                             </Form>
                         </Form>
                         <Form>
                             <Label htmlFor="interest_type">Tipe Bunga</Label>
                             <RadioGroup value={interest_value} onChange={handleChangeInterest} style={{ display: "flex", flexDirection: "row", paddingRight: "21.3em" }}>
-                                <FormControlLabel value="flat" control={<Radio />} label="Flat" />
-                                <FormControlLabel value="effective" control={<Radio />} label="Efektif" />
+                                <FormControlLabel value="flat" control={<Radio onClick={(e) => handleInput(e.target.value, "interest_calculation")} />} label="Flat" />
+                                <FormControlLabel value="effective" control={<Radio onClick={(e) => handleInput(e.target.value, "interest_calculation")} />} label="Efektif" />
                             </RadioGroup>
                         </Form>
                         <Form style={{ paddingRight: "17em" }}>
-                            <Label>Periode Bunga</Label>
+                            <Label>Periode Compound Bunga</Label>
                             <DropDownContainer>
                                 <DropDownButton
                                     onClick={() => handlePeriodOptions()}
@@ -233,8 +257,8 @@ const DepositProductList = (props) => {
                                 {optionPeriodOpen &&
                                     <DropDownOption>
                                         <DropDown
-                                            onClick={() => handlePeriodOption("A")}>
-                                            A
+                                            onClick={() => handlePeriodOption("daily")}>
+                                            Daily
                                         </DropDown>
                                     </DropDownOption>
                                 }
@@ -251,9 +275,9 @@ const DepositProductList = (props) => {
                                 {optionPostingOpen &&
                                     <DropDownOption>
                                         <DropDown
-                                            onClick={() => handlePostingOption("A")}
+                                            onClick={() => handlePostingOption("monthly")}
                                         >
-                                            A
+                                            Monthly
                                         </DropDown>
                                     </DropDownOption>
                                 }
@@ -263,7 +287,7 @@ const DepositProductList = (props) => {
                             <Label>Digit Setelah Desimal</Label>
                             <CounterContainer>
                                 <Numb>
-                                    {count}
+                                    {form.digit_after_decimal = count}
                                 </Numb>
                                 <Counter>
                                     <CounterButton onClick={handleIncrement}><img src={IncrementArrow} style={{ width: ".5em", paddingBottom: "0.62em" }} /></CounterButton>
@@ -275,7 +299,7 @@ const DepositProductList = (props) => {
                             <Label>Keliapatan Uang</Label>
                             <CounterContainer>
                                 <Numb>
-                                    {countMoney}
+                                    {form.in_multiple_of = countMoney}
                                 </Numb>
                                 <Counter>
                                     <CounterButton onClick={handleMoneyInc}><img src={IncrementArrow} style={{ width: ".5em", paddingBottom: "0.62em" }} /></CounterButton>
@@ -286,7 +310,7 @@ const DepositProductList = (props) => {
                         <Form style={{ paddingRight: "10.7em" }}>
                             <Label>Lock in period</Label>
                             <LockGroup>
-                                <Input id="lock_in_period" type="text" style={{ width: "5em", marginRight: "20px" }} />
+                                <Input id="lock_in_period" type="text" style={{ width: "5em", marginRight: "20px" }} onChange={(e) => handleInput(e.target.value, "lock_in_period")} />
                                 <DropDownContainer>
                                     <DropDownButton
                                         onClick={() => handleLockOptions()}
@@ -517,7 +541,6 @@ color: #ffffff;
 background-color: #003459;
 border-radius:2px;
 
-padding-left: 2.5em;
 width: 15em;
 `
 
@@ -525,6 +548,9 @@ const DropDownTitle = styled.label`
 color: #ffffff;
 font-style: italic;
 font-size: 18px;
+text-align: center;
+
+width: 100%;
 `
 const DropDownOption = styled.div`
   display: block;
