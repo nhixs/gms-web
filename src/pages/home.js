@@ -55,13 +55,13 @@ const Home = (props) => {
       <DetailBox>
         <Detail>
           <img src={ShakeHand} style={{ width: "3.5em", paddingBottom: "10em" }} />
-          <DataContainer style={{ alignItems: "center" }}>
+          <DataContainer style={{ alignItems: "center", padding: "0em 0em 0em 8.75em", marginRight: "2.5em" }}>
             <Label>Jumlah Anggota</Label>
             <Data>{anggota}</Data>
             <Button style={{ width: "4.5em" }}>Review</Button>
           </DataContainer>
-          <Line style={{ marginRight: "4.9em" }}></Line>
-          <DataContainer style={{ alignItems: "center" }}>
+          <Line style={{ marginRight: "8.3em" }}></Line>
+          <DataContainer style={{ alignItems: "center", paddingRight: "8.3em" }}>
             <Label>Calon Anggota</Label>
             <Data>{calonAnggota}</Data>
             <Button style={{ width: "4.5em" }}>Review</Button>
@@ -216,6 +216,8 @@ height: 8em;
 const ContentDetail = styled.div`
 display:flex;
 justify-content: space-between;
+
+padding: 0em 5.7em 0em 0em;
 `
 const ContentHeader = styled.div`
 font-size: 30px;
