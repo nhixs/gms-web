@@ -81,30 +81,6 @@ const DepositProductList = (props) => {
         setOptionPosting(!optionPostingOpen)
     }
 
-    /* Counter Digit after decimal */
-    const [count, setCount] = useState(0);
-
-    // Create handleIncrement event handler
-    const handleIncrement = () => {
-        setCount(prevCount => prevCount + 1);
-    };
-
-    //Create handleDecrement event handler
-    const handleDecrement = () => {
-        setCount(prevCount => prevCount - 1);
-    };
-
-    /* Counter Digit kelipatan uang */
-    const [countMoney, setCountMoney] = useState(10);
-
-    const handleMoneyInc = () => {
-        setCountMoney(prevCountMoney => prevCountMoney * 10);
-    };
-
-    const handleMoneyDec = () => {
-        setCountMoney(prevCountMoney => prevCountMoney / 10);
-    };
-
     /* Dropdown Lock in Period */
     const [lockOption, setLockOptionButton] = useState("Pilih Periode");
     const handleLockOption = (dropDownLock) => {
@@ -144,6 +120,55 @@ const DepositProductList = (props) => {
     const handleTaxOptions = () => {
         setOptionTax(!optionTaxOpen)
     }
+
+    /* Dropdown Color */
+
+    const [colorOption, setColorOption] = useState("");
+    const handleColorOption = (dropDownColor) => {
+        setForm(state => {
+            return {
+                ...state,
+                theme_color: dropDownColor.substring(1)
+            }
+        });
+        setColorOption(dropDownColor);
+        setOptionColor(!colorOpen);
+    };
+    const [colorOpen, setOptionColor] = useState(false);
+    const handleColorOptions = () => {
+        setOptionColor(!colorOpen)
+    }
+
+
+
+
+    /* Counter Digit after decimal */
+    const [count, setCount] = useState(0);
+
+    // Create handleIncrement event handler
+    const handleIncrement = () => {
+        setCount(prevCount => prevCount + 1);
+    };
+
+    //Create handleDecrement event handler
+    const handleDecrement = () => {
+        setCount(prevCount => prevCount - 1);
+    };
+
+    /* Counter Digit kelipatan uang */
+    const [countMoney, setCountMoney] = useState(10);
+
+    const handleMoneyInc = () => {
+        setCountMoney(prevCountMoney => prevCountMoney * 10);
+    };
+
+    const handleMoneyDec = () => {
+        setCountMoney(prevCountMoney => prevCountMoney / 10);
+    };
+
+
+
+
 
     /* Function for simulation */
 
@@ -187,8 +212,9 @@ const DepositProductList = (props) => {
 
     }
 
-    /* Submit Function */
 
+
+    /* Submit Function */
 
     const handleInput = (input, label) => {
         let resultInput
@@ -221,9 +247,43 @@ const DepositProductList = (props) => {
                         </MidSide>
                         <RightSide>
                             Tema
-                        <TemaContainer>
-                                <ColorChooser />
-                                <img src={YellowArrow} style={{ width: "12px" }} />
+                            <TemaContainer>
+                                <ColorButton onClick={() => handleColorOptions()}>
+                                    <Color style={{ backgroundColor: "#" + colorOption, marginRight: ".8em" }}></Color>
+                                    <img src={YellowArrow} style={{ width: "12px" }} />
+                                </ColorButton>
+                                {colorOpen &&
+                                    <ColorOptions>
+                                        <Color style={{ backgroundColor: "#C4C4C4" }}
+                                            onClick={() => handleColorOption("C4C4C4")}>
+                                        </Color>
+                                        <Color
+                                            style={{ backgroundColor: "#FFF975" }}
+                                            onClick={() => handleColorOption("FFF975")}
+                                        >
+                                        </Color>
+                                        <Color
+                                            style={{ backgroundColor: "#75FFA4" }}
+                                            onClick={() => handleColorOption("75FFA4")}
+                                        >
+                                        </Color>
+                                        <Color
+                                            style={{ backgroundColor: "#75EEFF" }}
+                                            onClick={() => handleColorOption("#75EEFF")}
+                                        >
+                                        </Color>
+                                        <Color
+                                            style={{ backgroundColor: "#FF4F37" }}
+                                            onClick={() => handleColorOption("FF4F37")}
+                                        >
+                                        </Color>
+                                        <Color
+                                            style={{ backgroundColor: "#7594FF" }}
+                                            onClick={() => handleColorOption("7594FF")}
+                                        >
+                                        </Color>
+                                    </ColorOptions>
+                                }
                             </TemaContainer>
                         </RightSide>
                     </Header>
@@ -502,7 +562,7 @@ width: 105px;
 `
 
 const TemaContainer = styled.div`
-width: 2.1em;
+width: 2.5em;
 height: 1.5em;
 
 display: flex;
@@ -741,6 +801,39 @@ width: 6.25em;
 `
 const Tenor = styled.option`
 
+`
+
+const ColorButton = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+`
+const ColorOptions = styled.div`
+display: block;
+  position: absolute;
+  
+  height: fit-content;
+  overflow: auto;
+  z-index:15;
+  background-color: #ffffff;
+  border: 1px solid #003459;
+`
+const Color = styled.div`
+display: flex;
+  justify-content:center;
+  width: 1em;
+  height: 1em;
+  border: 1px solid #003459;
+  font-family: Franklin Gothic Medium;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 20px;
+
+
+  color: #003459;
+  &:hover {
+      background-color: #E1ECF4;
+  }
 `
 
 export default DepositProductList   
