@@ -69,7 +69,7 @@ const OfficerAdd = (props) => {
                     <Input id="name" onChange={(e) => handleInput(e.target.value, "nama")}
                     />
                     <Label htmlFor="alamat">Alamat</Label>
-                    <Input id="address" type="text" style={{ height: '75px' }} onChange={(e) => handleInput(e.target.value, "alamat")} />
+                    <TextArea id="address" type="text" style={{ height: '75px' }} onChange={(e) => handleInput(e.target.value, "alamat")}></TextArea>
                     <Label htmlFor="email">Email</Label>
                     <Input id="email" onChange={(e) => handleInput(e.target.value, "email")} />
                     <FormGroupSub>
@@ -281,6 +281,12 @@ color: #003459;
 width: 210.01px;
 height: 40.81px;
 `
+const TextArea = styled.textarea`
+border: 1px solid #003459;
+box-sizing: border-box;
+border-radius: 10px;
 
+width: 59.5em;
+`
 
 export default OfficerAdd
