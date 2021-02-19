@@ -30,8 +30,7 @@ const DepositProductList = (props) => {
         lock_in_value: '',
         lock_in_period: '',
         tax: '',
-        tax_value: '',
-        theme_color: ''
+        theme_color: 'FFF975'
     })
 
     /* Radio Button */
@@ -109,7 +108,13 @@ const DepositProductList = (props) => {
     /* Dropdown Lock in Period */
     const [lockOption, setLockOptionButton] = useState("Pilih Periode");
     const handleLockOption = (dropDownLock) => {
-        setLockOptionButton(dropDownLock);
+        setForm(state => {
+            return {
+                ...state,
+                lock_in_period: dropDownLock
+            }
+        });
+        setLockOptionButton(dropDownLock.charAt(0).toUpperCase() + dropDownLock.substring(1));
         setOptionLock(!optionLockOpen);
     };
     const [optionLockOpen, setOptionLock] = useState(false);
@@ -126,6 +131,12 @@ const DepositProductList = (props) => {
     /* Dropdown Pajak */
     const [taxOption, setTaxOptionButton] = useState("Pilih Pajak");
     const handleTaxOption = (dropDownTax) => {
+        setForm(state => {
+            return {
+                ...state,
+                tax: dropDownTax
+            }
+        });
         setTaxOptionButton(dropDownTax);
         setOptionTax(!optionTaxOpen);
     };
@@ -260,6 +271,14 @@ const DepositProductList = (props) => {
                                             onClick={() => handlePeriodOption("daily")}>
                                             Daily
                                         </DropDown>
+                                        <DropDown
+                                            onClick={() => handlePeriodOption("monthly")}>
+                                            Monthly
+                                        </DropDown>
+                                        <DropDown
+                                            onClick={() => handlePeriodOption("yearly")}>
+                                            Yearly
+                                        </DropDown>
                                     </DropDownOption>
                                 }
                             </DropDownContainer>
@@ -275,9 +294,19 @@ const DepositProductList = (props) => {
                                 {optionPostingOpen &&
                                     <DropDownOption>
                                         <DropDown
+                                            onClick={() => handlePostingOption("daily")}
+                                        >
+                                            Daily
+                                        </DropDown>
+                                        <DropDown
                                             onClick={() => handlePostingOption("monthly")}
                                         >
                                             Monthly
+                                        </DropDown>
+                                        <DropDown
+                                            onClick={() => handlePostingOption("yearly")}
+                                        >
+                                            Yearly
                                         </DropDown>
                                     </DropDownOption>
                                 }
@@ -310,7 +339,7 @@ const DepositProductList = (props) => {
                         <Form style={{ paddingRight: "10.7em" }}>
                             <Label>Lock in period</Label>
                             <LockGroup>
-                                <Input id="lock_in_period" type="text" style={{ width: "5em", marginRight: "20px" }} onChange={(e) => handleInput(e.target.value, "lock_in_period")} />
+                                <Input id="lock_in_value" type="text" style={{ width: "5em", marginRight: "20px" }} onChange={(e) => handleInput(e.target.value, "lock_in_value")} />
                                 <DropDownContainer>
                                     <DropDownButton
                                         onClick={() => handleLockOptions()}
@@ -320,10 +349,20 @@ const DepositProductList = (props) => {
                                     {optionLockOpen &&
                                         <DropDownOption>
                                             <DropDown
-                                                onClick={() => handleLockOption("A")}
+                                                onClick={() => handleLockOption("day")}
                                             >
-                                                A
-                                        </DropDown>
+                                                Day
+                                            </DropDown>
+                                            <DropDown
+                                                onClick={() => handleLockOption("month")}
+                                            >
+                                                Month
+                                            </DropDown>
+                                            <DropDown
+                                                onClick={() => handleLockOption("year")}
+                                            >
+                                                Year
+                                            </DropDown>
                                         </DropDownOption>
                                     }
                                 </DropDownContainer>
@@ -343,9 +382,9 @@ const DepositProductList = (props) => {
                                         {optionTaxOpen &&
                                             <DropDownOption>
                                                 <DropDown
-                                                    onClick={() => handleTaxOption("A")}
+                                                    onClick={() => handleTaxOption("PPh Pasal 4 ayat 2")}
                                                 >
-                                                    A
+                                                    PPh Pasal 4 ayat 2
                                             </DropDown>
                                             </DropDownOption>
                                         }
