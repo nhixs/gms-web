@@ -6,11 +6,10 @@ import { useState } from 'react';
 import Drawer from "./components/drawer";
 import LogoContainer from "./components/logoContainer";
 import Koperasi from "../assets/logo.png"
-
 import Polygon1 from "../pages/img/Polygon1.svg"
 
 const OfficerAdd = (props) => {
-
+    /* Submit Functiom */
     const [form, setForm] = useState({
         nama: '',
         alamat: "",
@@ -18,6 +17,7 @@ const OfficerAdd = (props) => {
         role: "",
     })
 
+    /* Droopdown Option */
     const [dropDownButton, setDropDownButton] = useState("Pilih Role Anda");
     const handleDropDownButton = (dropdown) => {
         setDropDownButton(dropdown.charAt(0).toUpperCase() + dropdown.substring(1))

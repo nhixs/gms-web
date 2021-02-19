@@ -22,7 +22,13 @@ const ClientNew = (props) => {
 
     const [dropDownButton, setDropDownButton] = useState("Pilih Gender");
     const handleDropDownButton = (dropdown) => {
-        setDropDownButton(dropdown);
+        setDropDownButton(dropdown.charAt(0).toUpperCase() + dropdown.substring(1))
+        setForm(state => {
+            return {
+                ...state,
+                gender: dropdown
+            }
+        })
         setOption(!optionOpen);
     }
 
@@ -31,6 +37,23 @@ const ClientNew = (props) => {
         setOption(!optionOpen)
     }
 
+    const handleInput = (input, label) => {
+        let resultInput
+        if (input && input !== "") {
+            resultInput = input
+        }
+        else resultInput = ""
+
+        setForm(state => {
+            return {
+                ...state,
+                [label]: resultInput
+            }
+        })
+    }
+    const showForm = () => {
+        console.log(form);
+    }
     return (
         <Drawer title={'Anggota'} subtitle={'Tambah Anggota'}>
             <Container>
@@ -42,9 +65,9 @@ const ClientNew = (props) => {
                 </Header>
                 <FormGroup>
                     <Label htmlFor="name">Nama</Label>
-                    <Input id="name" />
+                    <Input id="name" onChange={(e) => handleInput(e.target.value, "nama")} />
                     <Label htmlFor="ktp">KTP</Label>
-                    <Input id="ktp" />
+                    <Input id="ktp" onChange={(e) => handleInput(e.target.value, "ktp")} />
                     <Label htmlFor="email">Gender</Label>
                     <DropDownContainer>
                         <DropDownButton
@@ -58,12 +81,12 @@ const ClientNew = (props) => {
                         {optionOpen &&
                             <DropDownOption>
                                 <DropDown
-                                    onClick={() => handleDropDownButton("Laki-Laki")}
+                                    onClick={() => handleDropDownButton("laki-laki")}
                                 >
                                     Laki-Laki
                                  </DropDown>
                                 <DropDown
-                                    onClick={() => handleDropDownButton("Perempuan")}
+                                    onClick={() => handleDropDownButton("perempuan")}
                                 >
                                     Perempuan
                                 </DropDown>
@@ -71,12 +94,12 @@ const ClientNew = (props) => {
                         }
                     </DropDownContainer>
                     <Label htmlFor="address">Lokasi</Label>
-                    <Input id="address" />
+                    <Input id="address" onChange={(e) => handleInput(e.target.value, "lokasi")} />
                     <Label htmlFor="profesion">Profesi</Label>
-                    <Input id="profesion" />
+                    <Input id="profesion" onChange={(e) => handleInput(e.target.value, "profesi")} />
                     <FormGroupFooter>
                         <CancelButton>Batal</CancelButton>
-                        <SubmitButton>Tambah</SubmitButton>
+                        <SubmitButton id="submit" type="submit" value="Tambah" onClick={showForm} />
                     </FormGroupFooter>
                 </FormGroup>
             </Container>
@@ -228,7 +251,7 @@ width: 210.01px;
 height: 40.81px;
 `
 
-const SubmitButton = styled.button`
+const SubmitButton = styled.input`
 background: #FFCB37;
 border: none;
 border-radius: 100px;

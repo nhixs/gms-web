@@ -105,12 +105,7 @@ const DepositProductList = (props) => {
 
     const [interest, setInterest] = useState(0);
     const handleInterest = (interest) => {
-        const newInterest = parseFloat(interest);
-        if (!Number.isNaN(newInterest)) {
-            setInterest(newInterest);
-        } else {
-            setInterest(' tidak valid ');
-        }
+        setInterest(interest);
     }
 
     const [tenorPeriod, setTenorPeriod] = useState("annually");
@@ -142,6 +137,42 @@ const DepositProductList = (props) => {
 
     }
 
+    /* Submit Function */
+    const [form, setForm] = useState({
+        name: '',
+        description: '',
+        interest_calculation: '',
+        interest_rate: '',
+        tipe_bunga: '',
+        compound: '',
+        posting: '',
+        digit_after_decimal: '',
+        in_multiple_of: '',
+        lock_in_value: '',
+        lock_in_period: '',
+        tax: '',
+        tax_value: '',
+        theme_color: ''
+    })
+
+    const handleInput = (input, label) => {
+        let resultInput
+        if (input && input !== "") {
+            resultInput = input
+        }
+        else resultInput = ""
+
+        setForm(state => {
+            return {
+                ...state,
+                [label]: resultInput
+            }
+        })
+    }
+    const showForm = () => {
+        console.log(form);
+    }
+
     return (
         <Drawer title={'Simpanan'} subtitle={'Tambah Produk Simpanan'}>
             <Content>
@@ -164,11 +195,11 @@ const DepositProductList = (props) => {
                     <FormGroup>
                         <Form>
                             <Label htmlFor="deposit_name">Nama Simpanan</Label>
-                            <Input id="deposit_name" type="text" />
+                            <Input id="deposit_name" type="text" onChange={(e) => handleInput(e.target.value, "name")} />
                         </Form>
                         <Form>
                             <Label htmlFor="details">Detail</Label>
-                            <TextArea />
+                            <TextArea onChange={(e) => handleInput(e.target.value, "description")} />
                         </Form>
                         <Form>
                             <Label htmlFor="deposit_type">Tipe Simpanan</Label>
@@ -180,7 +211,8 @@ const DepositProductList = (props) => {
                         <Form>
                             <Label htmlFor="interest">Bunga</Label>
                             <Form style={{ justifyContent: "space-evenly", paddingRight: "26.4em" }}>
-                                <Input id="interest" type="text" style={{ width: "4em", paddingLeft: "1.5em" }} onChange={event => handleInterest(event.target.value)} /><Label style={{ marginLeft: ".5em" }}>%</Label>
+                                <Input id="interest" type="number" min="0" style={{ width: "4em", paddingLeft: "1.5em" }} onChange={event => handleInterest(event.target.value) /*}, (e) => handleInput(e.target.value, "interest_rate")*/} />
+                                <Label style={{ marginLeft: ".5em" }}>%</Label>
                             </Form>
                         </Form>
                         <Form>
@@ -201,7 +233,7 @@ const DepositProductList = (props) => {
                                 {optionPeriodOpen &&
                                     <DropDownOption>
                                         <DropDown
-                                            onClick={() => handlePeriodOption("A")}                                                                                >
+                                            onClick={() => handlePeriodOption("A")}>
                                             A
                                         </DropDown>
                                     </DropDownOption>
@@ -298,7 +330,7 @@ const DepositProductList = (props) => {
                             </CheckContainer>
                         </Form>
                         <Form style={{ justifyContent: "flex-end" }}>
-                            <SubmitButton>Tambah</SubmitButton>
+                            <SubmitButton id="submit" type="submit" value="Tambah" onClick={showForm} />
                         </Form>
                     </FormGroup>
                 </ContainerMain>
@@ -460,7 +492,7 @@ const Input = styled.input`
 border: 1px solid #003459;
 border-radius: 7px;
 
-padding-left: 20px;
+padding-left: 1.25em;
 
 width: 32em;
 height: 2.3em;
@@ -469,6 +501,7 @@ const TextArea = styled.textarea`
 border: 1px solid #003459;
 border-radius: 7px;
 
+padding-left: 1.25em;
 width: 32em;
 height: 6.9em;
 `
@@ -558,7 +591,7 @@ flex-direction: row;
 padding-right: 215px;
 `
 
-const SubmitButton = styled.button`
+const SubmitButton = styled.input`
 background: #FFCB37;
 border: none;
 border-radius: 100px;
