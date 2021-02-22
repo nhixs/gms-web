@@ -17,6 +17,64 @@ import IncrementArrow from "../assets/arrow_up.svg";
 
 const LoanProductList = (props) => {
 
+    /*set Form function */
+    const [form, setForm] = useState({
+        name: '',
+        description: '',
+        interest_rate: '',
+        interest_calculation: '',
+        compound: '',
+        posting: '',
+        collateral_type: '',
+        digit_after_decimal: '',
+        in_multiple_of: '',
+        lock_in_value: '',
+        lock_in_period: '',
+        tax: '',
+        day_in_month: '',
+        theme_color: '',
+        loan_type: '',
+        days_in_year: ''
+    })
+
+    /* Submit Function */
+
+    const handleInput = (input, label) => {
+        let resultInput
+        if (input && input !== "") {
+            resultInput = input
+        }
+        else resultInput = ""
+
+        setForm(state => {
+            return {
+                ...state,
+                [label]: resultInput
+            }
+        })
+    }
+    const showForm = () => {
+        console.log(form);
+    }
+
+    /* Dropdown Color */
+
+    const [colorOption, setColorOption] = useState("");
+    const handleColorOption = (dropDownColor) => {
+        setForm(state => {
+            return {
+                ...state,
+                theme_color: dropDownColor.substring(1)
+            }
+        });
+        setColorOption(dropDownColor);
+        setOptionColor(!colorOpen);
+    };
+    const [colorOpen, setOptionColor] = useState(false);
+    const handleColorOptions = () => {
+        setOptionColor(!colorOpen)
+    }
+
     /* Radio Button Loan Type */
     const [collateral, setCollateral] = React.useState('with collateral');
     const handelCollateral = (event) => {
@@ -135,9 +193,43 @@ const LoanProductList = (props) => {
                         </MidSide>
                         <RightSide>
                             Tema
-                        <TemaContainer>
-                                <ColorChooser />
-                                <img src={YellowArrow} style={{ width: "12px" }} />
+                            <TemaContainer>
+                                <ColorButton>
+                                    <Color style={{ backgroundColor: "#" + colorOption, marginRight: ".4em" }}></Color>
+                                    <img src={YellowArrow} style={{ width: "12px", cursor: "pointer" }} onClick={() => handleColorOptions()} />
+                                </ColorButton>
+                                {colorOpen &&
+                                    <ColorOptions>
+                                        <Color style={{ backgroundColor: "#C4C4C4" }}
+                                            onClick={() => handleColorOption("C4C4C4")}>
+                                        </Color>
+                                        <Color
+                                            style={{ backgroundColor: "#FFF975" }}
+                                            onClick={() => handleColorOption("FFF975")}
+                                        >
+                                        </Color>
+                                        <Color
+                                            style={{ backgroundColor: "#75FFA4" }}
+                                            onClick={() => handleColorOption("75FFA4")}
+                                        >
+                                        </Color>
+                                        <Color
+                                            style={{ backgroundColor: "#75EEFF" }}
+                                            onClick={() => handleColorOption("#75EEFF")}
+                                        >
+                                        </Color>
+                                        <Color
+                                            style={{ backgroundColor: "#FF4F37" }}
+                                            onClick={() => handleColorOption("FF4F37")}
+                                        >
+                                        </Color>
+                                        <Color
+                                            style={{ backgroundColor: "#7594FF" }}
+                                            onClick={() => handleColorOption("7594FF")}
+                                        >
+                                        </Color>
+                                    </ColorOptions>
+                                }
                             </TemaContainer>
                         </RightSide>
                     </Header>
@@ -595,5 +687,37 @@ width: 6.25em;
 `
 const Tenor = styled.option`
 
+`
+const ColorButton = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+`
+const ColorOptions = styled.div`
+display: block;
+  position: absolute;
+  
+  height: fit-content;
+  overflow: auto;
+  z-index:15;
+  background-color: #ffffff;
+  border: 1px solid #003459;
+`
+const Color = styled.div`
+display: flex;
+  justify-content:center;
+  width: 1em;
+  height: 1em;
+  border: 1px solid #003459;
+  font-family: Franklin Gothic Medium;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 20px;
+
+
+  color: #003459;
+  &:hover {
+     cursor: pointer;
+  }
 `
 export default LoanProductList

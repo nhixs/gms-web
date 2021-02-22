@@ -33,6 +33,26 @@ const DepositProductList = (props) => {
         theme_color: 'FFF975'
     })
 
+    /* Submit Function */
+
+    const handleInput = (input, label) => {
+        let resultInput
+        if (input && input !== "") {
+            resultInput = input
+        }
+        else resultInput = ""
+
+        setForm(state => {
+            return {
+                ...state,
+                [label]: resultInput
+            }
+        })
+    }
+    const showForm = () => {
+        console.log(form);
+    }
+
     /* Radio Button */
 
     /* Tipe Simpanan */
@@ -212,28 +232,6 @@ const DepositProductList = (props) => {
 
     }
 
-
-
-    /* Submit Function */
-
-    const handleInput = (input, label) => {
-        let resultInput
-        if (input && input !== "") {
-            resultInput = input
-        }
-        else resultInput = ""
-
-        setForm(state => {
-            return {
-                ...state,
-                [label]: resultInput
-            }
-        })
-    }
-    const showForm = () => {
-        console.log(form);
-    }
-
     return (
         <Drawer title={'Simpanan'} subtitle={'Tambah Produk Simpanan'}>
             <Content>
@@ -248,9 +246,9 @@ const DepositProductList = (props) => {
                         <RightSide>
                             Tema
                             <TemaContainer>
-                                <ColorButton onClick={() => handleColorOptions()}>
+                                <ColorButton>
                                     <Color style={{ backgroundColor: "#" + colorOption, marginRight: ".8em" }}></Color>
-                                    <img src={YellowArrow} style={{ width: "12px" }} />
+                                    <img src={YellowArrow} style={{ width: "12px", cursor: "pointer" }} onClick={() => handleColorOptions()} />
                                 </ColorButton>
                                 {colorOpen &&
                                     <ColorOptions>
@@ -832,7 +830,7 @@ display: flex;
 
   color: #003459;
   &:hover {
-      background-color: #E1ECF4;
+      cursor: pointer;
   }
 `
 
