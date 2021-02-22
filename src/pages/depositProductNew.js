@@ -160,7 +160,11 @@ const DepositProductList = (props) => {
     }
 
 
-
+    /* Radio Button Multiples of Money */
+    const [multiples, setMultiples] = React.useState('100');
+    const handleMultiples = (event) => {
+        setMultiples(event.target.value);
+    };
 
     /* Counter Digit after decimal */
     const [count, setCount] = useState(0);
@@ -174,21 +178,6 @@ const DepositProductList = (props) => {
     const handleDecrement = () => {
         setCount(prevCount => prevCount - 1);
     };
-
-    /* Counter Digit kelipatan uang */
-    const [countMoney, setCountMoney] = useState(10);
-
-    const handleMoneyInc = () => {
-        setCountMoney(prevCountMoney => prevCountMoney * 10);
-    };
-
-    const handleMoneyDec = () => {
-        setCountMoney(prevCountMoney => prevCountMoney / 10);
-    };
-
-
-
-
 
     /* Function for simulation */
 
@@ -382,17 +371,13 @@ const DepositProductList = (props) => {
                                 </Counter>
                             </CounterContainer>
                         </Form>
-                        <Form style={{ paddingRight: "25.5em" }}>
-                            <Label>Keliapatan Uang</Label>
-                            <CounterContainer>
-                                <Numb>
-                                    {form.in_multiple_of = countMoney}
-                                </Numb>
-                                <Counter>
-                                    <CounterButton onClick={handleMoneyInc}><img src={IncrementArrow} style={{ width: ".5em", paddingBottom: "0.62em" }} /></CounterButton>
-                                    <CounterButton onClick={handleMoneyDec}><img src={DecrementArrow} style={{ width: ".5em", paddingBottom: "2em" }} /></CounterButton>
-                                </Counter>
-                            </CounterContainer>
+                        <Form>
+                            <Label>Kelipatan Uang</Label>
+                            <RadioGroup value={multiples} onChange={handleMultiples} style={{ display: "flex", flexDirection: "row", paddingRight: "15.9em" }}>
+                                <FormControlLabel value="100" control={<Radio onChange={(e) => handleInput(e.target.value, "in_multiple_of")} />} label="100" />
+                                <FormControlLabel value="1000" control={<Radio onChange={(e) => handleInput(e.target.value, "in_multiple_of")} />} label="1.000" />
+                                <FormControlLabel value="10000" control={<Radio onChange={(e) => handleInput(e.target.value, "in_multiple_of")} />} label="10.000" />
+                            </RadioGroup>
                         </Form>
                         <Form style={{ paddingRight: "10.7em" }}>
                             <Label>Lock in period</Label>

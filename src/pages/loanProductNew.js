@@ -82,7 +82,7 @@ const LoanProductList = (props) => {
     };
 
     /* Radio Button Interest Type */
-    const [interestCalc, setInterestCalc] = React.useState('flat');
+    const [interest_value, setInterestCalc] = React.useState(form.interest_calculation);
     const handleInterestCalc = (event) => {
         setInterestCalc(event.target.value);
     };
@@ -90,7 +90,13 @@ const LoanProductList = (props) => {
     /* Dropdown Compound Interest */
     const [compound, setCompound] = useState("Pilih Periode");
     const handleCompoundOpen = (dropDownCompound) => {
-        setCompound(dropDownCompound);
+        setForm(state => {
+            return {
+                ...state,
+                compound: dropDownCompound
+            }
+        })
+        setCompound(dropDownCompound.charAt(0).toUpperCase() + dropDownCompound.substring(1));
         setCompoundOpen(!compoundOpen);
     };
     const [compoundOpen, setCompoundOpen] = useState(false);
@@ -101,7 +107,13 @@ const LoanProductList = (props) => {
     /* Dropdown Posting Interest */
     const [posting, setPosting] = useState("Pilih Periode");
     const handlePostingOpen = (dropDownPosting) => {
-        setPosting(dropDownPosting);
+        setForm(state => {
+            return {
+                ...state,
+                posting, dropDownPosting
+            }
+        })
+        setPosting(dropDownPosting.charAt(0).toUpperCase() + dropDownPosting.substring(1));
         setPostingOpen(!postingOpen);
     };
     const [postingOpen, setPostingOpen] = useState(false);
@@ -112,10 +124,10 @@ const LoanProductList = (props) => {
     /* Counter Decimal */
     const [count, setCount] = useState(0);
     const handleIncrement = () => {
-        setCount(prevCount => prevCount + 1);
+        setCount((prevCount) => (Math.max(prevCount + 1, 0)));
     };
     const handleDecrement = () => {
-        setCount(prevCount => prevCount - 1);
+        setCount((prevCount) => (Math.min(prevCount - 1, 0)));
     };
 
     /* Radio Button Multiples of Money */
@@ -133,6 +145,12 @@ const LoanProductList = (props) => {
     /* Dropdown Pajak */
     const [taxOption, setTaxOptionButton] = useState("Pilih Pajak");
     const handleTaxOption = (dropDownTax) => {
+        setForm(state => {
+            return {
+                ...state,
+                tax: dropDownTax
+            }
+        })
         setTaxOptionButton(dropDownTax);
         setOptionTax(!optionTaxOpen);
     };
@@ -143,14 +161,15 @@ const LoanProductList = (props) => {
 
     /* Function for simulation */
 
-    const [interest, setInterest] = useState(0);
-    const handleInterest = (interest) => {
-        const newInterest = parseFloat(interest);
-        if (!Number.isNaN(newInterest)) {
-            setInterest(newInterest);
-        } else {
-            setInterest(' tidak valid ');
-        }
+    const [interest, setInterest] = useState(form.interest_rate);
+    const handleInterest = (interest_rate) => {
+        setForm(state => {
+            return {
+                ...state,
+                interest_rate
+            }
+        });
+        setInterest(interest_rate);
     }
 
     const [tenorPeriod, setTenorPeriod] = useState();
@@ -163,7 +182,7 @@ const LoanProductList = (props) => {
     const simulateInterest = async () => {
         const productData = {
             interest_rate: interest,
-            interest_calculation: interestCalc,
+            interest_calculation: interest_value,
             digit_after_decimal: count
         }
 
@@ -236,30 +255,30 @@ const LoanProductList = (props) => {
                     <FormGroup>
                         <Form>
                             <Label htmlFor="loan_name">Nama Pinjaman</Label>
-                            <Input id="loan_name" type="text" />
+                            <Input id="loan_name" type="text" onChange={(e) => handleInput(e.target.value, "name")} />
                         </Form>
                         <Form>
                             <Label htmlFor="details">Detail</Label>
-                            <TextArea />
+                            <TextArea onChange={(e) => handleInput(e.target.value, "description")} />
                         </Form>
                         <Form style={{ paddingRight: "2em" }}>
                             <Label htmlFor="deposit_type">Tipe Pinjaman</Label>
                             <RadioGroup value={collateral} onChange={handelCollateral} style={{ display: "flex", flexDirection: "row", paddingRight: "8.250em" }}>
-                                <FormControlLabel value="with_collateral" control={<Radio />} label="Degan Anggunan" />
-                                <FormControlLabel value="without_collateral" control={<Radio />} label="Tanpa Anggunan" />
+                                <FormControlLabel value="with_collateral" control={<Radio onChange={(e) => handleInput(e.target.value, "loan_type")} />} label="Degan Anggunan" />
+                                <FormControlLabel value="without_collateral" control={<Radio onChange={(e) => handleInput(e.target.value, "loan_type")} />} label="Tanpa Anggunan" />
                             </RadioGroup>
                         </Form>
                         <Form>
                             <Label htmlFor="interest_calculation">Perhitungan Bunga</Label>
-                            <RadioGroup value={interestCalc} onChange={handleInterestCalc} style={{ display: "flex", flexDirection: "row", paddingRight: "21.3em" }}>
-                                <FormControlLabel value="flat" control={<Radio />} label="Flat" />
-                                <FormControlLabel value="efective" control={<Radio />} label="Efektif" />
+                            <RadioGroup value={interest_value} onChange={handleInterestCalc} style={{ display: "flex", flexDirection: "row", paddingRight: "21.3em" }}>
+                                <FormControlLabel value="flat" control={<Radio onChange={(e) => handleInput(e.target.value, "interest_calculation")} />} label="Flat" />
+                                <FormControlLabel value="efective" control={<Radio onChange={(e) => handleInput(e.target.value, "interest_calculation")} />} label="Efektif" />
                             </RadioGroup>
                         </Form>
                         <Form>
                             <Label htmlFor="interest">Bunga</Label>
                             <Form style={{ justifyContent: "space-evenly", paddingRight: "26.4em" }}>
-                                <Input id="interest" type="text" style={{ width: "4em", paddingLeft: "1.5em" }} onChange={event => handleInterest(event.target.value)} /><Label style={{ marginLeft: ".5em" }}>%</Label>
+                                <Input id="interest" type="number" min="0.1" style={{ width: "4em", paddingLeft: ".5em" }} onChange={event => handleInterest(event.target.value)} /><Label style={{ marginLeft: ".5em" }}>%</Label>
                             </Form>
                         </Form>
                         <Form style={{ paddingRight: "17em" }}>
@@ -273,8 +292,16 @@ const LoanProductList = (props) => {
                                 {compoundOpen &&
                                     <DropDownOption>
                                         <DropDown
-                                            onClick={() => handleCompoundOpen("A")}                                                                                >
-                                            A
+                                            onClick={() => handleCompoundOpen("daily")}>
+                                            Daily
+                                        </DropDown>
+                                        <DropDown
+                                            onClick={() => handleCompoundOpen("monthly")}>
+                                            Monthly
+                                        </DropDown>
+                                        <DropDown
+                                            onClick={() => handleCompoundOpen("yearly")}>
+                                            Yearly
                                         </DropDown>
                                     </DropDownOption>
                                 }
@@ -291,9 +318,19 @@ const LoanProductList = (props) => {
                                 {postingOpen &&
                                     <DropDownOption>
                                         <DropDown
-                                            onClick={() => handlePostingOpen("A")}
+                                            onClick={() => handlePostingOpen("daily")}
                                         >
-                                            A
+                                            Daily
+                                        </DropDown>
+                                        <DropDown
+                                            onClick={() => handlePostingOpen("monthly")}
+                                        >
+                                            Monthly
+                                        </DropDown>
+                                        <DropDown
+                                            onClick={() => handlePostingOpen("yearly")}
+                                        >
+                                            Yearly
                                         </DropDown>
                                     </DropDownOption>
                                 }
@@ -303,7 +340,7 @@ const LoanProductList = (props) => {
                             <Label>Digit Setalah Desimal</Label>
                             <CounterContainer>
                                 <Numb>
-                                    {count}
+                                    {form.digit_after_decimal = count}
                                 </Numb>
                                 <Counter>
                                     <CounterButton onClick={handleIncrement}><img src={IncrementArrow} style={{ width: ".5em", paddingBottom: "0.62em" }} /></CounterButton>
@@ -314,9 +351,9 @@ const LoanProductList = (props) => {
                         <Form>
                             <Label>Kelipatan Uang</Label>
                             <RadioGroup value={multiples} onChange={handleMultiples} style={{ display: "flex", flexDirection: "row", paddingRight: "15.9em" }}>
-                                <FormControlLabel value="100" control={<Radio />} label="100" />
-                                <FormControlLabel value="1000" control={<Radio />} label="1.000" />
-                                <FormControlLabel value="10000" control={<Radio />} label="10.000" />
+                                <FormControlLabel value="100" control={<Radio onChange={(e) => handleInput(e.target.value, "in_multiple_of")} />} label="100" />
+                                <FormControlLabel value="1000" control={<Radio onChange={(e) => handleInput(e.target.value, "in_multiple_of")} />} label="1.000" />
+                                <FormControlLabel value="10000" control={<Radio onChange={(e) => handleInput(e.target.value, "in_multiple_of")} />} label="10.000" />
                             </RadioGroup>
                         </Form>
                         <Form>
@@ -333,9 +370,9 @@ const LoanProductList = (props) => {
                                         {optionTaxOpen &&
                                             <DropDownOption>
                                                 <DropDown
-                                                    onClick={() => handleTaxOption("A")}
+                                                    onClick={() => handleTaxOption("PPh")}
                                                 >
-                                                    A
+                                                    PPh
                                             </DropDown>
                                             </DropDownOption>
                                         }
@@ -344,7 +381,7 @@ const LoanProductList = (props) => {
                             </CheckContainer>
                         </Form>
                         <Form style={{ justifyContent: "flex-end" }}>
-                            <SubmitButton>Tambah</SubmitButton>
+                            <SubmitButton id="submit" type="submit" value="Tambah" onClick={showForm} />
                         </Form>
                     </FormGroup>
                 </ContainerMain>
@@ -514,6 +551,7 @@ const TextArea = styled.textarea`
 border: 1px solid #003459;
 border-radius: 7px;
 
+padding-left: 1.25em;
 width: 32em;
 height: 6.9em;
 `
@@ -529,7 +567,6 @@ color: #ffffff;
 background-color: #003459;
 border-radius:2px;
 
-padding-left: 2.5em;
 width: 15em;
 `
 
@@ -537,6 +574,9 @@ const DropDownTitle = styled.label`
 color: #ffffff;
 font-style: italic;
 font-size: 18px;
+text-align: center;
+
+width:100%;
 `
 const DropDownOption = styled.div`
   display: block;
@@ -603,7 +643,7 @@ flex-direction: row;
 padding-right: 215px;
 `
 
-const SubmitButton = styled.button`
+const SubmitButton = styled.input`
 background: #FFCB37;
 border: none;
 border-radius: 100px;
