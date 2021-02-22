@@ -52,7 +52,6 @@ const DepositProductList = (props) => {
     const showForm = () => {
         console.log(form);
     }
-
     /* Radio Button */
 
     /* Tipe Simpanan */
@@ -551,6 +550,7 @@ height: 1.5em;
 display: flex;
 flex-direction: row;
 justify-content: space-between;
+position: relative;
 
 padding: .3em;
 margin-left: 1.2em;
@@ -788,17 +788,16 @@ const Tenor = styled.option`
 
 const ColorButton = styled.div`
 display: flex;
+flex:1;
 flex-direction: row;
 justify-content: space-between;
 `
 const ColorOptions = styled.div`
-display: block;
-  position: absolute;
-  
+  display: block;
+  position: absolute;  
   height: fit-content;
   overflow: auto;
   z-index:15;
-  background-color: #ffffff;
   border: 1px solid #003459;
 `
 const Color = styled.div`

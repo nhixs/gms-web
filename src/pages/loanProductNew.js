@@ -496,6 +496,7 @@ height: 1.5em;
 display: flex;
 flex-direction: row;
 justify-content: space-between;
+position: relative;
 
 padding: .3em;
 margin-left: 1.2em;
