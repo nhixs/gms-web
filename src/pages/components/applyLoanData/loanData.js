@@ -6,8 +6,10 @@ import { Accordion, Card } from "react-bootstrap";
 import "../css/pagination.css";
 import DataLoanProduct from "../../../helpers/loan/dataLoanProduct";
 
+export default class loanData extends Component {
 
-export default class loanProductData extends Component {
+
+
     state = {
         showDetail: false
     }
@@ -24,6 +26,7 @@ export default class loanProductData extends Component {
         this.state = {
             data: [],
         };
+
     }
 
     receivedData() {
@@ -68,7 +71,7 @@ export default class loanProductData extends Component {
                                         <CardData>
                                             <Label>Bunga:</Label>
                                             {product.interest_rate}%
-                                            </CardData>
+                                        </CardData>
                                         <CardData>
                                             <Label>Tipe Bunga: </Label>
                                             {product.interest_calculation}
@@ -133,6 +136,8 @@ export default class loanProductData extends Component {
             </>
         )
     }
+
+
 }
 
 const CardDetail = styled.div`

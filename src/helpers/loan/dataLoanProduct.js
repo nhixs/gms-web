@@ -13,7 +13,6 @@ const dataLoanProduct =
                 "interest_calculation": "flat",
                 "compound": "daily",
                 "posting": "yearly",
-                "collateral_type": "vehicle",
                 "digit_after_decimal": 6,
                 "in_multiple_of": "100",
                 "lock_in_value": 2,
@@ -25,7 +24,7 @@ const dataLoanProduct =
                 "created_at": "2021-02-02T20:13:35.000Z",
                 "updated_at": "2021-02-02T20:13:35.000Z",
                 "id_loan_prod": "PA-01-0001",
-                "loan_type": "dengan anggunan",
+                "with_collateral": 1,
                 "days_in_year": "365"
             },
             {
@@ -37,7 +36,6 @@ const dataLoanProduct =
                 "interest_calculation": "flat",
                 "compound": "daily",
                 "posting": "yearly",
-                "collateral_type": "vehicle",
                 "digit_after_decimal": 6,
                 "in_multiple_of": "100",
                 "lock_in_value": 2,
@@ -49,7 +47,7 @@ const dataLoanProduct =
                 "created_at": "2021-02-02T20:13:35.000Z",
                 "updated_at": "2021-02-02T20:13:35.000Z",
                 "id_loan_prod": "PA-01-0002",
-                "loan_type": "dengan anggunan",
+                "with_collateral": 1,
                 "days_in_year": "365"
             }
         ]
@@ -60,7 +58,7 @@ const dataLoanProduct =
             "totalPage": 2,
             "perPage": 3,
             "totalData": 6,
-            "nextLink": "http://192.168.100.7:6464/product?limit=3&page=2&search=&sort=asc&type=depo",
+            "nextLink": "http://192.168.100.7:6464/product?limit=3&page=2&search=&sort=asc&type=loan",
             "prevLink": null
         }
     }

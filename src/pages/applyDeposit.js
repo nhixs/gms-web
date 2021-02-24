@@ -1,13 +1,262 @@
 import React from 'react';
+import styled from 'styled-components';
+import { useState } from 'react';
 
 import Drawer from "./components/drawer";
+import LogoContainer from './components/logoContainer';
+import Koperasi from '../assets/logo.png';
+import Polygon1 from "../pages/img/Polygon1.svg"
 
 const ApplyDeposit = (props) => {
+
+    const [dropDownButton, setDropDownButton] = useState("Pilih Produk");
+    const handleDropDownButton = (dropdown) => {
+        setDropDownButton(dropdown);
+        setOption(!optionOpen);
+    }
+
+    const [optionOpen, setOption] = useState(false);
+    const handleOptions = () => {
+        setOption(!optionOpen)
+
+    }
+
+    const [color, setColor] = useState('#003459');
+    const [textColor, setTextColor] = useState('white');
     return (
         <Drawer title={'Simpanan'} subtitle={'Pengajuan Simpanan'}>
-
+            <Container>
+                <Header>
+                    <LeftSide>
+                        <LogoContainer image={Koperasi} scale={"3em"} space={".5em"} />
+                        <KoperasiTitle>Gapura Kayumanis</KoperasiTitle>
+                    </LeftSide>
+                    <LabelTitle>Formulir Pengajuan</LabelTitle>
+                </Header>
+                <FormGroup>
+                    <DropDownContainer>
+                        <DropDownButton
+                            onClick={() => { handleOptions(); setColor("#E1ECF4") }}
+                            style={{ background: color, border: "1px solid #003459" }}
+                        >
+                            <DropDownTitle style={{ color: textColor }} onClick={() => { setTextColor('#003459') }}>
+                                {dropDownButton}
+                            </DropDownTitle>
+                            <img src={Polygon1} style={{ width: "15px", marginRight: "14px" }} />
+                        </DropDownButton>
+                        {optionOpen &&
+                            <DropDownOption>
+                                <DropDown
+                                    onClick={() => handleDropDownButton("Simpanan Daun")}
+                                >
+                                    Simpanan Daun
+                                 </DropDown>
+                                <DropDown
+                                    onClick={() => handleDropDownButton("Simpanan Gajah")}
+                                >
+                                    Simpanan Gajah
+                                </DropDown>
+                                <DropDown
+                                    onClick={() => handleDropDownButton("Simpanan Masa Depan")}
+                                >
+                                    Simpanan Masa Depan
+                                </DropDown>
+                                <DropDown
+                                    onClick={() => handleDropDownButton("Simpanan Masa Tua")}
+                                >
+                                    Simpanan Masa Tua
+                                </DropDown>
+                                <DropDown
+                                    onClick={() => handleDropDownButton("Simpanan Nikah")}
+                                >
+                                    Simpanan Nikah
+                                </DropDown>
+                                <DropDown
+                                    onClick={() => handleDropDownButton("Simpanan Untuk Anak-Anak")}
+                                >
+                                    Simpanan Untuk Anak-Anak
+                                </DropDown>
+                            </DropDownOption>
+                        }
+                    </DropDownContainer>
+                </FormGroup>
+            </Container>
         </Drawer>
     )
 }
+
+const Container = styled.div`
+display: flex;
+height: fit-content;
+flex-direction: column;
+width: 69em;
+padding: 2em;
+background-color: #ffffff;
+box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+border-radius: 24px;
+`
+
+const Header = styled.div`
+display: flex;
+flex-direction: column;
+width: 100 %;
+justify-content: space-between;
+`
+const LeftSide = styled.div`
+display: flex;
+flex-direction: row;
+align-items: center;
+`
+const LabelTitle = styled.div`
+margin : 20px 5px 5px 100px;
+display: block;
+font-family: Franklin Gothic Medium;
+font-style: normal;
+font-weight: normal;
+font-size: 20px;
+`
+
+const Logo = styled.div`
+display: flex;
+flex-direction: row;
+align-items: center;
+margin-right: 1em;
+`
+
+const KoperasiTitle = styled.div`
+font-family: Franklin Gothic Medium;
+font-style: normal;
+font-weight: normal;
+font-size: 25px;
+line-height: 22px;
+width: 105px;
+`
+
+const FormGroup = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    margin: 50px auto;
+    background: #FFFFFF;
+`
+
+const Label = styled.label`
+margin-bottom: 0.5em;
+color: #003459;
+display: block;
+font-family: Franklin Gothic Medium;
+font-style: normal;
+font-weight: normal;
+font-size: 20px;
+`
+
+const Input = styled.input`
+padding: 0.5em;
+border: 1px solid #003459;
+box-sizing: border-box;
+border-radius: 10px;
+width: 100%;
+`
+const DropDownContainer = styled.div`
+width: 40%;
+display: inline-block;
+position: relative;
+`
+
+const DropDownOption = styled.div`
+  display: block;
+  position: absolute;
+  min-width: 100%;
+  height: fit-content;
+  overflow: auto;
+  z-index:15;
+  background-color: #ffffff;
+  border: 1px solid #003459;
+`
+
+const DropDownButton = styled.div`
+display: flex;
+  justify-content: space-between;
+  flex: 1;
+  color: #ffffff;
+  background-color: #003459;
+  border-radius:2px;
+  z-index:10;
+
+  &:focus {
+      background-color: #E1ECF4;
+  }
+`
+
+const DropDownTitle = styled.label`
+    color: #ffffff;
+    font-family: Franklin Gothic Medium;
+    font-style: italic;
+    font-size: 18px; 
+
+    margin-left 135px;
+`
+
+const DropDown = styled.div`
+  display: flex;
+  justify-content:center;
+  width: 100%;
+  border: 1px solid #003459;
+  font-family: Franklin Gothic Medium;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 20px;
+
+
+  color: #003459;
+  &:hover {
+      background-color: #E1ECF4;
+  }
+
+`
+const FormGroupFooter = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+
+height: fit-content;
+width: 100%;
+align-item: center;
+margin-top: 120px;
+padding: 0px 150px;
+`
+
+const CancelButton = styled.button`
+background: #F85454;
+border: none;
+border-radius: 100px;
+font-family: Franklin Gothic Medium;
+font-style: normal;
+font-weight: normal;
+font-size: 28px;
+line-height: 33px;
+text-align: center;
+color: #FFFFFF;
+
+width: 210.01px;
+height: 40.81px;
+`
+
+const SubmitButton = styled.button`
+background: #FFCB37;
+border: none;
+border-radius: 100px;
+font-family: Franklin Gothic Medium;
+font-style: normal;
+font-weight: normal;
+font-size: 28px;
+line-height: 33px;
+text-align: center;
+color: #003459;
+
+width: 210.01px;
+height: 40.81px;
+`
 
 export default ApplyDeposit
