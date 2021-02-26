@@ -112,11 +112,11 @@ const ApplyLoan = (props) => {
                     <Accordion style={{ width: "100%" }}>
                         <DropDownContainer style={{ marginLeft: "20.3em" }}>
                             <DropDownButton
-                                onClick={() => { handleOptions(); setColor("#E1ECF4"); }}
+                                onClick={() => { handleOptions(); setColor("#E1ECF4"); setTextColor('#003459') }}
                                 style={{ background: color, border: "1px solid #003459" }}
                             >
                                 <div></div>
-                                <DropDownTitle style={{ color: textColor }} onClick={() => { setTextColor('#003459') }}>
+                                <DropDownTitle style={{ color: textColor }}>
                                     {dropDownButton}
                                 </DropDownTitle>
                                 <img src={Polygon1} style={{ width: "15px", marginRight: "14px" }} />
