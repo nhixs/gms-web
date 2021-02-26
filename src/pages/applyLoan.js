@@ -21,31 +21,46 @@ const ApplyLoan = (props) => {
         setDropDownButton(value["name"]);
         setOption(!optionOpen);
     }
+    const [optionOpen, setOption] = useState(false);
+    const handleOptions = () => {
+        setOption(!optionOpen)
+
+    }
 
     /*Dropdown Tenor*/
     const [dropDownTenor, setDropDownTenor] = useState("Pilih Tenor");
     const handleDropDownTenor = (Tenor) => {
         setDropDownTenor(Tenor);
-        setOption(!optionOpen);
+        setOptionTenor(!optionOpenTenor);
+    }
+    const [optionOpenTenor, setOptionTenor] = useState(false);
+    const handleOptionsTenor = () => {
+        setOptionTenor(!optionOpenTenor)
+
     }
 
     /*Dropdown Income*/
     const [dropDownIncome, setDropDownIncome] = useState("Pilih Penghasilan");
     const handleDropDownIncome = (Income) => {
         setDropDownIncome(Income);
-        setOption(!optionOpen);
+        setOptionIncome(!optionOpenIncome);
+    }
+
+    const [optionOpenIncome, setOptionIncome] = useState(false);
+    const handleOptionsIncome = () => {
+        setOptionIncome(!optionOpenIncome)
+
     }
 
     /*Dropdown Income*/
     const [dropDownIncomeCouple, setDropDownIncomeCouple] = useState("Pilih Penghasilan Pasangan");
     const handleDropDownIncomeCouple = (IncomeCouple) => {
         setDropDownIncomeCouple(IncomeCouple);
-        setOption(!optionOpen);
+        setOptionCouple(!optionOpenCouple);
     }
-
-    const [optionOpen, setOption] = useState(false);
-    const handleOptions = () => {
-        setOption(!optionOpen)
+    const [optionOpenCouple, setOptionCouple] = useState(false);
+    const handleOptionsCouple = () => {
+        setOptionCouple(!optionOpenCouple)
 
     }
 
@@ -198,12 +213,12 @@ const ApplyLoan = (props) => {
                         <Label>Tenor</Label>
                         <DropDownContainer>
                             <DropDownButton
-                                onClick={() => handleOptions()}
+                                onClick={() => handleOptionsTenor()}
                             ><div></div>
                                 <DropDownTitle>{dropDownTenor}</DropDownTitle>
                                 <img src={Polygon1} style={{ width: "15px", marginRight: "14px" }} />
                             </DropDownButton>
-                            {optionOpen &&
+                            {optionOpenTenor &&
                                 <DropDownOption>
                                     <DropDown
                                         onClick={() => handleDropDownTenor("Tenor")}
@@ -220,12 +235,12 @@ const ApplyLoan = (props) => {
                         <Label>Penghasilan</Label>
                         <DropDownContainer>
                             <DropDownButton
-                                onClick={() => handleOptions()}
+                                onClick={() => handleOptionsIncome()}
                             ><div></div>
                                 <DropDownTitle>{dropDownIncome}</DropDownTitle>
                                 <img src={Polygon1} style={{ width: "15px", marginRight: "14px" }} />
                             </DropDownButton>
-                            {optionOpen &&
+                            {optionOpenIncome &&
                                 <DropDownOption>
                                     <DropDown
                                         onClick={() => handleDropDownIncome("Income")}
@@ -258,12 +273,12 @@ const ApplyLoan = (props) => {
                         <Label>Penghasilan</Label>
                         <DropDownContainer>
                             <DropDownButton
-                                onClick={() => handleOptions()}
+                                onClick={() => handleOptionsCouple()}
                             ><div></div>
                                 <DropDownTitle>{dropDownIncomeCouple}</DropDownTitle>
                                 <img src={Polygon1} style={{ width: "15px", marginRight: "14px" }} />
                             </DropDownButton>
-                            {optionOpen &&
+                            {optionOpenCouple &&
                                 <DropDownOption>
                                     <DropDown
                                         onClick={() => handleDropDownIncomeCouple("Income")}
