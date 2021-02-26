@@ -11,6 +11,7 @@ import Zoom from "../pages/img/zoom.svg";
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { Accordion, Card } from "react-bootstrap";
 
 
 const ApplyLoan = (props) => {
@@ -92,83 +93,85 @@ const ApplyLoan = (props) => {
                 </Header>
                 <FormGroup>
 
-                    <DropDownContainer>
-                        <DropDownButton
-                            onClick={() => { handleOptions(); setColor("#E1ECF4"); }}
-                            style={{ background: color, border: "1px solid #003459" }}
-                        >
-                            <div></div>
-                            <DropDownTitle style={{ color: textColor }} onClick={() => { setTextColor('#003459') }}>
-                                {dropDownButton}
-                            </DropDownTitle>
-                            <img src={Polygon1} style={{ width: "15px", marginRight: "14px" }} />
-                        </DropDownButton>
-                        {optionOpen &&
-                            <DropDownOption>
-                                {loanProd.map((value, id) => (
-                                    <DropDown onClick={() => { handleDropDownButton(value) }}>
-                                        {value["id_loan_prod"] + " - " + value["name"]}
-                                    </DropDown>
-                                ))}
-                            </DropDownOption>
-                        }
-                    </DropDownContainer>
-                    {loanProd.map((value, id) => (
-                        <>
 
-                            <Card>
-                                <Paragraph>{value["description"]}</Paragraph>
-                                <DetailCard>
-                                    <DetailLeftSide>
-                                        <DetailData>
-                                            <DetailLabel>Tipe Simpanan</DetailLabel>
-                                            <DetailValue>
-                                                {value["with_collateral"]}
-                                            </DetailValue>
-                                        </DetailData>
-                                        <DetailData>
-                                            <DetailLabel>Periode Bunga</DetailLabel>
-                                            <DetailValue>
-                                                {value["posting"]}
-                                            </DetailValue>
-                                        </DetailData>
-                                    </DetailLeftSide>
-                                    <DetailMidSide>
-                                        <DetailData>
-                                            <DetailLabel>Tipe Bunga</DetailLabel>
-                                            <DetailValue>
-                                                {value["interest_calculation"]}
-                                            </DetailValue>
-                                        </DetailData>
-                                        <DetailData>
-                                            <DetailLabel>Hari Dalam Setahun</DetailLabel>
-                                            <DetailValue>
-                                                {value["days_in_year"]}
-                                            </DetailValue>
-                                        </DetailData>
-                                    </DetailMidSide>
-                                    <DetailRightSide>
-                                        <DetailData>
-                                            <DetailLabel>Pajak</DetailLabel>
-                                            <DetailValue>
-                                                {value["tax"]}
-                                            </DetailValue>
-                                        </DetailData>
-                                        <DetailData>
-                                            <DetailLabel>Hari Dalam Sebulan</DetailLabel>
-                                            <DetailValue>
-                                                {value["day_in_month"]}
-                                            </DetailValue>
-                                        </DetailData>
-                                    </DetailRightSide>
-                                </DetailCard>
-                            </Card>
+                    <Accordion style={{ width: "100%" }}>
+                        <DropDownContainer>
+                            <DropDownButton
+                                onClick={() => { handleOptions(); setColor("#E1ECF4"); }}
+                                style={{ background: color, border: "1px solid #003459" }}
+                            >
+                                <div></div>
+                                <DropDownTitle style={{ color: textColor }} onClick={() => { setTextColor('#003459') }}>
+                                    {dropDownButton}
+                                </DropDownTitle>
+                                <img src={Polygon1} style={{ width: "15px", marginRight: "14px" }} />
+                            </DropDownButton>
+                            {optionOpen &&
+                                <DropDownOption>
+                                    {loanProd.map((value, id) => (
+                                        <Accordion.Toggle as={DropDown} eventKey={value.id} onClick={() => { handleDropDownButton(value) }} >
+                                            {value["id_loan_prod"] + " - " + value["name"]}
+                                        </Accordion.Toggle>
+                                    ))}
+                                </DropDownOption>
+                            }
+                        </DropDownContainer>
+                        {loanProd.map((value, id) => (
+                            <>
+                                <Accordion.Collapse eventKey={value.id}>
+                                    <CardForm>
+                                        <Paragraph>{value["description"]}</Paragraph>
+                                        <DetailCard>
+                                            <DetailLeftSide>
+                                                <DetailData>
+                                                    <DetailLabel>Tipe Simpanan</DetailLabel>
+                                                    <DetailValue>
+                                                        {value["with_collateral"]}
+                                                    </DetailValue>
+                                                </DetailData>
+                                                <DetailData>
+                                                    <DetailLabel>Periode Bunga</DetailLabel>
+                                                    <DetailValue>
+                                                        {value["posting"]}
+                                                    </DetailValue>
+                                                </DetailData>
+                                            </DetailLeftSide>
+                                            <DetailMidSide>
+                                                <DetailData>
+                                                    <DetailLabel>Tipe Bunga</DetailLabel>
+                                                    <DetailValue>
+                                                        {value["interest_calculation"]}
+                                                    </DetailValue>
+                                                </DetailData>
+                                                <DetailData>
+                                                    <DetailLabel>Hari Dalam Setahun</DetailLabel>
+                                                    <DetailValue>
+                                                        {value["days_in_year"]}
+                                                    </DetailValue>
+                                                </DetailData>
+                                            </DetailMidSide>
+                                            <DetailRightSide>
+                                                <DetailData>
+                                                    <DetailLabel>Pajak</DetailLabel>
+                                                    <DetailValue>
+                                                        {value["tax"]}
+                                                    </DetailValue>
+                                                </DetailData>
+                                                <DetailData>
+                                                    <DetailLabel>Hari Dalam Sebulan</DetailLabel>
+                                                    <DetailValue>
+                                                        {value["day_in_month"]}
+                                                    </DetailValue>
+                                                </DetailData>
+                                            </DetailRightSide>
+                                        </DetailCard>
+                                    </CardForm>
+                                </Accordion.Collapse>
 
-
-                            <Line />
-                        </>
-                    ))}
-
+                            </>
+                        ))}
+                    </Accordion>
+                    <Line />
                     <Form>
                         <Label>Anggota</Label>
                         <SearchBox>
@@ -366,6 +369,7 @@ width: 105px;
 const FormGroup = styled.div`
     display: flex;
     flex-direction: column;
+    justify-content: center;
     width: 100%;
     align-items: center;
     margin: 50px auto;
@@ -456,7 +460,7 @@ padding: .5em;
 width: 35em;
 `
 
-const Card = styled.div`
+const CardForm = styled.div`
 display: flex;
 flex-direction: column;
 
@@ -578,4 +582,5 @@ color: #003459;
 width: 210.01px;
 height: 40.81px;
 `
+
 export default ApplyLoan
