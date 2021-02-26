@@ -97,6 +97,7 @@ const ApplyLoan = (props) => {
                             onClick={() => { handleOptions(); setColor("#E1ECF4"); }}
                             style={{ background: color, border: "1px solid #003459" }}
                         >
+                            <div></div>
                             <DropDownTitle style={{ color: textColor }} onClick={() => { setTextColor('#003459') }}>
                                 {dropDownButton}
                             </DropDownTitle>
@@ -193,8 +194,9 @@ const ApplyLoan = (props) => {
                         <DropDownContainer>
                             <DropDownButton
                                 onClick={() => handleOptions()}
-                            >
+                            ><div></div>
                                 <DropDownTitle>{dropDownTenor}</DropDownTitle>
+                                <img src={Polygon1} style={{ width: "15px", marginRight: "14px" }} />
                             </DropDownButton>
                             {optionOpen &&
                                 <DropDownOption>
@@ -214,8 +216,9 @@ const ApplyLoan = (props) => {
                         <DropDownContainer>
                             <DropDownButton
                                 onClick={() => handleOptions()}
-                            >
+                            ><div></div>
                                 <DropDownTitle>{dropDownIncome}</DropDownTitle>
+                                <img src={Polygon1} style={{ width: "15px", marginRight: "14px" }} />
                             </DropDownButton>
                             {optionOpen &&
                                 <DropDownOption>
@@ -250,8 +253,9 @@ const ApplyLoan = (props) => {
                         <DropDownContainer>
                             <DropDownButton
                                 onClick={() => handleOptions()}
-                            >
+                            ><div></div>
                                 <DropDownTitle>{dropDownIncomeCouple}</DropDownTitle>
+                                <img src={Polygon1} style={{ width: "15px", marginRight: "14px" }} />
                             </DropDownButton>
                             {optionOpen &&
                                 <DropDownOption>
@@ -294,12 +298,12 @@ const ApplyLoan = (props) => {
                     </Form>
                     <Form>
                         <Label>Upload Foto Kendaraan</Label>
-                        <PreviewButton>Preview</PreviewButton>
+                        <PreviewButton style={{ marginRight: "1.6em" }}>Preview</PreviewButton>
                         <InputFile type="file" />
                     </Form>
                     <Form>
                         <Label>Upload Foto BPKB</Label>
-                        <PreviewButton>Preview</PreviewButton>
+                        <PreviewButton style={{ marginLeft: ".8em" }}>Preview</PreviewButton>
                         <InputFile type="file" />
                     </Form>
                     <FormGroupFooter>
@@ -385,14 +389,14 @@ const DropDownOption = styled.div`
 `
 
 const DropDownButton = styled.div`
-display: flex;
-  justify-content: center;
+  display: flex;
+  justify-content: space-between;
   flex: 1;
   color: #ffffff;
   background-color: #003459;
   border-radius:2px;
   z-index:10;
-
+  text-align: center;
   &:focus {
       background-color: #E1ECF4;
   }
