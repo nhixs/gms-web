@@ -95,7 +95,7 @@ const ApplyLoan = (props) => {
 
 
                     <Accordion style={{ width: "100%" }}>
-                        <DropDownContainer>
+                        <DropDownContainer style={{ marginLeft: "20.3em" }}>
                             <DropDownButton
                                 onClick={() => { handleOptions(); setColor("#E1ECF4"); }}
                                 style={{ background: color, border: "1px solid #003459" }}
@@ -172,6 +172,7 @@ const ApplyLoan = (props) => {
                         ))}
                     </Accordion>
                     <Line />
+                    <Label style={{ fontSize: "35px", marginTop: "1em" }}>Data Anggota</Label>
                     <Form>
                         <Label>Anggota</Label>
                         <SearchBox>
@@ -179,6 +180,7 @@ const ApplyLoan = (props) => {
                                 outline: "none",
                                 border: "none",
                                 width: "32em",
+                                fontStyle: "italic",
                                 margin: "4px 0px 0px 3px"
                             }} placeholder="Cari Anggota" />
                             <img src={Zoom} />
@@ -236,8 +238,9 @@ const ApplyLoan = (props) => {
                         <Label>Jumlah Tanggungan</Label>
                         <Input type="number" style={{ width: "7em", marginRight: "27.5em" }} />
                     </Form>
+                    <Label style={{ fontSize: "35px", marginTop: "1em" }}>Data Pasangan</Label>
                     <Form>
-                        <Label>Data Pasangan</Label>
+                        <Label>Status Pasangan</Label>
                         <RadioGroup value={couple} onChange={handleCouple} style={{ display: "flex", flexDirection: "row", padding: "0em 0em 0em 6.4em", justifyContent: "space-between", width: "80%" }}>
                             <FormControlLabel value="1" control={<Radio />} label="Punya Pasangan" />
                             <FormControlLabel value="0" control={<Radio />} label="Tidak Punya Pasangan" />
@@ -280,6 +283,7 @@ const ApplyLoan = (props) => {
                         <Label>Alamat Pasangan</Label>
                         <TextArea></TextArea>
                     </Form>
+                    <Label style={{ fontSize: "35px", marginTop: "1em" }}>Data Anggunan</Label>
                     <Form>
                         <Label>Jenis Anggunan</Label>
                         <RadioGroup value={collateralType} onChange={handleCollateralType} style={{ display: "flex", flexDirection: "row", padding: "0em 9em 0em 6.5em", justifyContent: "space-between", width: "80%" }}>
@@ -376,9 +380,11 @@ const FormGroup = styled.div`
     background: #FFFFFF;
 `
 const DropDownContainer = styled.div`
-width: 40%;
 display: inline-block;
 position: relative;
+
+width: 40%;
+margin-right: 14em;
 `
 
 const DropDownOption = styled.div`
@@ -468,7 +474,7 @@ margin: 2em 10em;
 `
 const Paragraph = styled.div`
 text-align: center;
-margin: 5em 0em;
+margin: 0em 0em 5em 0em;
 `
 const DetailCard = styled.div`
 display: flex;
