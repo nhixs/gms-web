@@ -23,7 +23,8 @@ const dataDepositProduct =
                 "created_at": "2021-02-02T20:13:35.000Z",
                 "updated_at": "2021-02-02T20:13:35.000Z",
                 "id_deposit_prod": "SMPN-01-0001",
-                "deposit_type": "fixed"
+                "deposit_type": "fixed",
+                "days_in_year": 360
             },
             {
                 "id": 2,
@@ -44,7 +45,9 @@ const dataDepositProduct =
                 "created_at": "2021-02-08T07:03:03.000Z",
                 "updated_at": "2021-02-08T07:03:03.000Z",
                 "id_deposit_prod": "SMPN-01-0002",
-                "deposit_type": "fixed"
+                "deposit_type": "fixed",
+                "days_in_year": 360
+
             },
             {
                 "id": 3,
@@ -65,7 +68,9 @@ const dataDepositProduct =
                 "created_at": "2021-02-08T07:03:14.000Z",
                 "updated_at": "2021-02-08T07:03:14.000Z",
                 "id_deposit_prod": "SMPN-01-0003",
-                "deposit_type": "fixed"
+                "deposit_type": "fixed",
+                "days_in_year": 360
+
             },
             {
                 "id": 4,
@@ -86,7 +91,9 @@ const dataDepositProduct =
                 "created_at": "2021-02-08T07:03:29.000Z",
                 "updated_at": "2021-02-08T07:03:29.000Z",
                 "id_deposit_prod": "SMPN-01-0004",
-                "deposit_type": "fixed"
+                "deposit_type": "fixed",
+                "days_in_year": 360
+
             },
             {
                 "id": 5,
@@ -107,7 +114,9 @@ const dataDepositProduct =
                 "created_at": "2021-02-08T07:03:45.000Z",
                 "updated_at": "2021-02-08T07:03:45.000Z",
                 "id_deposit_prod": "SMPN-01-0005",
-                "deposit_type": "fixed"
+                "deposit_type": "fixed",
+                "days_in_year": 360
+
             },
             {
                 "id": 6,
@@ -128,7 +137,9 @@ const dataDepositProduct =
                 "created_at": "2021-02-08T07:04:05.000Z",
                 "updated_at": "2021-02-08T07:04:05.000Z",
                 "id_deposit_prod": "SMPN-01-0006",
-                "deposit_type": "fixed"
+                "deposit_type": "fixed",
+                "days_in_year": 360
+
             }
         ]
     },

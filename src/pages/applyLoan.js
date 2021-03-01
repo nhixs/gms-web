@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
+import { Accordion } from "react-bootstrap";
 
 import Drawer from "./components/drawer";
 import LogoContainer from './components/logoContainer';
@@ -11,10 +12,9 @@ import Zoom from "../pages/img/zoom.svg";
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { Accordion, Card } from "react-bootstrap";
-
 
 const ApplyLoan = (props) => {
+
     /*Dropdown Product*/
     const [dropDownButton, setDropDownButton] = useState("Pilih Produk");
     const handleDropDownButton = (value) => {
@@ -64,19 +64,6 @@ const ApplyLoan = (props) => {
 
     }
 
-    const [color, setColor] = useState('#003459');
-    const [textColor, setTextColor] = useState('white');
-
-    const { status, message, data } = DataLoanProduct;
-    const { loanProd } = data;
-
-    const receiveData = () => {
-        loanProd.map((value, index) => {
-            console.log(value)
-        })
-
-    }
-
     /* Radio Button Couple */
     const [couple, setCouple] = React.useState('1');
     const handleCouple = (event) => {
@@ -95,6 +82,11 @@ const ApplyLoan = (props) => {
         setCollateralType(event.target.value);
     };
 
+    const [color, setColor] = useState('#003459');
+    const [textColor, setTextColor] = useState('white');
+
+    const { status, message, data } = DataLoanProduct;
+    const { loanProd } = data;
 
     return (
         <Drawer title={'Pinjaman'} subtitle={'Pengjuan Pinjaman'}>
@@ -107,8 +99,6 @@ const ApplyLoan = (props) => {
                     <LabelTitle>Formulir Pengajuan</LabelTitle>
                 </Header>
                 <FormGroup>
-
-
                     <Accordion style={{ width: "100%" }}>
                         <DropDownContainer style={{ marginLeft: "20.3em" }}>
                             <DropDownButton
@@ -124,7 +114,8 @@ const ApplyLoan = (props) => {
                             {optionOpen &&
                                 <DropDownOption>
                                     {loanProd.map((value, id) => (
-                                        <Accordion.Toggle as={DropDown} eventKey={value.id} onClick={() => { handleDropDownButton(value) }} >
+                                        <Accordion.Toggle as={DropDown} eventKey={value.id}
+                                            onClick={() => { handleDropDownButton(value) }} >
                                             {value["id_loan_prod"] + " - " + value["name"]}
                                         </Accordion.Toggle>
                                     ))}
@@ -139,7 +130,7 @@ const ApplyLoan = (props) => {
                                         <DetailCard>
                                             <DetailLeftSide>
                                                 <DetailData>
-                                                    <DetailLabel>Tipe Simpanan</DetailLabel>
+                                                    <DetailLabel>Tipe Pinjaman</DetailLabel>
                                                     <DetailValue>
                                                         {value["with_collateral"]}
                                                     </DetailValue>
@@ -147,7 +138,7 @@ const ApplyLoan = (props) => {
                                                 <DetailData>
                                                     <DetailLabel>Periode Bunga</DetailLabel>
                                                     <DetailValue>
-                                                        {value["posting"]}
+                                                        {value["posting"].charAt(0).toUpperCase() + value["posting"].substring(1)}
                                                     </DetailValue>
                                                 </DetailData>
                                             </DetailLeftSide>
@@ -155,7 +146,7 @@ const ApplyLoan = (props) => {
                                                 <DetailData>
                                                     <DetailLabel>Tipe Bunga</DetailLabel>
                                                     <DetailValue>
-                                                        {value["interest_calculation"]}
+                                                        {value["interest_calculation"].charAt(0).toUpperCase() + value["interest_calculation"].substring(1)}
                                                     </DetailValue>
                                                 </DetailData>
                                                 <DetailData>
@@ -169,7 +160,7 @@ const ApplyLoan = (props) => {
                                                 <DetailData>
                                                     <DetailLabel>Pajak</DetailLabel>
                                                     <DetailValue>
-                                                        {value["tax"]}
+                                                        {value["tax"].charAt(0).toUpperCase() + value["tax"].substring(1)}
                                                     </DetailValue>
                                                 </DetailData>
                                                 <DetailData>
