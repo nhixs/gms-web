@@ -15,10 +15,50 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const ApplyLoan = (props) => {
 
+    const [form, setForm] = useState({
+        id_loan: '',
+        id_client: '',
+        loan_name: '',
+        amount: '',
+        tenor: '',
+        loan_purpose: '',
+        period_unit: "monthly",
+        dependents: '',
+        client_income: '',
+        partner_status: '',
+        partner_name: '',
+        partner_profesion: '',
+        live_in_the_same_house: ''
+    })
+    const handleInput = (input, label) => {
+        let resultInput
+        if (input && input !== "") {
+            resultInput = input
+        }
+        else resultInput = ""
+
+        setForm(state => {
+            return {
+                ...state,
+                [label]: resultInput
+            }
+        })
+    }
+    const showForm = () => {
+        console.log(form);
+    }
+
+
     /*Dropdown Product*/
     const [dropDownButton, setDropDownButton] = useState("Pilih Produk");
     const handleDropDownButton = (value) => {
         setDropDownButton(value["name"]);
+        setForm(state => {
+            return {
+                ...state,
+                id_loan: value["id_loan_prod"]
+            }
+        })
         setOption(!optionOpen);
     }
     const [optionOpen, setOption] = useState(false);
@@ -29,8 +69,27 @@ const ApplyLoan = (props) => {
 
     /*Dropdown Tenor*/
     const [dropDownTenor, setDropDownTenor] = useState("Pilih Tenor");
-    const handleDropDownTenor = (Tenor) => {
-        setDropDownTenor(Tenor);
+    const handleDropDownTenor = (value) => {
+        const [tenor, periodUnit] = value.split(" ")
+        let selectPeriod
+        switch (periodUnit) {
+            case "Tahun": {
+                selectPeriod = "annually"
+            }
+            case "Minggu":
+                selectPeriod = "weekly"
+                break;
+            default:
+                selectPeriod = "monthly";
+                break;
+
+        }
+        setDropDownTenor(value);
+        setForm(state => ({
+            ...state,
+            tenor: parseInt(tenor),
+            period_unit: selectPeriod
+        }))
         setOptionTenor(!optionOpenTenor);
     }
     const [optionOpenTenor, setOptionTenor] = useState(false);
@@ -41,8 +100,31 @@ const ApplyLoan = (props) => {
 
     /*Dropdown Income*/
     const [dropDownIncome, setDropDownIncome] = useState("Pilih Penghasilan");
-    const handleDropDownIncome = (Income) => {
-        setDropDownIncome(Income);
+    const handleDropDownIncome = (value) => {
+
+        let selectIncome
+        switch (value) {
+            case "< 4jt":
+                selectIncome = "< 4jt"
+                break;
+            case "< 5jt":
+                selectIncome = "< 5jt"
+                break;
+            case "< 6jt":
+                selectIncome = "< 6jt"
+                break;
+            case "< 7jt":
+                selectIncome = "< 7jt"
+                break;
+            default:
+                selectIncome = "8jt"
+                break;
+        }
+        setDropDownIncome(value);
+        setForm(state => ({
+            ...state,
+            client_income: selectIncome
+        }))
         setOptionIncome(!optionOpenIncome);
     }
 
@@ -54,8 +136,30 @@ const ApplyLoan = (props) => {
 
     /*Dropdown Income*/
     const [dropDownIncomeCouple, setDropDownIncomeCouple] = useState("Pilih Penghasilan Pasangan");
-    const handleDropDownIncomeCouple = (IncomeCouple) => {
-        setDropDownIncomeCouple(IncomeCouple);
+    const handleDropDownIncomeCouple = (value) => {
+        let selectIncome
+        switch (value) {
+            case "< 4jt":
+                selectIncome = "< 4jt"
+                break;
+            case "< 5jt":
+                selectIncome = "< 5jt"
+                break;
+            case "< 6jt":
+                selectIncome = "< 6jt"
+                break;
+            case "< 7jt":
+                selectIncome = "< 7jt"
+                break;
+            default:
+                selectIncome = "8jt"
+                break;
+        }
+        setDropDownIncomeCouple(value);
+        setForm(state => ({
+            ...state,
+            partner_income: selectIncome
+        }))
         setOptionCouple(!optionOpenCouple);
     }
     const [optionOpenCouple, setOptionCouple] = useState(false);
@@ -194,11 +298,11 @@ const ApplyLoan = (props) => {
                     </Form>
                     <Form>
                         <Label>Nama Pinjaman</Label>
-                        <Input></Input>
+                        <Input onChange={(e) => handleInput(e.target.value, "loan_name")}></Input>
                     </Form>
                     <Form>
                         <Label>Masukan Nominal</Label>
-                        <Input></Input>
+                        <Input type="number" onChange={(e) => handleInput(e.target.value, "amount")}></Input>
                     </Form>
                     <Form>
                         <Label>Tenor</Label>
@@ -211,16 +315,19 @@ const ApplyLoan = (props) => {
                             </DropDownButton>
                             {optionOpenTenor &&
                                 <DropDownOption>
-                                    <DropDown
-                                        onClick={() => handleDropDownTenor("Tenor")}
-                                    >Tenor</DropDown>
+                                    {["3 Bulan", "6 Bulan", "9 Bulan"].map((value, id) => {
+                                        return <DropDown
+                                            onClick={() => handleDropDownTenor(value)}
+                                            children={value}
+                                        />
+                                    })}
                                 </DropDownOption>
                             }
                         </DropDownContainer>
                     </Form>
                     <Form>
                         <Label>Tujuan Pinjaman</Label>
-                        <TextArea></TextArea>
+                        <TextArea onChange={(e) => handleInput(e.target.value, "loan_purpose")}></TextArea>
                     </Form>
                     <Form>
                         <Label>Penghasilan</Label>
@@ -233,32 +340,48 @@ const ApplyLoan = (props) => {
                             </DropDownButton>
                             {optionOpenIncome &&
                                 <DropDownOption>
-                                    <DropDown
-                                        onClick={() => handleDropDownIncome("Income")}
-                                    >Income</DropDown>
+                                    {["< 4jt", "< 5jt", "< 6jt", "< 7jt", "8jt"].map((value) => {
+                                        return <DropDown
+                                            onClick={() => handleDropDownIncome(value)}
+                                            children={value}
+                                        />
+                                    })}
+
                                 </DropDownOption>
                             }
                         </DropDownContainer>
                     </Form>
                     <Form>
+                        <Label>Upload Slip Gaji</Label>
+                        <PreviewButton style={{ marginLeft: "1.9em" }}>Preview</PreviewButton>
+                        <InputFile type="file" />
+                    </Form>
+                    <Form>
                         <Label>Jumlah Tanggungan</Label>
-                        <Input type="number" style={{ width: "7em", marginRight: "27.5em" }} />
+                        <Input type="number" style={{ width: "7em", marginRight: "27.5em" }}
+                            onChange={(e) => handleInput(e.target.value, "dependents")}
+                        />
                     </Form>
                     <Label style={{ fontSize: "35px", marginTop: "1em" }}>Data Pasangan</Label>
                     <Form>
                         <Label>Status Pasangan</Label>
                         <RadioGroup value={couple} onChange={handleCouple} style={{ display: "flex", flexDirection: "row", padding: "0em 0em 0em 6.4em", justifyContent: "space-between", width: "80%" }}>
-                            <FormControlLabel value="1" control={<Radio />} label="Punya Pasangan" />
-                            <FormControlLabel value="0" control={<Radio />} label="Tidak Punya Pasangan" />
+                            <FormControlLabel value="married"
+                                control={<Radio
+                                    onChange={(e) => handleInput(e.target.value, "partner_status")}
+                                />} label="Punya Pasangan" />
+                            <FormControlLabel value="single" control={<Radio
+                                onChange={(e) => handleInput(e.target.value, "partner_status")}
+                            />} label="Tidak Punya Pasangan" />
                         </RadioGroup>
                     </Form>
                     <Form>
                         <Label>Nama Pasangan</Label>
-                        <Input />
+                        <Input onChange={(e) => handleInput(e.target.value, "partner_name")} />
                     </Form>
                     <Form>
                         <Label>Pekerjaan</Label>
-                        <Input />
+                        <Input onChange={(e) => handleInput(e.target.value, "partner_profesion")} />
                     </Form>
                     <Form>
                         <Label>Penghasilan</Label>
@@ -271,43 +394,61 @@ const ApplyLoan = (props) => {
                             </DropDownButton>
                             {optionOpenCouple &&
                                 <DropDownOption>
-                                    <DropDown
-                                        onClick={() => handleDropDownIncomeCouple("Income")}
-                                    >Income</DropDown>
+                                    {["< 4jt", "< 5jt", "< 6jt", "< 7jt", "8jt"].map((value) => {
+                                        return <DropDown
+                                            onClick={() => handleDropDownIncomeCouple(value)}
+                                            children={value}
+                                        />
+                                    })}
                                 </DropDownOption>
                             }
                         </DropDownContainer>
                     </Form>
                     <Form>
+                        <Label>Upload Slip Gaji</Label>
+                        <PreviewButton style={{ marginLeft: "1.9em" }}>Preview</PreviewButton>
+                        <InputFile type="file" />
+                    </Form>
+                    <Form>
                         <Label>Tinggal Serumah</Label>
                         <RadioGroup value={live} onChange={handleLive} style={{ display: "flex", flexDirection: "row", padding: "0em 9em 0em 6.5em", justifyContent: "space-between", width: "80%" }}>
-                            <FormControlLabel value="1" control={<Radio />} label="Tidak" />
-                            <FormControlLabel value="0" control={<Radio />} label="Ya" />
+                            <FormControlLabel value="no" control={<Radio
+                                onChange={(e) => handleInput(e.target.value, "live_in_the_same_house")}
+                            />} label="Tidak" />
+                            <FormControlLabel value="ya" control={<Radio
+                                onChange={(e) => handleInput(e.target.value, "live_in_the_same_house")}
+                            />} label="Ya" />
                         </RadioGroup>
                     </Form>
                     <Form>
                         <Label>Alamat Pasangan</Label>
-                        <TextArea></TextArea>
+                        <TextArea onChange={(e) => handleInput(e.target.value, "partner_address")}></TextArea>
                     </Form>
                     <Label style={{ fontSize: "35px", marginTop: "1em" }}>Data Anggunan</Label>
                     <Form>
                         <Label>Jenis Anggunan</Label>
                         <RadioGroup value={collateralType} onChange={handleCollateralType} style={{ display: "flex", flexDirection: "row", padding: "0em 9em 0em 6.5em", justifyContent: "space-between", width: "80%" }}>
-                            <FormControlLabel value="vehicle" control={<Radio />} label="Kendaraan" />
-                            <FormControlLabel value="property" control={<Radio />} label="Properti" />
+                            <FormControlLabel value="vehicle" control={<Radio
+                                onChange={(e) => handleInput(e.target.value, "collaterall_type")}
+                            />}
+                                label="Kendaraan" />
+                            <FormControlLabel value="property" control={<Radio
+                                onChange={(e) => handleInput(e.target.value, "collaterall_type")}
+                            />}
+                                label="Properti" />
                         </RadioGroup>
                     </Form>
                     <Form>
                         <Label>No.BPKB</Label>
-                        <Input></Input>
+                        <Input onChange={(e) => handleInput(e.target.value, "bpkb_number")} ></Input>
                     </Form>
                     <Form>
                         <Label>Jenis Kendaraan</Label>
-                        <Input></Input>
+                        <Input onChange={(e) => handleInput(e.target.value, "vehicle_type")}></Input>
                     </Form>
                     <Form>
                         <Label>Tahun Produksi</Label>
-                        <Input></Input>
+                        <Input onChange={(e) => handleInput(e.target.value, "vehicle_year")}></Input>
                     </Form>
                     <Form>
                         <Label>Upload Foto Kendaraan</Label>
@@ -321,7 +462,7 @@ const ApplyLoan = (props) => {
                     </Form>
                     <FormGroupFooter>
                         <CancelButton>Batal</CancelButton>
-                        <SubmitButton id="submit" type="submit" value="Tambah" />
+                        <SubmitButton id="submit" type="submit" value="Tambah" onClick={showForm} />
                     </FormGroupFooter>
                 </FormGroup>
             </Container>
@@ -590,6 +731,7 @@ font-size: 28px;
 line-height: 33px;
 text-align: center;
 color: #003459;
+outline: none;
 
 width: 210.01px;
 height: 40.81px;

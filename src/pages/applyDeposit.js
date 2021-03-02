@@ -43,7 +43,6 @@ const ApplyDeposit = (props) => {
     // dropdown deposit
     const [dropDownButton, setDropDownButton] = useState("Pilih Produk");
     const handleDropDownButton = (value) => {
-
         setDropDownButton(value["name"]);
         setForm(state => {
             return {

@@ -34,7 +34,9 @@ const LoanProductList = (props) => {
         day_in_month: '',
         theme_color: '',
         loan_type: '',
-        days_in_year: ''
+        days_in_year: '',
+        partner_address: '',
+        collaterall_type: ''
     })
 
     /* Submit Function */
@@ -351,9 +353,18 @@ const LoanProductList = (props) => {
                         <Form>
                             <Label>Kelipatan Uang</Label>
                             <RadioGroup value={multiples} onChange={handleMultiples} style={{ display: "flex", flexDirection: "row", paddingRight: "15.9em" }}>
-                                <FormControlLabel value="100" control={<Radio onChange={(e) => handleInput(e.target.value, "in_multiple_of")} />} label="100" />
-                                <FormControlLabel value="1000" control={<Radio onChange={(e) => handleInput(e.target.value, "in_multiple_of")} />} label="1.000" />
-                                <FormControlLabel value="10000" control={<Radio onChange={(e) => handleInput(e.target.value, "in_multiple_of")} />} label="10.000" />
+                                <FormControlLabel value="100"
+                                    control={<Radio
+                                        onChange={(e) => handleInput(e.target.value, "in_multiple_of")}
+                                    />} label="100" />
+                                <FormControlLabel value="1000"
+                                    control={<Radio
+                                        onChange={(e) => handleInput(e.target.value, "in_multiple_of")}
+                                    />} label="1.000" />
+                                <FormControlLabel value="10000"
+                                    control={<Radio
+                                        onChange={(e) => handleInput(e.target.value, "in_multiple_of")}
+                                    />} label="10.000" />
                             </RadioGroup>
                         </Form>
                         <Form>
