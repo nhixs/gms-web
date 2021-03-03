@@ -529,7 +529,6 @@ const FormGroup = styled.div`
 const DropDownContainer = styled.div`
 display: inline-block;
 position: relative;
-
 width: 40%;
 margin-right: 14em;
 `
@@ -575,20 +574,15 @@ const DropDown = styled.div`
   font-style: italic;
   font-weight: normal;
   font-size: 20px;
-
-
   color: #003459;
   &:hover {
       background-color: #E1ECF4;
   }
-
 `
 const Form = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: space-between;
-
-
 width: 80%;
 margin: 2em 0em 0em 0em;
 `
@@ -596,7 +590,6 @@ const SearchBox = styled.div`
 border: 1px solid #003459;
 box-sizing: border-box;
 border-radius: 10px;
-
 width: 35em;
 `
 const Label = styled.label`
@@ -608,7 +601,6 @@ border: 1px solid #003459;
 box-sizing: border-box;
 border-radius: 10px;
 outline: none;
-
 padding: .5em;
 width: 35em;
 `
@@ -616,7 +608,6 @@ width: 35em;
 const CardForm = styled.div`
 display: flex;
 flex-direction: column;
-
 margin: 2em 10em;
 `
 const Paragraph = styled.div`
@@ -647,13 +638,11 @@ const DetailData = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: space-between;
-
 margin: .5em 0em;
 width: 12em;
 `
 const DetailLabel = styled.div`
 font-family: Franklin Gothic Book;
-
 width: 5em;
 `
 
@@ -664,7 +653,6 @@ font-size: 18px;
 
 const Line = styled.div`
 border: .5px solid #003459;
-
 width: 55em;
 `
 
@@ -673,7 +661,6 @@ border: 1px solid #003459;
 box-sizing: border-box;
 border-radius: 10px;
 outline: none;
-
 padding: .5em;
 width: 34.7em;
 `
@@ -683,20 +670,17 @@ border: 1px solid #003459;
 box-sizing: border-box;
 border-radius: 10px;
 font-size: 20px;
-
 width: 7em;
 `
 
 
 const InputFile = styled.input`
-
 `
 
 const FormGroupFooter = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: space-between;
-
 height: fit-content;
 width: 100%;
 align-item: center;
@@ -715,7 +699,6 @@ font-size: 28px;
 line-height: 33px;
 text-align: center;
 color: #FFFFFF;
-
 width: 210.01px;
 height: 40.81px;
 `
@@ -732,7 +715,6 @@ line-height: 33px;
 text-align: center;
 color: #003459;
 outline: none;
-
 width: 210.01px;
 height: 40.81px;
 `
