@@ -21,6 +21,8 @@ import ApplyDeposit from "./pages/applyDeposit";
 import TransactionDeposit from "./pages/transactionDeposit";
 import TransactionLoan from "./pages/transactionLoan";
 import SubmissionDetail from "./pages/submission_detail";
+import ClientDetail from "./pages/clientDetail";
+import Example from "./pages/example";
 
 const App = () => {
   const officer = useSelector(state => state.officer);
@@ -47,6 +49,10 @@ const App = () => {
         <Route path="/transaction/loan" exact component={TransactionLoan} />
         <Route path="/transaction/deposit" exact component={TransactionDeposit} />
         <Route path="/submission/details" exact component={SubmissionDetail} />
+        <Route path="/client/details" exact component={ClientDetail} />
+        <Route path="/example" exact component={Example} />
+
+
       </Switch>
     </BrowserRouter>
 

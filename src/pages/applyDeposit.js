@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
 import { Accordion } from "react-bootstrap";
+import Axios from 'axios';
+import qs from 'querystring';
 
 import Drawer from "./components/drawer";
 import LogoContainer from './components/logoContainer';
@@ -11,6 +13,23 @@ import DataDepositProduct from "../helpers/deposit/dataDepositProduct";
 import Zoom from "../pages/img/zoom.svg";
 
 const ApplyDeposit = (props) => {
+    const [gettingClients, setGettingClients] = useState(false);
+    const [clients, setClients] = useState([]);
+    const [selectedClient, setSelectedClient] = useState(null);
+    const fetchingClient = async (value) => {
+        setGettingClients(true)
+        setClients([])
+        let param;
+        if (value && value != '') {
+            param = "?" + qs.stringify({ search: value })
+        } else {
+            param = ''
+        }
+        const fetchClients = await Axios.get('http://192.168.1.12:6464/client/profile' + param)
+        const { status, message, data } = fetchClients.data
+        setClients([...data.clients])
+        setGettingClients(false)
+    }
 
     const [form, setForm] = useState({
         id_deposit: '',
@@ -95,7 +114,8 @@ const ApplyDeposit = (props) => {
         setOptionTenor(!optionOpenTenor)
 
     }
-
+    console.log(clients)
+    console.log(selectedClient)
     return (
         <Drawer title={'Simpanan'} subtitle={'Pengajuan Simpanan'}>
             <Container>
@@ -180,13 +200,22 @@ const ApplyDeposit = (props) => {
                     <Form>
                         <Label>Anggota</Label>
                         <SearchBox>
-                            <Input style={{
+                            <Input list="anggota" onChange={(e) => fetchingClient(e.target.value)} style={{
                                 outline: "none",
                                 border: "none",
                                 width: "32em",
                                 fontStyle: "italic",
                                 margin: "4px 0px 0px 3px"
                             }} placeholder="Cari Anggota" />
+                            <datalist id="anggota">
+                                {!gettingClients &&
+                                    clients.length > 0 ?
+
+                                    clients.map((value, id) => <option onClick={(e) => setSelectedClient(e.target.value)} value={value["client"].id_client} children={value["client"].full_name} />)
+                                    : <option value={null} children="data tidak ditemukan !" />
+                                }
+                            </datalist>
+
                             <img src={Zoom} />
                         </SearchBox>
                     </Form>
