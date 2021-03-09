@@ -20,7 +20,7 @@ import ApplyLoan from "./pages/applyLoan";
 import ApplyDeposit from "./pages/applyDeposit";
 import TransactionDeposit from "./pages/transactionDeposit";
 import TransactionLoan from "./pages/transactionLoan";
-import SubmissionDetail from "./pages/submission_detail";
+import SubmissionDetail from "./pages/submissionDetail";
 import ClientDetail from "./pages/clientDetail";
 import Example from "./pages/example";
 

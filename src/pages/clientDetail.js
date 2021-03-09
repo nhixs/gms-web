@@ -115,9 +115,9 @@ const ClientDetail = (props) => {
                                 <LabelData>Simpanan Berkala</LabelData>
                                 <LabelData>Rp. 5.725.000</LabelData>
                             </Data>
-                            <AddDeposit>
+                            <AddLoan>
                                 <StyledLink style={{ textDecoration: "none" }} to="/loan/apply">Ajukan Pinjaman Baru</StyledLink>
-                            </AddDeposit>
+                            </AddLoan>
                         </LoanSection>
                     </BodyContent>
                 </Container2>
@@ -580,4 +580,12 @@ color: #787878;
     text-decoration: none;
     color: #787878;
 }
+`
+const AddLoan = styled.div`
+text-align: center;
+border: 2px dashed #C4C4C4;
+box-sizing: border-box;
+border-radius: 10px;
+
+margin: 0em 0em 2em 0em;
 `

@@ -35,7 +35,52 @@ const SubmissionDetail = (props) => {
                     <Line />
                     <>
                         <Content active={active === 0}>
-                            <h1>Content 1</h1>
+                            <HeadContent>
+                                APP-0000001101
+                                <div></div>
+                            </HeadContent>
+                            <BodyContent>
+                                <LeftSide>
+                                    <Label1>Nama</Label1>
+                                    <Label1>No. Telepon</Label1>
+                                    <Label1>Email</Label1>
+                                    <Label1>Produk</Label1>
+
+
+
+                                </LeftSide>
+                                <MidSide>
+                                    <Label2>Julius Obed Wahyu Jati</Label2>
+                                    <Label2>085716576999</Label2>
+                                    <Label2>juliusobed@gmail.com</Label2>
+                                    <Label2>Pinjaman Anggunan</Label2>
+
+                                </MidSide>
+                                <RightSide>
+
+                                </RightSide>
+                            </BodyContent>
+                            <Line></Line>
+                            <BodyContent>
+                                <LeftSide>
+
+                                    <Label1>Nominal</Label1>
+                                    <Label1>Tenor</Label1>
+                                    <Label1>Tujuan Peminjaman</Label1>
+
+
+                                </LeftSide>
+                                <MidSide>
+
+                                    <Label2 style={{ fontSize: "23px" }}>Rp. 10.000.000</Label2>
+                                    <Label2>12 Bulan</Label2>
+                                    <Label2 style={{ width: "12em" }}>Untuk membayar uang masuk kuliah 2021 di UMN</Label2>
+
+                                </MidSide>
+                                <RightSide>
+
+                                </RightSide>
+                            </BodyContent>
                         </Content>
                         <Content active={active === 1}>
                             <h1>Content 2</h1>
@@ -58,7 +103,7 @@ export default SubmissionDetail;
 
 const Container1 = styled.div`
 width: 682px;
-height: 520px;
+height: fit-content;
 
 padding: 2em;
 background: #FFFFFF;
@@ -107,4 +152,56 @@ border: none;
 
 const Line = styled.div`
 border: .5px solid #003459;
+
+margin: 1em 0em;
+`
+
+const HeadContent = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+font-size: 30px;
+
+margin-left: 1em;
+`
+
+const BodyContent = styled.div`
+display: flex;
+flex-direction: space-between;
+margin: 2.5em 0em 0em 0em;
+`
+
+const Data = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+`
+
+const Label1 = styled.label`
+font-size: 18px;
+
+width: 6em;
+margin: .5em 0em;
+`
+const Label2 = styled.label`
+font-size: 18px;
+
+
+`
+const LeftSide = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+
+margin: 0em 10em 0em .5em;
+`
+const RightSide = styled.div`
+
+`
+const MidSide = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+
+width: 20em;
 `
