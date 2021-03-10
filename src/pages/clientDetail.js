@@ -193,9 +193,9 @@ const ClientDetail = (props) => {
                             </Data>
                             <Data>
                                 <Label>Pendidikan</Label>
-                                <Input style={{ width: "13em" }} />
+                                <Input style={{ width: "11em" }} />
                                 <Label>Profesi</Label>
-                                <Input style={{ width: "13em" }} />
+                                <Input style={{ width: "11em" }} />
                             </Data>
                             <Data>
                                 <div></div>
