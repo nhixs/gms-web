@@ -9,3 +9,27 @@ body, #root {
  font-family: "Franklin Gothic Medium";
 
 }
+  
+
+.swal2-confirm{
+  width: 125px;
+  height: 32px;
+  padding: 0px 0px 0px 0px  !important;
+  border-radius: 50px !important;
+  font-family: "Franklin Gothic Medium"!important;
+  font-size: 20px !important;
+  color: #003459!important;
+}
+
+span.swal2-label{
+  font-size: 16px !important;
+} 
+
+.swal2-cancel{
+  width: 125px;
+  height: 32px;
+  padding: 0px 0px 0px 0px  !important;
+  border-radius: 50px !important;
+  font-family: "Franklin Gothic Medium"!important;
+  font-size: 20px !important;
+}
