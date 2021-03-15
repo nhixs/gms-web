@@ -22,17 +22,15 @@ const SubmissionDetail = (props) => {
     };
 
     /* Function for checked action */
-    const check = { CheckActive, CheckDeactive };
+    const check = { CheckActive, CheckDeactive, CheckCross };
     const [checked, setChecked] = useState(check.CheckDeactive);
 
-    const checkProcess = { CheckActive, CheckDeactive };
+    const checkProcess = { CheckActive, CheckDeactive, CheckCross };
     const [checkedProcess, setCheckedProcess] = useState(checkProcess.CheckDeactive);
 
-    const checkFinal = { CheckActive, CheckDeactive };
+    const checkFinal = { CheckActive, CheckDeactive, CheckCross };
     const [checkedFinal, setCheckedFinal] = useState(checkFinal.CheckDeactive);
 
-    const cross = { CheckCross, CheckDeactive };
-    const [crossed, setCrossed] = useState(cross.CheckDeactive);
 
     return (
         <Drawer title={'Pengajuan'} subtitle={'Detail Pengajuan'}>
@@ -298,13 +296,14 @@ const SubmissionDetail = (props) => {
                                     }
                                 }).then(function (result) {
                                     if (result.value) {
-                                        setCheckedFinal(checkFinal.CheckActive);
+                                        setCheckedProcess(checkProcess.CheckActive);
                                         Swal.fire({
                                             icon: 'success',
                                             title: 'Pengajuan Diprosess!',
                                             showConfirmButton: false
                                         })
                                     } else if (result.dismiss === Swal.DismissReason.cancel) {
+                                        setCheckedProcess(checkProcess.CheckCross);
                                         Swal.fire({ icon: 'error', text: "Pengajuan ditolak", showConfirmButton: false });
                                     } else {
                                         Swal.fire({ icon: 'error', text: "Check data kembali", showConfirmButton: false });
@@ -363,13 +362,14 @@ const SubmissionDetail = (props) => {
                                     }
                                 }).then(function (result) {
                                     if (result.value) {
-                                        setCheckedFinal(checkFinal.CheckActive);
+                                        setChecked(check.CheckActive);
                                         Swal.fire({
                                             icon: 'success',
                                             title: 'Pengajuan Diprosess!',
                                             showConfirmButton: false
                                         })
                                     } else if (result.dismiss === Swal.DismissReason.cancel) {
+                                        setChecked(check.CheckCross);
                                         Swal.fire({ icon: 'error', text: "Pengajuan ditolak", showConfirmButton: false });
                                     } else {
                                         Swal.fire({ icon: 'error', text: "Check data kembali", showConfirmButton: false });
@@ -434,6 +434,7 @@ const SubmissionDetail = (props) => {
                                             showConfirmButton: false
                                         })
                                     } else if (result.dismiss === Swal.DismissReason.cancel) {
+                                        setCheckedFinal(checkFinal.CheckCross);
                                         Swal.fire({ icon: 'error', text: "Pengajuan ditolak", showConfirmButton: false });
                                     } else {
                                         Swal.fire({ icon: 'error', text: "Check data kembali", showConfirmButton: false });
