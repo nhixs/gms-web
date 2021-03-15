@@ -8,6 +8,7 @@ import Drawer from "./components/drawer";
 import pasPhoto from '../assets/photo_close_up.jpg';
 import CheckDeactive from '../assets/check_deactive.svg';
 import CheckActive from '../assets/check_active.svg';
+import CheckCross from '../assets/check_cross.svg';
 
 
 const SubmissionDetail = (props) => {
@@ -30,6 +31,8 @@ const SubmissionDetail = (props) => {
     const checkFinal = { CheckActive, CheckDeactive };
     const [checkedFinal, setCheckedFinal] = useState(checkFinal.CheckDeactive);
 
+    const cross = { CheckCross, CheckDeactive };
+    const [crossed, setCrossed] = useState(cross.CheckDeactive);
 
     return (
         <Drawer title={'Pengajuan'} subtitle={'Detail Pengajuan'}>
@@ -256,81 +259,58 @@ const SubmissionDetail = (props) => {
                             Tahap pengecekan kelengkapan data dan dokumen anggota
                                 </Paragraph>
                         <SubmitButton type="submit" value="Action"
-                            onClick={() => Swal.fire({
-                                html: '<div>'
-                                    + '<div style="font-family: Franklin Gothic Medium; font-style: normal; font-weight: normal; font-size: 25px; color: #003459; margin-right: 300px;">'
-                                    + 'Diproses'
-                                    + '</div>'
-                                    + '<div style="border: .5px solid #003459;">'
-                                    + '</div>'
-                                    + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 15px;color: #003459; margin-right: 265px;">'
-                                    + 'Telah Direview Oleh'
-                                    + '</div>'
-                                    + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 25px;color: #003459; margin: 10px 0px 5px 0px;">'
-                                    + 'Julius Obed Wahyu Jati'
-                                    + '</div>'
-                                    + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 15px;color: #003459;">'
-                                    + '0014-Officer'
-                                    + '</div>'
-                                    + '</div>',
-                                inputPlaceholder: 'Data pengajuan anggota sudah memenuhi persyaratan',
-                                input: 'checkbox',
-                                confirmButtonText: 'Prosses',
-                                confirmButtonColor: ' #FFCB37'
-                            }).then(function (result) {
-                                if (result.value) {
-                                    Swal.fire({
-                                        text: 'Alasan Tidak Memenuhi Syarat',
-                                        html: '<div>'
-                                            + '<div style="font-family: Franklin Gothic Medium; font-style: normal; font-weight: normal; font-size: 25px; color: #003459; margin-right: 300px;">'
-                                            + 'Diproses'
-                                            + '</div>'
-                                            + '<div style="border: .5px solid #003459;">'
-                                            + '</div>'
-                                            + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 15px;color: #003459; margin-right: 265px;">'
-                                            + 'Telah Direview Oleh'
-                                            + '</div>'
-                                            + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 25px;color: #003459; margin: 10px 0px 5px 0px;">'
-                                            + 'Julius Obed Wahyu Jati'
-                                            + '</div>'
-                                            + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 15px;color: #003459;">'
-                                            + '0014-Officer'
-                                            + '</div>'
-                                            + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 15px;color: #003459; margin:30px 200px 0px 0px;">'
-                                            + 'Alasan Tidak Memenuhi Syarat:'
-                                            + '</div>'
-                                            + '<textarea style="border: 1px solid #003459;box-sizing: border-box; width: 22.5em; height: 5em;"></textarea>'
-                                            + '</div>',
-                                        inputPlaceholder: 'Data pengajuan anggota sudah memenuhi persyaratan',
-                                        input: 'checkbox',
-                                        showCancelButton: true,
-                                        cancelButtonColor: '#FF4F37',
-                                        cancelButtonText: 'Tolak',
-                                        confirmButtonColor: '#B3B3B3',
-                                        confirmButtonText: 'Prosses'
-                                    }).then(function (result) {
-                                        if (result.value) {
-                                            setCheckedProcess(checkProcess.CheckActive)
-                                            Swal.fire({
-                                                icon: 'success',
-                                                title: 'Pengajuan Diprosess!',
-                                                showConfirmButton: false
-                                            })
-                                        } else if (result.dismiss === Swal.DismissReason.cancel) {
-                                            Swal.fire({ icon: 'error', text: "Pengajuan ditolak", showConfirmButton: false });
-
+                            onClick={() =>
+                                Swal.fire({
+                                    text: 'Alasan Tidak Memenuhi Syarat',
+                                    html: '<div>'
+                                        + '<div style="font-family: Franklin Gothic Medium; font-style: normal; font-weight: normal; font-size: 25px; color: #003459; margin-right: 300px;">'
+                                        + 'Diproses'
+                                        + '</div>'
+                                        + '<div style="border: .5px solid #003459;">'
+                                        + '</div>'
+                                        + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 15px;color: #003459; margin-right: 265px;">'
+                                        + 'Telah Direview Oleh'
+                                        + '</div>'
+                                        + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 25px;color: #003459; margin: 10px 0px 5px 0px;">'
+                                        + 'Julius Obed Wahyu Jati'
+                                        + '</div>'
+                                        + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 15px;color: #003459;">'
+                                        + '0014-Officer'
+                                        + '</div>'
+                                        + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 15px;color: #003459; margin:30px 200px 0px 0px;">'
+                                        + 'Alasan Tidak Memenuhi Syarat:'
+                                        + '</div>'
+                                        + '<textarea id="description" style="border: 1px solid #003459;box-sizing: border-box; width: 22.5em; height: 5em;" required></textarea>'
+                                        + '</div>',
+                                    inputPlaceholder: 'Data pengajuan anggota sudah memenuhi persyaratan',
+                                    input: 'checkbox',
+                                    showCancelButton: true,
+                                    cancelButtonColor: '#FF4F37',
+                                    cancelButtonText: 'Tolak',
+                                    confirmButtonColor: '#B3B3B3',
+                                    confirmButtonText: 'Prosses',
+                                    preConfirm: () => {
+                                        if (document.getElementById('description').value) {
+                                            // Handle return value 
                                         } else {
-                                            console.log(`modal was dismissed by ${result.dismiss}`)
+                                            Swal.showValidationMessage('Alasan Tidak Boleh Kosong')
                                         }
-                                    })
-
-                                } else if (result.value === 0) {
-                                    Swal.fire({ icon: 'error', text: "Check data kembali", showConfirmButton: false });
-
-                                } else {
-                                    console.log(`modal was dismissed by ${result.dismiss}`)
-                                }
-                            })} />
+                                    }
+                                }).then(function (result) {
+                                    if (result.value) {
+                                        setCheckedFinal(checkFinal.CheckActive);
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Pengajuan Diprosess!',
+                                            showConfirmButton: false
+                                        })
+                                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                                        Swal.fire({ icon: 'error', text: "Pengajuan ditolak", showConfirmButton: false });
+                                    } else {
+                                        Swal.fire({ icon: 'error', text: "Check data kembali", showConfirmButton: false });
+                                        console.log(`modal was dismissed by ${result.dismiss}`)
+                                    }
+                                })} />
                     </CollapseContent>
 
                     <FormGroup>
@@ -344,80 +324,58 @@ const SubmissionDetail = (props) => {
                             Tahap untuk penentuan tanggal survey
                                 </Paragraph>
                         <SubmitButton type="submit" value="Action"
-                            onClick={() => Swal.fire({
-                                html: '<div>'
-                                    + '<div style="font-family: Franklin Gothic Medium; font-style: normal; font-weight: normal; font-size: 25px; color: #003459; margin-right: 300px;">'
-                                    + 'Diproses'
-                                    + '</div>'
-                                    + '<div style="border: .5px solid #003459;">'
-                                    + '</div>'
-                                    + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 15px;color: #003459; margin-right: 265px;">'
-                                    + 'Telah Direview Oleh'
-                                    + '</div>'
-                                    + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 25px;color: #003459; margin: 10px 0px 5px 0px;">'
-                                    + 'Julius Obed Wahyu Jati'
-                                    + '</div>'
-                                    + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 15px;color: #003459;">'
-                                    + '0014-Officer'
-                                    + '</div>'
-                                    + '</div>',
-                                inputPlaceholder: 'Data pengajuan anggota sudah memenuhi persyaratan',
-                                input: 'checkbox',
-                                confirmButtonText: 'Prosses',
-                                confirmButtonColor: ' #FFCB37'
-                            }).then(function (result) {
-                                if (result.value) {
-                                    Swal.fire({
-                                        text: 'Alasan Tidak Memenuhi Syarat',
-                                        html: '<div>'
-                                            + '<div style="font-family: Franklin Gothic Medium; font-style: normal; font-weight: normal; font-size: 25px; color: #003459; margin-right: 300px;">'
-                                            + 'Diproses'
-                                            + '</div>'
-                                            + '<div style="border: .5px solid #003459;">'
-                                            + '</div>'
-                                            + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 15px;color: #003459; margin-right: 265px;">'
-                                            + 'Telah Direview Oleh'
-                                            + '</div>'
-                                            + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 25px;color: #003459; margin: 10px 0px 5px 0px;">'
-                                            + 'Julius Obed Wahyu Jati'
-                                            + '</div>'
-                                            + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 15px;color: #003459;">'
-                                            + '0014-Officer'
-                                            + '</div>'
-                                            + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 15px;color: #003459; margin:30px 200px 0px 0px;">'
-                                            + 'Alasan Tidak Memenuhi Syarat:'
-                                            + '</div>'
-                                            + '<textarea style="border: 1px solid #003459;box-sizing: border-box; width: 22.5em; height: 5em;"></textarea>'
-                                            + '</div>',
-                                        inputPlaceholder: 'Data pengajuan anggota sudah memenuhi persyaratan',
-                                        input: 'checkbox',
-                                        showCancelButton: true,
-                                        cancelButtonColor: '#FF4F37',
-                                        cancelButtonText: 'Tolak',
-                                        confirmButtonColor: '#B3B3B3',
-                                        confirmButtonText: 'Prosses'
-                                    }).then(function (result) {
-                                        if (result.value) {
-                                            setChecked(check.CheckActive);
-                                            Swal.fire({
-                                                icon: 'success',
-                                                title: 'Pengajuan Diprosess!',
-                                                showConfirmButton: false
-                                            })
-                                        } else if (result.dismiss === Swal.DismissReason.cancel) {
-                                            Swal.fire({ icon: 'error', text: "Pengajuan ditolak", showConfirmButton: false });
+                            onClick={() =>
+                                Swal.fire({
+                                    text: 'Alasan Tidak Memenuhi Syarat',
+                                    html: '<div>'
+                                        + '<div style="font-family: Franklin Gothic Medium; font-style: normal; font-weight: normal; font-size: 25px; color: #003459; margin-right: 300px;">'
+                                        + 'Diproses'
+                                        + '</div>'
+                                        + '<div style="border: .5px solid #003459;">'
+                                        + '</div>'
+                                        + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 15px;color: #003459; margin-right: 265px;">'
+                                        + 'Telah Direview Oleh'
+                                        + '</div>'
+                                        + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 25px;color: #003459; margin: 10px 0px 5px 0px;">'
+                                        + 'Julius Obed Wahyu Jati'
+                                        + '</div>'
+                                        + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 15px;color: #003459;">'
+                                        + '0014-Officer'
+                                        + '</div>'
+                                        + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 15px;color: #003459; margin:30px 200px 0px 0px;">'
+                                        + 'Alasan Tidak Memenuhi Syarat:'
+                                        + '</div>'
+                                        + '<textarea id="description" style="border: 1px solid #003459;box-sizing: border-box; width: 22.5em; height: 5em;" required></textarea>'
+                                        + '</div>',
+                                    inputPlaceholder: 'Data pengajuan anggota sudah memenuhi persyaratan',
+                                    input: 'checkbox',
+                                    showCancelButton: true,
+                                    cancelButtonColor: '#FF4F37',
+                                    cancelButtonText: 'Tolak',
+                                    confirmButtonColor: '#B3B3B3',
+                                    confirmButtonText: 'Prosses',
+                                    preConfirm: () => {
+                                        if (document.getElementById('description').value) {
+                                            // Handle return value 
                                         } else {
-                                            console.log(`modal was dismissed by ${result.dismiss}`)
+                                            Swal.showValidationMessage('Alasan Tidak Boleh Kosong')
                                         }
-                                    })
-
-                                } else if (result.value === 0) {
-                                    Swal.fire({ icon: 'error', text: "Check data kembali", showConfirmButton: false });
-
-                                } else {
-                                    console.log(`modal was dismissed by ${result.dismiss}`)
-                                }
-                            })} />
+                                    }
+                                }).then(function (result) {
+                                    if (result.value) {
+                                        setCheckedFinal(checkFinal.CheckActive);
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Pengajuan Diprosess!',
+                                            showConfirmButton: false
+                                        })
+                                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                                        Swal.fire({ icon: 'error', text: "Pengajuan ditolak", showConfirmButton: false });
+                                    } else {
+                                        Swal.fire({ icon: 'error', text: "Check data kembali", showConfirmButton: false });
+                                        console.log(`modal was dismissed by ${result.dismiss}`)
+                                    }
+                                })} />
                     </CollapseContent>
 
                     <FormGroup>
@@ -430,80 +388,59 @@ const SubmissionDetail = (props) => {
                             simpanan/pinjaman anggota
                                 </Paragraph>
                         <SubmitButton type="submit" value="Action"
-                            onClick={() => Swal.fire({
-                                html: '<div>'
-                                    + '<div style="font-family: Franklin Gothic Medium; font-style: normal; font-weight: normal; font-size: 25px; color: #003459; margin-right: 300px;">'
-                                    + 'Diproses'
-                                    + '</div>'
-                                    + '<div style="border: .5px solid #003459;">'
-                                    + '</div>'
-                                    + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 15px;color: #003459; margin-right: 265px;">'
-                                    + 'Telah Direview Oleh'
-                                    + '</div>'
-                                    + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 25px;color: #003459; margin: 10px 0px 5px 0px;">'
-                                    + 'Julius Obed Wahyu Jati'
-                                    + '</div>'
-                                    + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 15px;color: #003459;">'
-                                    + '0014-Officer'
-                                    + '</div>'
-                                    + '</div>',
-                                inputPlaceholder: 'Data pengajuan anggota sudah memenuhi persyaratan',
-                                input: 'checkbox',
-                                confirmButtonText: 'Prosses',
-                                confirmButtonColor: ' #FFCB37'
-                            }).then(function (result) {
-                                if (result.value) {
-                                    Swal.fire({
-                                        text: 'Alasan Tidak Memenuhi Syarat',
-                                        html: '<div>'
-                                            + '<div style="font-family: Franklin Gothic Medium; font-style: normal; font-weight: normal; font-size: 25px; color: #003459; margin-right: 300px;">'
-                                            + 'Diproses'
-                                            + '</div>'
-                                            + '<div style="border: .5px solid #003459;">'
-                                            + '</div>'
-                                            + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 15px;color: #003459; margin-right: 265px;">'
-                                            + 'Telah Direview Oleh'
-                                            + '</div>'
-                                            + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 25px;color: #003459; margin: 10px 0px 5px 0px;">'
-                                            + 'Julius Obed Wahyu Jati'
-                                            + '</div>'
-                                            + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 15px;color: #003459;">'
-                                            + '0014-Officer'
-                                            + '</div>'
-                                            + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 15px;color: #003459; margin:30px 200px 0px 0px;">'
-                                            + 'Alasan Tidak Memenuhi Syarat:'
-                                            + '</div>'
-                                            + '<textarea style="border: 1px solid #003459;box-sizing: border-box; width: 22.5em; height: 5em;"></textarea>'
-                                            + '</div>',
-                                        inputPlaceholder: 'Data pengajuan anggota sudah memenuhi persyaratan',
-                                        input: 'checkbox',
-                                        showCancelButton: true,
-                                        cancelButtonColor: '#FF4F37',
-                                        cancelButtonText: 'Tolak',
-                                        confirmButtonColor: '#B3B3B3',
-                                        confirmButtonText: 'Prosses'
-                                    }).then(function (result) {
-                                        if (result.value) {
-                                            setCheckedFinal(checkFinal.CheckActive);
-                                            Swal.fire({
-                                                icon: 'success',
-                                                title: 'Pengajuan Diprosess!',
-                                                showConfirmButton: false
-                                            })
-                                        } else if (result.dismiss === Swal.DismissReason.cancel) {
-                                            Swal.fire({ icon: 'error', text: "Pengajuan ditolak", showConfirmButton: false });
+                            onClick={() =>
+                                Swal.fire({
+                                    text: 'Alasan Tidak Memenuhi Syarat',
+                                    html: '<div>'
+                                        + '<div style="font-family: Franklin Gothic Medium; font-style: normal; font-weight: normal; font-size: 25px; color: #003459; margin-right: 300px;">'
+                                        + 'Diproses'
+                                        + '</div>'
+                                        + '<div style="border: .5px solid #003459;">'
+                                        + '</div>'
+                                        + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 15px;color: #003459; margin-right: 265px;">'
+                                        + 'Telah Direview Oleh'
+                                        + '</div>'
+                                        + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 25px;color: #003459; margin: 10px 0px 5px 0px;">'
+                                        + 'Julius Obed Wahyu Jati'
+                                        + '</div>'
+                                        + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 15px;color: #003459;">'
+                                        + '0014-Officer'
+                                        + '</div>'
+                                        + '<div style="font-family: Franklin Gothic Medium;font-style: normal;font-weight: normal;font-size: 15px;color: #003459; margin:30px 200px 0px 0px;">'
+                                        + 'Alasan Tidak Memenuhi Syarat:'
+                                        + '</div>'
+                                        + '<textarea id="description" style="border: 1px solid #003459;box-sizing: border-box; width: 22.5em; height: 5em;" required></textarea>'
+                                        + '</div>',
+                                    inputPlaceholder: 'Data pengajuan anggota sudah memenuhi persyaratan',
+                                    input: 'checkbox',
+                                    showCancelButton: true,
+                                    cancelButtonColor: '#FF4F37',
+                                    cancelButtonText: 'Tolak',
+                                    confirmButtonColor: '#B3B3B3',
+                                    confirmButtonText: 'Prosses',
+                                    preConfirm: () => {
+                                        if (document.getElementById('description').value) {
+                                            // Handle return value 
                                         } else {
-                                            console.log(`modal was dismissed by ${result.dismiss}`)
+                                            Swal.showValidationMessage('Alasan Tidak Boleh Kosong')
                                         }
-                                    })
-
-                                } else if (result.value === 0) {
-                                    Swal.fire({ icon: 'error', text: "Check data kembali", showConfirmButton: false });
-
-                                } else {
-                                    console.log(`modal was dismissed by ${result.dismiss}`)
-                                }
-                            })} />
+                                    }
+                                }).then(function (result) {
+                                    if (result.value) {
+                                        setCheckedFinal(checkFinal.CheckActive);
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Pengajuan Diprosess!',
+                                            showConfirmButton: false
+                                        })
+                                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                                        Swal.fire({ icon: 'error', text: "Pengajuan ditolak", showConfirmButton: false });
+                                    } else {
+                                        Swal.fire({ icon: 'error', text: "Check data kembali", showConfirmButton: false });
+                                        console.log(`modal was dismissed by ${result.dismiss}`)
+                                    }
+                                })
+                            } />
                     </CollapseContent>
                 </BodyContentSub>
             </Container2>
